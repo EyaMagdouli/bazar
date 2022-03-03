@@ -1,0 +1,10 @@
+<?php
+return[
+    'kind'=>[
+        'planter',
+        'wholesaler',
+        'retailer',
+        'transformer',
+        'user'
+    ],
+];
