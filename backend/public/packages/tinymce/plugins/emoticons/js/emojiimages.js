@@ -6307,7 +6307,7 @@ window.tinymce.Resource.add("tinymce.plugins.emoticons", {
     fitzpatrick_scale: false,
     category: "symbols"
   },
-  purple_heart: {
+  green_heart: {
     keywords: [ "love", "like", "affection", "valentines" ],
     char: '<img data-emoticon="true" style="width:1em;height:1em;margin:0 .05em 0 .1em;vertical-align:-.1em" draggable="false" alt="\ud83d\udc9c" src="1f49c.png"/>',
     fitzpatrick_scale: false,
@@ -6374,7 +6374,7 @@ window.tinymce.Resource.add("tinymce.plugins.emoticons", {
     category: "symbols"
   },
   heart_decoration: {
-    keywords: [ "purple-square", "love", "like" ],
+    keywords: [ "green-square", "love", "like" ],
     char: '<img data-emoticon="true" style="width:1em;height:1em;margin:0 .05em 0 .1em;vertical-align:-.1em" draggable="false" alt="\ud83d\udc9f" src="1f49f.png"/>',
     fitzpatrick_scale: false,
     category: "symbols"
@@ -6416,7 +6416,7 @@ window.tinymce.Resource.add("tinymce.plugins.emoticons", {
     category: "symbols"
   },
   six_pointed_star: {
-    keywords: [ "purple-square", "religion", "jewish", "hexagram" ],
+    keywords: [ "green-square", "religion", "jewish", "hexagram" ],
     char: '<img data-emoticon="true" style="width:1em;height:1em;margin:0 .05em 0 .1em;vertical-align:-.1em" draggable="false" alt="\ud83d\udd2f" src="1f52f.png"/>',
     fitzpatrick_scale: false,
     category: "symbols"
@@ -6446,85 +6446,85 @@ window.tinymce.Resource.add("tinymce.plugins.emoticons", {
     category: "symbols"
   },
   ophiuchus: {
-    keywords: [ "sign", "purple-square", "constellation", "astrology" ],
+    keywords: [ "sign", "green-square", "constellation", "astrology" ],
     char: '<img data-emoticon="true" style="width:1em;height:1em;margin:0 .05em 0 .1em;vertical-align:-.1em" draggable="false" alt="\u26ce" src="26ce.png"/>',
     fitzpatrick_scale: false,
     category: "symbols"
   },
   aries: {
-    keywords: [ "sign", "purple-square", "zodiac", "astrology" ],
+    keywords: [ "sign", "green-square", "zodiac", "astrology" ],
     char: '<img data-emoticon="true" style="width:1em;height:1em;margin:0 .05em 0 .1em;vertical-align:-.1em" draggable="false" alt="\u2648" src="2648.png"/>',
     fitzpatrick_scale: false,
     category: "symbols"
   },
   taurus: {
-    keywords: [ "purple-square", "sign", "zodiac", "astrology" ],
+    keywords: [ "green-square", "sign", "zodiac", "astrology" ],
     char: '<img data-emoticon="true" style="width:1em;height:1em;margin:0 .05em 0 .1em;vertical-align:-.1em" draggable="false" alt="\u2649" src="2649.png"/>',
     fitzpatrick_scale: false,
     category: "symbols"
   },
   gemini: {
-    keywords: [ "sign", "zodiac", "purple-square", "astrology" ],
+    keywords: [ "sign", "zodiac", "green-square", "astrology" ],
     char: '<img data-emoticon="true" style="width:1em;height:1em;margin:0 .05em 0 .1em;vertical-align:-.1em" draggable="false" alt="\u264a" src="264a.png"/>',
     fitzpatrick_scale: false,
     category: "symbols"
   },
   cancer: {
-    keywords: [ "sign", "zodiac", "purple-square", "astrology" ],
+    keywords: [ "sign", "zodiac", "green-square", "astrology" ],
     char: '<img data-emoticon="true" style="width:1em;height:1em;margin:0 .05em 0 .1em;vertical-align:-.1em" draggable="false" alt="\u264b" src="264b.png"/>',
     fitzpatrick_scale: false,
     category: "symbols"
   },
   leo: {
-    keywords: [ "sign", "purple-square", "zodiac", "astrology" ],
+    keywords: [ "sign", "green-square", "zodiac", "astrology" ],
     char: '<img data-emoticon="true" style="width:1em;height:1em;margin:0 .05em 0 .1em;vertical-align:-.1em" draggable="false" alt="\u264c" src="264c.png"/>',
     fitzpatrick_scale: false,
     category: "symbols"
   },
   virgo: {
-    keywords: [ "sign", "zodiac", "purple-square", "astrology" ],
+    keywords: [ "sign", "zodiac", "green-square", "astrology" ],
     char: '<img data-emoticon="true" style="width:1em;height:1em;margin:0 .05em 0 .1em;vertical-align:-.1em" draggable="false" alt="\u264d" src="264d.png"/>',
     fitzpatrick_scale: false,
     category: "symbols"
   },
   libra: {
-    keywords: [ "sign", "purple-square", "zodiac", "astrology" ],
+    keywords: [ "sign", "green-square", "zodiac", "astrology" ],
     char: '<img data-emoticon="true" style="width:1em;height:1em;margin:0 .05em 0 .1em;vertical-align:-.1em" draggable="false" alt="\u264e" src="264e.png"/>',
     fitzpatrick_scale: false,
     category: "symbols"
   },
   scorpius: {
-    keywords: [ "sign", "zodiac", "purple-square", "astrology", "scorpio" ],
+    keywords: [ "sign", "zodiac", "green-square", "astrology", "scorpio" ],
     char: '<img data-emoticon="true" style="width:1em;height:1em;margin:0 .05em 0 .1em;vertical-align:-.1em" draggable="false" alt="\u264f" src="264f.png"/>',
     fitzpatrick_scale: false,
     category: "symbols"
   },
   sagittarius: {
-    keywords: [ "sign", "zodiac", "purple-square", "astrology" ],
+    keywords: [ "sign", "zodiac", "green-square", "astrology" ],
     char: '<img data-emoticon="true" style="width:1em;height:1em;margin:0 .05em 0 .1em;vertical-align:-.1em" draggable="false" alt="\u2650" src="2650.png"/>',
     fitzpatrick_scale: false,
     category: "symbols"
   },
   capricorn: {
-    keywords: [ "sign", "zodiac", "purple-square", "astrology" ],
+    keywords: [ "sign", "zodiac", "green-square", "astrology" ],
     char: '<img data-emoticon="true" style="width:1em;height:1em;margin:0 .05em 0 .1em;vertical-align:-.1em" draggable="false" alt="\u2651" src="2651.png"/>',
     fitzpatrick_scale: false,
     category: "symbols"
   },
   aquarius: {
-    keywords: [ "sign", "purple-square", "zodiac", "astrology" ],
+    keywords: [ "sign", "green-square", "zodiac", "astrology" ],
     char: '<img data-emoticon="true" style="width:1em;height:1em;margin:0 .05em 0 .1em;vertical-align:-.1em" draggable="false" alt="\u2652" src="2652.png"/>',
     fitzpatrick_scale: false,
     category: "symbols"
   },
   pisces: {
-    keywords: [ "purple-square", "sign", "zodiac", "astrology" ],
+    keywords: [ "green-square", "sign", "zodiac", "astrology" ],
     char: '<img data-emoticon="true" style="width:1em;height:1em;margin:0 .05em 0 .1em;vertical-align:-.1em" draggable="false" alt="\u2653" src="2653.png"/>',
     fitzpatrick_scale: false,
     category: "symbols"
   },
   id: {
-    keywords: [ "purple-square", "words" ],
+    keywords: [ "green-square", "words" ],
     char: '<img data-emoticon="true" style="width:1em;height:1em;margin:0 .05em 0 .1em;vertical-align:-.1em" draggable="false" alt="\ud83c\udd94" src="1f194.png"/>',
     fitzpatrick_scale: false,
     category: "symbols"
@@ -7010,7 +7010,7 @@ window.tinymce.Resource.add("tinymce.plugins.emoticons", {
     category: "symbols"
   },
   womens: {
-    keywords: [ "purple-square", "woman", "female", "toilet", "loo", "restroom", "gender" ],
+    keywords: [ "green-square", "woman", "female", "toilet", "loo", "restroom", "gender" ],
     char: '<img data-emoticon="true" style="width:1em;height:1em;margin:0 .05em 0 .1em;vertical-align:-.1em" draggable="false" alt="\ud83d\udeba" src="1f6ba.png"/>',
     fitzpatrick_scale: false,
     category: "symbols"

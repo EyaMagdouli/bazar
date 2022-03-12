@@ -6294,7 +6294,7 @@ window.tinymce.Resource.add("tinymce.plugins.emoticons", {
     fitzpatrick_scale: false,
     category: "symbols"
   },
-  purple_heart: {
+  green_heart: {
     keywords: [ "love", "like", "affection", "valentines" ],
     char: "\ud83d\udc9c",
     fitzpatrick_scale: false,
@@ -6361,7 +6361,7 @@ window.tinymce.Resource.add("tinymce.plugins.emoticons", {
     category: "symbols"
   },
   heart_decoration: {
-    keywords: [ "purple-square", "love", "like" ],
+    keywords: [ "green-square", "love", "like" ],
     char: "\ud83d\udc9f",
     fitzpatrick_scale: false,
     category: "symbols"
@@ -6403,7 +6403,7 @@ window.tinymce.Resource.add("tinymce.plugins.emoticons", {
     category: "symbols"
   },
   six_pointed_star: {
-    keywords: [ "purple-square", "religion", "jewish", "hexagram" ],
+    keywords: [ "green-square", "religion", "jewish", "hexagram" ],
     char: "\ud83d\udd2f",
     fitzpatrick_scale: false,
     category: "symbols"
@@ -6433,85 +6433,85 @@ window.tinymce.Resource.add("tinymce.plugins.emoticons", {
     category: "symbols"
   },
   ophiuchus: {
-    keywords: [ "sign", "purple-square", "constellation", "astrology" ],
+    keywords: [ "sign", "green-square", "constellation", "astrology" ],
     char: "\u26ce",
     fitzpatrick_scale: false,
     category: "symbols"
   },
   aries: {
-    keywords: [ "sign", "purple-square", "zodiac", "astrology" ],
+    keywords: [ "sign", "green-square", "zodiac", "astrology" ],
     char: "\u2648",
     fitzpatrick_scale: false,
     category: "symbols"
   },
   taurus: {
-    keywords: [ "purple-square", "sign", "zodiac", "astrology" ],
+    keywords: [ "green-square", "sign", "zodiac", "astrology" ],
     char: "\u2649",
     fitzpatrick_scale: false,
     category: "symbols"
   },
   gemini: {
-    keywords: [ "sign", "zodiac", "purple-square", "astrology" ],
+    keywords: [ "sign", "zodiac", "green-square", "astrology" ],
     char: "\u264a",
     fitzpatrick_scale: false,
     category: "symbols"
   },
   cancer: {
-    keywords: [ "sign", "zodiac", "purple-square", "astrology" ],
+    keywords: [ "sign", "zodiac", "green-square", "astrology" ],
     char: "\u264b",
     fitzpatrick_scale: false,
     category: "symbols"
   },
   leo: {
-    keywords: [ "sign", "purple-square", "zodiac", "astrology" ],
+    keywords: [ "sign", "green-square", "zodiac", "astrology" ],
     char: "\u264c",
     fitzpatrick_scale: false,
     category: "symbols"
   },
   virgo: {
-    keywords: [ "sign", "zodiac", "purple-square", "astrology" ],
+    keywords: [ "sign", "zodiac", "green-square", "astrology" ],
     char: "\u264d",
     fitzpatrick_scale: false,
     category: "symbols"
   },
   libra: {
-    keywords: [ "sign", "purple-square", "zodiac", "astrology" ],
+    keywords: [ "sign", "green-square", "zodiac", "astrology" ],
     char: "\u264e",
     fitzpatrick_scale: false,
     category: "symbols"
   },
   scorpius: {
-    keywords: [ "sign", "zodiac", "purple-square", "astrology", "scorpio" ],
+    keywords: [ "sign", "zodiac", "green-square", "astrology", "scorpio" ],
     char: "\u264f",
     fitzpatrick_scale: false,
     category: "symbols"
   },
   sagittarius: {
-    keywords: [ "sign", "zodiac", "purple-square", "astrology" ],
+    keywords: [ "sign", "zodiac", "green-square", "astrology" ],
     char: "\u2650",
     fitzpatrick_scale: false,
     category: "symbols"
   },
   capricorn: {
-    keywords: [ "sign", "zodiac", "purple-square", "astrology" ],
+    keywords: [ "sign", "zodiac", "green-square", "astrology" ],
     char: "\u2651",
     fitzpatrick_scale: false,
     category: "symbols"
   },
   aquarius: {
-    keywords: [ "sign", "purple-square", "zodiac", "astrology" ],
+    keywords: [ "sign", "green-square", "zodiac", "astrology" ],
     char: "\u2652",
     fitzpatrick_scale: false,
     category: "symbols"
   },
   pisces: {
-    keywords: [ "purple-square", "sign", "zodiac", "astrology" ],
+    keywords: [ "green-square", "sign", "zodiac", "astrology" ],
     char: "\u2653",
     fitzpatrick_scale: false,
     category: "symbols"
   },
   id: {
-    keywords: [ "purple-square", "words" ],
+    keywords: [ "green-square", "words" ],
     char: "\ud83c\udd94",
     fitzpatrick_scale: false,
     category: "symbols"
@@ -7003,7 +7003,7 @@ window.tinymce.Resource.add("tinymce.plugins.emoticons", {
     category: "symbols"
   },
   womens: {
-    keywords: [ "purple-square", "woman", "female", "toilet", "loo", "restroom", "gender" ],
+    keywords: [ "green-square", "woman", "female", "toilet", "loo", "restroom", "gender" ],
     char: "\ud83d\udeba",
     fitzpatrick_scale: false,
     category: "symbols"

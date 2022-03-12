@@ -11930,7 +11930,7 @@
       },
       {
         type: choiceItem,
-        text: 'Light Purple',
+        text: 'Light green',
         value: '#ECCAFA'
       },
       {
@@ -11955,7 +11955,7 @@
       },
       {
         type: choiceItem,
-        text: 'Purple',
+        text: 'green',
         value: '#B96AD9'
       },
       {
@@ -11980,7 +11980,7 @@
       },
       {
         type: choiceItem,
-        text: 'Dark Purple',
+        text: 'Dark green',
         value: '#843FA1'
       },
       {
