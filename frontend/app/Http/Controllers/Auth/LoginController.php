@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
+
 
 class LoginController extends Controller
 {
@@ -33,7 +35,18 @@ class LoginController extends Controller
      *
      * @return void
      */
-    public function __construct()
+
+
+    protected function authenticated(Request $request, $user) {
+        if ($user->kind == 'admin') {
+            return redirect()->away('/PFE/backend/public/admin/dashboard');
+        }
+         else {
+            return redirect('/home');
+        }
+   }
+
+   public function __construct()
     {
         $this->middleware('guest')->except('logout');
     }
