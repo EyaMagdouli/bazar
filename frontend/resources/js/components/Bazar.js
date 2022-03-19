@@ -1,19 +1,14 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 
-function Bazar() {
+ function Bazar() {
     return (
-        <div className="container">
-            <div className="row justify-content-center">
-
-            </div>
-        </div>
+       <h1>hi</h1>
     );
 }
-
 export default Bazar;
-
-/* if (document.getElementById('bazarHome')) {
+console.log("works here")
+if (document.getElementById('bazarHome')) {
+    console.log("found div")
     ReactDOM.render(<Bazar/>, document.getElementById('bazarHome'));
 }
- */
+
