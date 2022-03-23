@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import logo from './logo.png';
-function Header({title})
+function Header(props)
 {
     return (
         <div>
@@ -20,7 +20,7 @@ function Header({title})
                                 <Link className="nav-link" to={"/login"}>Login</Link>
                             </li>
                             <li className="nav-item">
-                                <Link className="nav-link" to={"/register"}>Register</Link>
+                                <Link className="nav-link" to={"/ChooseKind"}>Register</Link>
                             </li>
                             <li className="nav-item dropdown">
                                 <a id="navbarDropdown" className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >

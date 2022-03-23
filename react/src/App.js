@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Header from './components/layout/Header';
 import Body from './components/layout/Body';
 import Footer from './components/layout/Footer';
@@ -10,12 +10,8 @@ import CreateMarketplace from './components/marketplace/CreateMarketplace';
 
 
 
-class App extends React.Component {
-  
-  render() {
-   
+function App()  {
     return (
-  
       <>
         <Header />
         <Body />
@@ -23,6 +19,6 @@ class App extends React.Component {
       </>
 )
 };
-}
+
 
 export default App;

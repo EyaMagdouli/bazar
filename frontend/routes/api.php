@@ -21,21 +21,13 @@ use Illuminate\Support\Facades\Route;
 //Marketplace api routes
 Route::resource('marketplaces',MarketplaceController::class);
 Route::get('/marketplaces/search/{name}',[MarketplaceController::class,'search']);
-/* Route::get('/marketplaces',[MarketplaceController::class,'index']);
-Route::post('/marketplaces',[MarketplaceController::class,'store']); */
+
 
 
 //**************/
 //Product api routes
 Route::resource('products',ProductController::class)->middleware('auth:sanctum');
 Route::get('/products/search/{name}',[ProductController::class,'search'])->middleware('auth:sanctum');
-/* Route::get('/products',[ProductController::class,'index']);
-Route::post('/products',[ProductController::class,'store']); */
-
-
-
-
-
 
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {

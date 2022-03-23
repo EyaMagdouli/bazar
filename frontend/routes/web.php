@@ -23,14 +23,14 @@ Route::get('/', function () {
     return view('home');
 });
 
-// Auth::routes([]);
-Route::post('/login', function (Request $request) {
+ Auth::routes();
+/* Route::post('/login', function (Request $request) {
 
     return response()->json($request->all());
 });
 Route::post('/register', function (Request $request) {
     return response()->json(["login"=>true]);
-});
+}); */
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 //Route::get('/admin', [AdminController::class, 'index'])->name('Admin');
 /* Route::get('/SimpleUser', [SimpleUserController::class, 'index'])->name('SimpleUser');
