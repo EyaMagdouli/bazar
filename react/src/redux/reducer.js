@@ -1,8 +1,9 @@
 import {combineReducers} from "redux"
-import {cart} from "./reducers/cart"
-import {auth} from "./reducers/auth"
+import auth from './reducers/auth'
+import message from "./reducers/message"
 
-export const rootReducer = combineReducers({
-    cart,
-    auth
+export default combineReducers({
+    auth,
+    message
 })
+

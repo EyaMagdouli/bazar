@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\MarketplaceResource;
 use Illuminate\Http\Request;
 use App\Models\Marketplace;
 
@@ -14,7 +15,9 @@ class MarketplaceController extends Controller
      */
     public function index()
     {
-        return Marketplace::all();
+        $marketplaces = Marketplace::all();
+        dd($marketplaces);
+        // return $this->handleResponse(MarketplaceResource::collection($marketplaces),'Marketplaces have been retrieved');
     }
 
     /**

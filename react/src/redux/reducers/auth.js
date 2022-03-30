@@ -1,20 +1,47 @@
-import { dispatchConstants } from "../constants"
-
-const init = {
-    isLoggedIn: false
-}
-export const auth = (state=init, action)=>{
-    switch(action.type){
-        case dispatchConstants.AUTH.SET_LOGGED_IN:
-            return {
-                isLoggedIn: true,
-                ...action.user
-            }
-        case dispatchConstants.AUTH.SET_LOGGED_OUT:
-            return {
-                isLoggedIn: false
-            }
-        default: 
-        return state
+// the Auth reducer will update the isLoggedIN and user state of the application
+import {
+    REGISTER_SUCCESS,
+    REGISTER_FAIL,
+    LOGIN_SUCCESS,
+    LOGIN_FAIL,
+    LOGOUT,
+  } from "../actions/types";
+  const user = JSON.parse(localStorage.getItem("user"));
+  const initialState = user
+    ? { isLoggedIn: true, user }
+    : { isLoggedIn: false, user: null };
+  export default function (state = initialState, action) {
+    const { type, payload } = action;
+    switch (type) {
+      case REGISTER_SUCCESS:
+        return {
+          ...state,
+          isLoggedIn: false,
+        };
+      case REGISTER_FAIL:
+        return {
+          ...state,
+          isLoggedIn: false,
+        };
+      case LOGIN_SUCCESS:
+        return {
+          ...state,
+          isLoggedIn: true,
+          user: payload.user,
+        };
+      case LOGIN_FAIL:
+        return {
+          ...state,
+          isLoggedIn: false,
+          user: null,
+        };
+      case LOGOUT:
+        return {
+          ...state,
+          isLoggedIn: false,
+          user: null,
+        };
+      default:
+        return state;
     }
-}
+  }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\ProductResource;
 use Illuminate\Http\Request;
 use App\Models\Product;
 
@@ -15,7 +16,9 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return Product::all();
+        dd("ici");
+        $products = Product::all();
+        return $this->handleResponse(ProductResource::collection($products),'Products have been retrieved');
     }
 
     /**

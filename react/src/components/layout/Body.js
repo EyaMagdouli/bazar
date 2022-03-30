@@ -8,7 +8,10 @@ import CreateMarketplace from '../marketplace/CreateMarketplace';
 import ChooseKind from '../auth/ChooseKind';
 import ForgotPassword from '../auth/ForgotPassword';
 
+
 export default function Body() {
+
+
   return (
 
     <Routes>
