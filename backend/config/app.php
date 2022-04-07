@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
+    'name' => env('APP_NAME', 'Bazar'),
 
     /*
     |--------------------------------------------------------------------------
@@ -51,6 +51,7 @@ return [
     | your application so that it is used when running Artisan tasks.
     |
     */
+    //'admin_link' => 'http://localhost/PFE/backend/public/admin',
 
     'url' => env('APP_URL', 'http://localhost'),
 

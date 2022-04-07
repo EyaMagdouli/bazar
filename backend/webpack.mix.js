@@ -14,3 +14,7 @@ const mix = require('laravel-mix');
 mix.js('resources/js/app.js', 'public/js')
     .react()
     .sass('resources/sass/app.scss', 'public/css');
+
+    
+mix.disableNotifications(); // Disable success and error Notification
+mix.disableSuccessNotifications(); // Disable only success Notification and show error Notification
