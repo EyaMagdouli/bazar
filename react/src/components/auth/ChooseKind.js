@@ -1,9 +1,9 @@
 import React,{Component} from 'react'
 import { Link } from 'react-router-dom'
-import planter from './images/planter.jpg'
-import retailer from './images/retailer.jpg'
-import wholesaler from './images/wholesaler.jpg'
-import transformer from './images/transformer.jpg'
+import planter from '../../assets/images/planter.jpg'
+import retailer from '../../assets/images/retailer.jpg'
+import wholesaler from '../../assets/images/wholesaler.jpg'
+import transformer from '../../assets/images/transformer.jpg'
 
 export default function ChooseKind() {
   return (

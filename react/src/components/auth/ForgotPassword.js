@@ -1,5 +1,5 @@
 import React from 'react'
-import './css/auth.css';
+import '../../assets/css/auth/auth.css';
 
 export default function ForgotPassword() {
   return (

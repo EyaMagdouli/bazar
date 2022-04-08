@@ -1,17 +1,17 @@
-import React from "react";
-import axios from "axios";
-import { useState } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import pic from './images/auth.jpg';
-import swal from 'sweetalert';
 import {useNavigate} from 'react-router-dom';
+import axios from "axios";
+import pic from '../../assets/images/auth.jpg';
+import swal from 'sweetalert';
+
 
 export default function Register(props) {
 
 	const navigate = useNavigate();
 	const [registerInput, setRegister] = useState({
 		name: '',
-		email: '',
+		email: '',	
 		phone_number: '',
 		password: '',
 		error_list: [],
@@ -30,13 +30,14 @@ export default function Register(props) {
 			password: registerInput?.password
 		}
 
+		//to gender a csrf token
 		axios.get('/sanctum/csrf-cookie').then(response => {
-			axios.post('/api/register',data).then(res=>{
+			axios.post ('/api/register',data).then(res=>{
 				if(res.data.status === 200){
 					localStorage.setItem('auth_token',res.data.token);
 					localStorage.setItem('auth_name',res.data.name);
 					swal("Success",res.data.message,"success");
-					navigate('/createMarket');
+					navigate('/');
 				}
 				else{
 					setRegister({...registerInput ,error_list: res.data.validation_errors});
@@ -63,7 +64,7 @@ export default function Register(props) {
 						<span className="symbol-input100">
 							<i className="fa fa-user-circle" aria-hidden="true"></i>
 						</span>
-						<span>{ registerInput.error_list.name }</span>
+						<span style={{ 'color': "red" }}>{ registerInput.error_list.name }</span>
 
 					</div>
 
@@ -73,7 +74,7 @@ export default function Register(props) {
 						<span className="symbol-input100">
 							<i className="fa fa-envelope" aria-hidden="true"></i>
 						</span>
-						<span>{ registerInput.error_list.email }</span>
+						<span style={{ 'color': "red" }}>{ registerInput.error_list.email }</span>
 
 					</div>
 
@@ -83,6 +84,7 @@ export default function Register(props) {
 						<span className="symbol-input100">
 							<i className="fa fa-address-book-o" aria-hidden="true"></i>
 						</span>
+						<span style={{ 'color': "red" }}>{ registerInput.error_list.phone_number }</span>
 					</div>
 
 					<div className="wrap-input100 validate-input" data-validate = "Password is required">
@@ -91,7 +93,7 @@ export default function Register(props) {
 						<span className="symbol-input100">
 							<i className="fa fa-lock" aria-hidden="true"></i>
 						</span>
-						<span>{ registerInput.error_list.password }</span>
+						<span style={{ 'color': "red" }}>{ registerInput.error_list.password }</span>
 					</div>
 
 					{/* <div className="wrap-input100 validate-input" data-validate = "Password is required">

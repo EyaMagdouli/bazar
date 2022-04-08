@@ -1,11 +1,10 @@
 import axios from "axios";
 import React from "react";
 import {useRef, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import swal from "sweetalert";
-import './css/auth.css';
-import pic from './images/auth.jpg'
-import {useNavigate} from 'react-router-dom';
+import '../../assets/css/auth/auth.css';
+import pic from '../../assets/images/auth.jpg'
 
 
 export default function Login(props) {
@@ -33,7 +32,7 @@ export default function Login(props) {
 			if(res.data.status === 200){
 				localStorage.setItem('auth_token',res.data.token);
 				localStorage.setItem('auth_name',res.data.name);
-				swal('hiiiiiiiiii',res.data.message,"success");
+				//swal('Logged In successfully',res.data.message,"success");
 				navigate('/');
 			}
 			else if(res.data.status === 401){
@@ -54,8 +53,8 @@ export default function Login(props) {
       <div className='container py-5'>
       <div className="card" style={{display: 'flex',  justifyContent:'center'}}>
         <div className="card-body" style={{display: 'flex',  justifyContent:'center', alignItems:'center'}}>
-				<div className="login100-pic js-tilt" data-tilt>
-					<img src={pic} alt="image"/>
+				<div className="login100-pic js-tilt" data-tilt >
+					<img src={pic} alt="image" />
 				</div>
 				<form onSubmit={loginSubmit} className="login100-form validate-form">
 					<span className="login100-form-title">
@@ -68,7 +67,7 @@ export default function Login(props) {
 						<span className="symbol-input100">
 							<i className="fa fa-envelope" aria-hidden="true"></i>
 						</span>
-						<span>
+						<span style={{ 'color': "red" }}>
 							{loginInput.error_list.email}
 						</span>
 					</div>
@@ -79,7 +78,7 @@ export default function Login(props) {
 						<span className="symbol-input100">
 							<i className="fa fa-lock" aria-hidden="true"></i>
 						</span>
-						<span>
+						<span style={{ 'color': "red" }}>
 							{loginInput.error_list.password}
 						</span>
 					</div>

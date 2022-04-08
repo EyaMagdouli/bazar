@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import logo from './logo.png';
+import logo from '../../assets/images/logo.png';
 import axios from 'axios';
 import swal from 'sweetalert';
 import {useNavigate} from 'react-router-dom';
@@ -41,7 +41,7 @@ function Header(props)
                 <li className='nav-item'>
                     <button type='button' onClick={logoutSubmit} className='nav-link btn btn-danger btn-sm text-white'>
                         Logout
-                    </button>
+                    </button> 
                 </li>
             </ul>
         );
@@ -61,20 +61,7 @@ function Header(props)
 
                         <div className="collapse navbar-collapse" id="navbarSupportedContent">                   
                         <ul className="navbar-nav ms-auto">
-                            {AuthButtons}
-
-                            {/* <li className="nav-item dropdown">
-                                <a id="navbarDropdown" className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
-                                    username
-                                </a>
-                                <div className="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a className="dropdown-item" href="{{ route('logout') }}">
-                                        logout
-                                    </a>
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" className="d-none">
-                                    </form>
-                                </div>
-                            </li> */}
+                            {AuthButtons} 
                         </ul>
                     </div>
                 </div>
