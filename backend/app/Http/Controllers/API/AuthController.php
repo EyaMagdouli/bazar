@@ -20,6 +20,7 @@ class AuthController extends Controller
 
         //validation of the inputs
         $validator= Validator::make($request->all(), [
+            'kind'=>'required',
             'name'=> 'required|max:191',
             'email'=>'required|email|max:191|unique:users,email',
             'phone_number'=>'required|max:18|min:8',
@@ -42,7 +43,7 @@ class AuthController extends Controller
                 'password'=>Hash::make($request->password),
             ]);
 
-            //creating a toke of this user named _Token
+            //creating a token of this user named _Token
             $token = $user->createToken($user->email.'_Token')->plainTextToken;
             return response()->json(
                 [
@@ -89,6 +90,7 @@ class AuthController extends Controller
                     'status'=>200,
                     'name'=>$user->name,
                     'token'=>$token,
+                    'kind'=>$user->kind,
                     'message'=>'Logged In successfully',
                     ]);
             }

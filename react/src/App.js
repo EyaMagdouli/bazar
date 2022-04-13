@@ -3,7 +3,7 @@ import Header from './components/layout/Header';
 import "bootstrap/dist/css/bootstrap.min.css";
 import Body from './components/layout/Body';
 import Footer from './components/layout/Footer';
-import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+
 import axios from 'axios';
 
 
