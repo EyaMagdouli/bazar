@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\API\AuthController;
+use App\Http\Controllers\API\CategoryController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\MarketplaceController;
 
@@ -32,6 +33,15 @@ Route::post('login',[AuthController::class, 'login']);
 Route::middleware('auth:sanctum')->group(function(){
     Route::post('logout',[AuthController::class, 'logout']);
 });
+
+//categories
+Route::get('viewCategory',[CategoryController::class, 'index']);
+Route::post('addCategory',[CategoryController::class, 'store']);
+Route::get('editCategory/{id}',[CategoryController::class, 'edit']);
+Route::put('updateCategory/{id}', [CategoryController::class, 'update']);
+Route::delete('deleteCategory/{id}',[CategoryController::class, 'destroy']);
+
+
 
 
 

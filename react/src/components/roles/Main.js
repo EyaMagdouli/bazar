@@ -1,6 +1,9 @@
 import React from "react";
 import { Route, Routes, useParams } from "react-router";
-import Category from "../dashboard/Category";
+import Category from "../dashboard/categories/Category";
+import AddCategory from "../dashboard/categories/AddCategory"
+import EditCategory from "../dashboard/categories/EditCategory"
+
 
 export default function Main({ toggle, settoggle }) {
   const params = useParams();
@@ -20,6 +23,10 @@ export default function Main({ toggle, settoggle }) {
       </div>
       <Routes>
         <Route path="/categories" element={<Category />} />
+        <Route path="/categories/add" element={<AddCategory />} />
+        <Route path="/categories/edit/:id" element={<EditCategory />} />
+
+        
       </Routes>
     </div>
   );
