@@ -4,9 +4,9 @@ use App\Models\Marketplace;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ProductController;
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\CategoryController;
+use App\Http\Controllers\API\ProductController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\MarketplaceController;
 
@@ -42,21 +42,14 @@ Route::put('updateCategory/{id}', [CategoryController::class, 'update']);
 Route::delete('deleteCategory/{id}',[CategoryController::class, 'destroy']);
 
 
+//products
+Route::get('categories',[CategoryController::class, 'allCategories']);
+Route::post('addProduct',[ProductController::class,'store']);
 
 
 
 
-//**************/
-//Marketplace api routes
-Route::resource('marketplaces',MarketplaceController::class);
-Route::get('/marketplaces/search/{name}',[MarketplaceController::class,'search']);
 
-
-
-//**************/
-//Product api routes
-Route::resource('products',ProductController::class);
-Route::get('/products/search/{name}',[ProductController::class,'search'])/* ->middleware('auth:sanctum') */;
 
 
 

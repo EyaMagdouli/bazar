@@ -79,7 +79,7 @@ const EditCategory = () => {
                 <input
                 className="input100"
                 type="text"
-                name="name" placeholder="Name"  onChange={handleInput}
+                name="name"onChange={handleInput}
                 value={categoryInput.name } />
                 <span style={{ color: "red" }}>
                 {error.name}

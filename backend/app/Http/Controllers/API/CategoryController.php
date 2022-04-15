@@ -120,9 +120,19 @@ class CategoryController extends Controller
             'message' =>'Category added successfully'
         ]);
         }
+
+
+
+
     }
 
-
+    public function allCategories(){
+        $category = Category::get();
+        return response()->json([
+        'status' =>200,
+        'category'=> $category
+    ]);
+    }
 
 
 }
