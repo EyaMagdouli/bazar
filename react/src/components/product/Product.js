@@ -1,74 +1,101 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import axios from 'axios'
 
 const Product = () => {
-  return (
-    <div className='container py-5'>
-  <div className="card" style={{display: 'flex',  justifyContent:'center', width:"900px", marginLeft:"140px"}}>
-    <div
-          className="card-body"
-          style={{
-            display: "flex",
-            justifyContent: "space-around",
-            alignItems: "center",
-          }}
-        >
-          
-      <div className="row flex-lg-nowrap">
-        
-        <div>
-          <div className="e-panel card" >
-            
-            <div className="card-body">
-            <div className='cardHeader' >
-            <h2 >Products</h2>
-            <Link to="/buyer/dashboard/products/add">
-            <button className="btn btn-success" type="button" data-toggle="modal" data-target="#user-form-modal">Add Product</button>
-            </Link>
-            </div>
-            
 
-              <div className="e-table"> 
-                <div className="table-responsive table-lg mt-3">
-                  <table className="table table-bordered"  style={{width:"800px "}}>
+
+  const [product, setProduct] = useState([])
+  
+  useEffect(() => {
+      axios.get(`/api/viewProduct`).then(res=>{
+        if(res.data.status === 200){
+          setProduct(res.data.products)
+        }
+      })
+  }, [])
+
+  const deleteProduct= (e, id) => {
+    e.preventDefault();
+
+    axios.delete(`api/deleteProduct/${id}`).then(res=>{
+      if(res.data.status === 200){
+        swal("Success",res.data.message,"success")
+
+      }
+      else if(res.data.status === 404) {
+        swal("Success",res.data.message,"success")
+
+      }
+
+    })
+  }
+
+var displayProductData =""
+
+displayProductData = product.map( (item, i) => {
+  return(
+    <tr key={item.id}>
+      <td>{item.id}</td>
+      <td> <img src={`http://127.0.0.1:8000/${item.image}`} width="50px" alt={item.name} /> </td>
+      <td>{item.name}</td>
+      <td>{item.slug}</td>
+      <td>{item.category.name}</td>
+      <td>{item.price}</td>
+      <td>{item.description}</td>
+      <td>
+      <div className="btn-group align-top">
+        <button type="button" >
+            <Link to={`/buyer/dashboard/products/edit/${item.id}`} style={{color:"blue", fontSize:"17px" ,marginRight:"10px", textDecoration:"none"}}  >
+            <i className="far fa-edit" ></i> Edit </Link>
+        </button>
+        <button type="button" onClick={(e)=>deleteProduct(e, item.id)} style={{color:"red", fontSize:"16px" }} >
+            <i className="fa fa-trash" ></i>
+            Delete
+         </button>
+        </div>
+      </td>
+
+
+
+    </tr>
+  )
+} )
+
+  return (
+    <div className='data'>
+    <div className='recentData' >
+    <div className='cardHeader' >
+            <h1 className='title' >Products</h1>
+            <Link to="/buyer/dashboard/products/add">
+            <button className="button" type="button" >Add Product</button>
+            </Link>
+    </div>
+                  <table>
                     <thead>
                         <tr>
-                        <th className="max-width">
-                            ID
-                        </th>
-                        <th className="max-width">
-                            Image
-                        </th>
-                        <th className="max-width">
-                            Name
-                        </th>
-                        <th className='sortable' >
-                            Slug
-                        </th>
-                        <th className='max-width' >
-                            Price
-                        </th>
-                        <th className="max-width"> 
-                          Description
-                        </th>
-                        <th>Actions</th>
+                        <td>ID</td>
+                        <td>Image</td>
+                        <td>Name</td>
+                        <td>Slug</td>
+                        <td>Category</td>
+                        <td>Price</td>
+                        <td>Description</td>
+                        <td>Actions</td>
                         </tr>
                     </thead>
                     
                     <tbody>
-                    {/* {viewCategory_table} */}
+                    {displayProductData}
                     </tbody>
+                
                   </table>
-                </div>
+              
+            </div>
+            </div>
+            
+  
 
-              </div>
-            </div> 
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
   )
 }
 

@@ -2,12 +2,13 @@ import axios from 'axios';
 import React, { useState, useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router';
 import swal from 'sweetalert';
+import { Link } from 'react-router-dom';
 
 
 const EditCategory = () => {
   const navigate = useNavigate();
   const [categoryInput, setCategory] = useState([]);
-  const [error, setError] = useState([])
+  const [error, setError]     = useState([])
   
   
   const { Category_id } = useParams();
@@ -59,69 +60,66 @@ const EditCategory = () => {
 
 
   return (
-    <div className='container py-5'>
-        <div className="card" style={{display: 'flex',  justifyContent:'center', width:"600px", marginLeft:"140px", top:"-30px"}}>
-        <div
-          className="card-body"
-          style={{
-            display: "flex",
-            justifyContent: "space-around",
-            alignItems: "center",
-          }}
-        >
-
-            <form className="login100-form validate-form" onSubmit={categoryUpdate} /* id="category_from" */>
-            <span className="login100-form-title">Edit Category</span>
-
-            <div
-              className="wrap-input100 validate-input"
-              data-validate="name is required">
+    <div className='data'>
+        <div className='recentData'>
+        <div className='cardHeader'>
+        <h1 className='title'>Edit Category</h1>
+            <Link to="/buyer/dashboard/categories">
+            <button className='button' type="button" >
+              Back
+              </button>
+            </Link>
+        </div>
+        <form className="form-card" onSubmit={categoryUpdate}>
+            <div className="row justify-content-between text-left">
+            <div className="form-group col-sm-6 flex-column d-flex">
+            <label style={{fontSize:"15px"}} className="form-control-label px-3">Name
+                        <span className="text-danger"> *</span>
+                        </label> 
                 <input
-                className="input100"
-                type="text"
-                name="name"onChange={handleInput}
+                className="form-control" type="text" name="name"  onChange={handleInput}
                 value={categoryInput.name } />
                 <span style={{ color: "red" }}>
                 {error.name}
               </span>
-           
             </div>
-            <div
-              className="wrap-input100 validate-input"
-              data-validate="slug is required">
+            <div className="form-group col-sm-6 flex-column d-flex" >
+            <label style={{fontSize:"15px"}} className="form-control-label px-3" >Slug
+                        <span className="text-danger"> *</span>
+                        </label>
                 <input
-                className="input100"
+                className="form-control"
                 type="text"
-                name="slug" placeholder="Slug"  onChange={handleInput}
-                value={categoryInput.slug || ""} />  
+                name="slug"   onChange={handleInput}
+                value={categoryInput.slug || ""} />
                 <span style={{ color: "red" }}>
                 {error.slug}
               </span>
             </div>
-            <div
-              className="wrap-input100 validate-input"
-              data-validate="Description is required">
+            </div>
+            <div className="form-group col-sm-6 flex-column d-flex">
+            <label style={{fontSize:"15px"}}>Description</label>
                 <textarea
-                className="input100"
+                 className="form-control"
                 type="text"
-                name="description" placeholder="Description" rows="4" cols="50" 
-                 onChange={handleInput}
+                name="description" rows="4" cols="50" 
+                onChange={handleInput}
                 value={categoryInput.description || ""} />
-           
-  
-              <div className="container-login100-form-btn">
-              <button type="submit" className="login100-form-btn">
-                Edit
-              </button>
-            </div>
-            </div>
+                <span style={{ color: "red" }}>
+                {error.description}
+              </span>
+              </div>
+              <br></br>
+              <button style={{width:"600px", marginLeft:"200px",fontSize:"17px"}} type="submit" className="btn btn-outline-success">Add Category</button>
+
+            
 
             </form>
+              
               
 
           </div>
         </div>
-      </div>
   )
 }
 

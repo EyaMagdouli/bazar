@@ -1,11 +1,15 @@
 import React from "react";
 import { Route, Routes, useParams } from "react-router";
-import Category from "../categories/Category";
-import AddCategory from "../categories/AddCategory"
-import EditCategory from "../categories/EditCategory"
-import Product from "../products/Product"
+import Category from "../category/Category";
+import AddCategory from "../category/AddCategory"
+import EditCategory from "../category/EditCategory"
+import Product from "../product/Product"
 import AddProduct from "../product/AddProduct"
 import EditProduct from "../product/EditProduct"
+import DashHome from "./DashHome"
+import Marketplace from "../marketplace/Marketplace";
+import EditMarketplace from "../marketplace/EditMarketplace";
+
 
 
 
@@ -26,7 +30,11 @@ export default function Main({ toggle, settoggle }) {
           </label>
         </div>
       </div>
+
+       
+
       <Routes>
+        <Route path="/" element={ < DashHome /> } />
         {/* categories */}
         <Route path="/categories" element={<Category />} />
         <Route path="/categories/add" element={<AddCategory />} />
@@ -35,7 +43,11 @@ export default function Main({ toggle, settoggle }) {
         {/* products */}
         <Route path="/products" element={ <Product /> } />
         <Route path="/products/add" element={ <AddProduct /> } />
-        {/* <Route path="/products/edit/:id" element={ <EditProduct /> } /> */}
+        <Route path="/products/edit/:id" element={ <EditProduct /> } />
+
+         {/* marketplace */}
+        <Route path="/marketplace" element={ <Marketplace /> } />
+        <Route path="/marketplace/edit" element={ <EditMarketplace /> } />
 
 
         

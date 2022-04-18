@@ -28,7 +28,7 @@ class CategoryController extends Controller
         }
         else{
             return response()->json([
-                'status'=>'404',
+                'status'=>404,
                 'message'=>'No category id found'
             ]);
         }
@@ -71,9 +71,6 @@ class CategoryController extends Controller
     }
 
 
-
-
-
     public function destroy($id){
         $category = Category::find($id);
         if($category){
@@ -86,7 +83,7 @@ class CategoryController extends Controller
         }
         else {
             return response()->json([
-                'status'=>'404',
+                'status'=>404,
                 'message'=>'No category id found'
             ]);
         }

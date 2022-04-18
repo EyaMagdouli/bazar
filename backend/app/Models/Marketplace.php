@@ -12,9 +12,12 @@ class Marketplace extends Model
     use HasFactory;
     protected $fillable =
     ['name',
+    'user_id',
     'slug',
-    'description'];
+    'description',
+    'image'];
 
+    protected $with = ['user']; 
 
     public function product(){
         $this->hasMany(Product::class);

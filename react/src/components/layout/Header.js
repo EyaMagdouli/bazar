@@ -44,8 +44,8 @@ function Header() {
   );
 
   return (
-    <div id="bazarHome" style={{height: "wrap-content"}}>
-      <div className="header navbar navbar-expand-md position-relative">
+    <div id="bazarHome"  style={{height: "20px"}}>
+      <div className="header navbar navbar-expand-md " style={{height: "60px"}}>
         <div className="container">
           <Link className="logo" to="/">
             <img src={logo} alt="logo" width="150" />

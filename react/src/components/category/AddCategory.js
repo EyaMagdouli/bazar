@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import swal from "sweetalert"
 import axios from "axios";
 import { useNavigate } from 'react-router';
-
+import { Link } from 'react-router-dom';
 
 const AddCategory = () => {
 
@@ -41,37 +41,33 @@ const AddCategory = () => {
   }
 
   return (
-<div className='container py-5'>
-        <div className="card" style={{display: 'flex',  justifyContent:'center', width:"600px", marginLeft:"140px", top:"-30px"}}>
-        <div
-          className="card-body"
-          style={{
-            display: "flex",
-            justifyContent: "space-around",
-            alignItems: "center",
-          }}
-        >
-
-            <form className="login100-form validate-form" onSubmit={categorySubmit} id="category_from">
-            <span className="login100-form-title">Add Category</span>
-
-            <div
-              className="wrap-input100 validate-input"
-              data-validate="name is required">
+<div className='data'>
+        <div className='recentData'>
+        <div className='cardHeader'>
+           <h1 className='title'>Add Category</h1>
+                <Link to="/buyer/dashboard/categories">
+                    <button className="button" type="button" >Back</button>
+                </Link>
+        </div>
+            <form className="form-card" onSubmit={categorySubmit} id="category_from">
+            <div className="row justify-content-between text-left">
+            <div className="form-group col-sm-6 flex-column d-flex">
+            <label style={{fontSize:"15px"}} className="form-control-label px-3">Name
+                        <span className="text-danger"> *</span>
+                        </label> 
                 <input
-                className="input100"
-                type="text"
-                name="name" placeholder="Name"  onChange={handleInput}
+                className="form-control" type="text" name="name"  onChange={handleInput}
                 value={categoryInput.name || ""} />
                 <span style={{ color: "red" }}>
                 {categoryInput.error_list.name}
               </span>
             </div>
-            <div
-              className="wrap-input100 validate-input"
-              data-validate="slug is required">
+            <div className="form-group col-sm-6 flex-column d-flex" >
+            <label style={{fontSize:"15px"}} className="form-control-label px-3" >Slug
+                        <span className="text-danger"> *</span>
+                        </label>
                 <input
-                className="input100"
+                className="form-control"
                 type="text"
                 name="slug" placeholder="Slug"  onChange={handleInput}
                 value={categoryInput.slug || ""} />
@@ -79,11 +75,11 @@ const AddCategory = () => {
                 {categoryInput.error_list.slug}
               </span>
             </div>
-            <div
-              className="wrap-input100 validate-input"
-              data-validate="Description is required">
+            </div>
+            <div className="form-group col-sm-6 flex-column d-flex">
+            <label style={{fontSize:"15px"}}>Description</label>
                 <textarea
-                className="input100"
+                 className="form-control"
                 type="text"
                 name="description" placeholder="Description" rows="4" cols="50" 
                  onChange={handleInput}
@@ -91,19 +87,17 @@ const AddCategory = () => {
                 <span style={{ color: "red" }}>
                 {categoryInput.error_list.description}
               </span>
-              <div className="container-login100-form-btn">
-              <button type="submit" className="login100-form-btn">
-                Create
-              </button>
-            </div>
-            </div>
+              </div>
+              <br></br>
+              <button style={{width:"600px", marginLeft:"200px",fontSize:"17px"}} type="submit" className="btn btn-outline-success">Add Category</button>
+
+            
 
             </form>
               
 
           </div>
         </div>
-      </div>
 
   )}
 

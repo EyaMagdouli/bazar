@@ -2,6 +2,8 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+
+
 }
 
 :root {
@@ -10,15 +12,18 @@
     ---grey: #f5f5f5;
     --black1:#222;
     ---black2:#999;
+    --yellow: rgb(104, 196, 84);
 }
 body{
     min-height: 100vh;
     overflow-x: hidden;
     
+    
 }
 .container{
-    position: relative;
+    position: fixed;
     width: 100%;
+
     
 
 }
@@ -26,12 +31,14 @@ body{
     position: fixed;
     width: 200px;
     height: 100%;
+    z-index: 1;
     background: var(--green);
     border-left: 10px solid var(--green);
     transition: 0.5s;
-    overflow: hidden;
-    top: 69px;
-    left: 0px;
+    overflow-x: hidden;
+    padding-top: 20px;
+    top: 60px;
+    left: 0;
     
 }
 
@@ -41,13 +48,15 @@ body{
     left: 0;
     width: 100%;
     padding-left: 0rem;
+
 }
 .navigation ul li {
-    position: relative;
+    position: fix;
     width: 100%;
     list-style: none;
     border-top-left-radius:30px ;
     border-bottom-left-radius:30px ;
+    
 }
 
 .navigation ul li:hover,
@@ -132,7 +141,7 @@ body{
 .topbar  {
     width: 100%;
     height: 60px;
-    display: flex;
+    /* display: flex; */
     justify-content: space-between;
     align-items: center;
     padding: 0 10px;
@@ -143,7 +152,8 @@ body{
     width: 40px;
     height: 40px;
     display: flex;
-    /* left:-40px ; */
+    top:40px;
+    left:50px ;
     justify-content: center;
     align-items: center;
     font-size: 2.8em;
@@ -151,9 +161,12 @@ body{
 }
 
 .search{
-    position: relative;
+    position: fixed;
     width: 400px;
     margin: 0 10px;
+    top:80px;
+    left:600px;
+
 }
 
 .search label {
@@ -186,4 +199,122 @@ body{
     width: calc(100% - 80px);
     left: 10px;
     
+}
+
+
+.cardBox{
+    left: 60px;
+    position: relative;
+    width: 100%;
+    padding: 20px;
+    display: grid;
+    top:70px;
+    grid-template-columns: repeat(4,1fr);
+    grid-gap: 30px
+
+}
+.cardBox .card{
+    position: relative;
+    background: var(--white);
+    padding: 30px;
+    border-radius: 20px;
+    display: flex;
+    justify-content: space-between;
+    box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
+}
+.cardBox .card .numbers{
+    position: relative;
+    font-weight: 500;
+    font-size: 2.5em;
+    color: var(--green);
+}
+.cardBox .card .cardName{
+    color: var(---black2);
+    font-size: 1.1em;
+    margin-top: 5px ;
+}
+.cardBox .card .iconBx{
+    font-size: 3.5em;
+    color: var(---black2);
+}
+.cardBox .card:hover{
+    background:var(--green);
+}
+.cardBox .card:hover .numbers,
+.cardBox .card:hover .cardName,
+.cardBox .card:hover .iconBx
+{
+    color: var(--white  );
+}
+
+.data{
+    position: relative;
+    width: 1600px;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-gap: 30px;
+    margin-top: 10px;
+    left: 60px;
+    top: 50px;
+}
+.data .recentData{
+    position: relative;
+    display: grid;
+    background: var(--white);
+    padding: 20px;
+    box-shadow: 0 7px 25px rgba(0, 0, 0, 0.2);
+}
+
+.cardHeader{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+.cardHeader .title{
+    font-weight: 600;
+    color: var(--green);
+    font-size: 30px;
+
+}
+.button{
+    position: relative;
+    padding: 5px 10px;
+    background: var(--green) ;
+    text-decoration: none;
+    color: var(--white);
+    border-radius: 6px;
+}
+.data table{
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+.data table thead td{
+    font-weight: 600;
+    font-size: 18px;
+
+}
+.data .recentData table tr {
+    color: var(--black1);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    font-size: 15px;
+
+}
+
+
+.data .recentData table tbody tr:last-child{
+    border-bottom: none ;
+}
+.data .recentData table tr td{
+    padding: 10px;
+}
+.data .recentData table tr td:last-child{
+    text-align: end;
+}
+.data .recentData table tr td:nth-child(2){
+    text-align: end;
+}
+.data .recentData table tr td:nth-child(2){
+    text-align: center;
 }

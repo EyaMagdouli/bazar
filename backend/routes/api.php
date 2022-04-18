@@ -8,7 +8,7 @@ use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\CategoryController;
 use App\Http\Controllers\API\ProductController;
 use App\Http\Controllers\Auth\RegisterController;
-use App\Http\Controllers\MarketplaceController;
+use App\Http\Controllers\API\MarketplaceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,10 +23,10 @@ use App\Http\Controllers\MarketplaceController;
 
 
 //**************/
-//register api routes
+//register
 Route::post('register',[AuthController::class, 'register']);
 
-//login api routes
+//login
 Route::post('login',[AuthController::class, 'login']);
 
 //logout
@@ -40,11 +40,21 @@ Route::post('addCategory',[CategoryController::class, 'store']);
 Route::get('editCategory/{id}',[CategoryController::class, 'edit']);
 Route::put('updateCategory/{id}', [CategoryController::class, 'update']);
 Route::delete('deleteCategory/{id}',[CategoryController::class, 'destroy']);
+Route::get('categories',[CategoryController::class, 'allCategories']);
+
 
 
 //products
-Route::get('categories',[CategoryController::class, 'allCategories']);
 Route::post('addProduct',[ProductController::class,'store']);
+Route::get('viewProduct',[ProductController::class,'index']);
+Route::get('editProduct/{id}',[ProductController::class,'edit']);
+Route::post('updateProduct/{id}',[ProductController::class,'update']);
+Route::delete('deleteProduct/{id}',[ProductController::class, 'destroy']);
+
+
+//marketplace
+Route::post('createMarket',[MarketplaceController::class,'create']);
+Route::get('viewMarket/{id}',[MarketplaceController::class,'index']);
 
 
 

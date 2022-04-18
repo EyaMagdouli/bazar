@@ -15,9 +15,11 @@ class CreateMarketplacesTable extends Migration
     {
         Schema::create('marketplaces', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('slug');
-            $table->text('description');
+            $table->integer('user_id')->required();
+            $table->string('name')->required();
+            $table->string('slug')->required();
+            $table->string('image')->required();
+            $table->text('description')->nullable();
             $table->timestamps();
         });
     }

@@ -16,15 +16,19 @@ class Product extends Model
     ['name',
     'slug',
     'category_id',
+    'marketplace_id',
     'image',
     'price'];
 
 
+
+    protected $with = ['category','marketplace']; //to use with js
     public function category(){
-        $this->belongsTo(Category::class);
+        return $this->belongsTo(Category::class, 'category_id', 'id');
     }
 
+
     public function marketplace(){
-        $this->belongsTo(Marketplace::class);
+        $this->belongsTo(Marketplace::class, 'marketplace_id', 'id');
     }
 }
