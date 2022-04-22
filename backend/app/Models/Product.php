@@ -15,20 +15,18 @@ class Product extends Model
     protected $fillable =
     ['name',
     'slug',
-    'category_id',
     'marketplace_id',
+    'category_id',
     'image',
     'price'];
 
 
-
-    protected $with = ['category','marketplace']; //to use with js
+    protected $with =  ['category','marketplace'];
     public function category(){
         return $this->belongsTo(Category::class, 'category_id', 'id');
     }
 
-
     public function marketplace(){
-        $this->belongsTo(Marketplace::class, 'marketplace_id', 'id');
+        return $this->belongsTo(Marketplace::class, 'marketplace_id', 'id');
     }
 }

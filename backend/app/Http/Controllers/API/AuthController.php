@@ -85,6 +85,9 @@ class AuthController extends Controller
             }
             else {
                 $token = $user->createToken($user->email.'_Token')->plainTextToken;
+                $remeber_token = $token;
+                $user->remember_token = $remeber_token;
+                $user->save();
                 return response()->json(
                     [
                     'status'=>200,

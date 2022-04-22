@@ -3,14 +3,31 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
+use App\Models\Marketplace;
 use App\Models\Product;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Validator;
 
 class ProductController extends Controller
 {
+    public function index(Request $request){
+
+
+        $user_id = auth()->user()->id;
+        $market = Marketplace::where('user_id', $user_id)->first();
+        $products = Product::where('marketplace_id', $market->id)->get();
+        return response()->json([
+            'status'=>200,
+            'products'=>$products
+        ]);
+    }
     public function store (Request $request){
+        //dd(Marketplace::where('user_id',$request->user()->id)->firstOrFail());
+
 
         $validator= Validator::make($request->all(),[
             'category_id'=>'required|max:191',
@@ -28,8 +45,20 @@ class ProductController extends Controller
 
         }
         else{
+
+            $user_id = auth()->user()->id;
+
+
+
+            // now we will fetch marketplace_id through user_id
+            $market = Marketplace::where('user_id', $user_id)->first();    // get marketplace info
+            //$marketplace_id = (!empty($market)) ? $market->id : 0; // her we get marketplace_id if not we assign 0
+            //return response()->json($marketplace_id);
+
+
             $product = new Product;
             $product->category_id = $request->input('category_id');
+            $product->marketplace_id =$market->id;
             $product->name = $request->input('name');
             $product->slug = $request->input('slug');
             $product->price = $request->input('price');
@@ -50,16 +79,6 @@ class ProductController extends Controller
             ]);
         }
 
-    }
-
-
-
-    public function index(){
-        $products = Product::all();
-        return response()->json([
-            'status'=>200,
-            'products'=>$products
-        ]);
     }
 
 
@@ -98,7 +117,7 @@ class ProductController extends Controller
 
         }
         else{
-            $product = Product::finc($id);
+            $product = Product::find($id);
             if($product){
             $product->category_id = $request->input('category_id');
             $product->name = $request->input('name');
@@ -135,12 +154,7 @@ class ProductController extends Controller
 
 
     }
-
-
-
-
 }
-
 
 public function destroy($id){
    $product = Product::find($id);

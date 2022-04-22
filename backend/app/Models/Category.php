@@ -12,10 +12,15 @@ class Category extends Model
     protected $table = 'categories';
     protected $fillable = [
         'name',
+        'marketplace_id',
         'slug',
     ];
 
+
     public function product(){
-        return $this->hasMany(Product::class);
+        return $this->hasMany(Product::class,'category_id', 'id');
+    }
+    public function marketplace(){
+        return $this->belongsTo(Marketplace::class,'marketplace_id', 'id');
     }
 }
