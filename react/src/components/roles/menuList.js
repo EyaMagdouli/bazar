@@ -12,7 +12,7 @@ export const menuList = [
     {
         title: "Marketplace",
         ion: "bag-handle",
-        link: "/buyer/dashboard/marketplace"
+        link: "/buyer/dashboard/marketplace/marketplace_id"
     },
     {
         title: "Products",

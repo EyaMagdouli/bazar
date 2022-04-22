@@ -11,18 +11,16 @@ const EditProduct = () => {
   const [categoryList, setCategoryList] = useState([])
   const [productInput, setProduct] = useState({
       category_id:'',
-      slug:'',
-      name:'',
-      description:'',
-      price:'',
-      error_list: []
+      'slug':'',
+      'name':'',
+      'description':'',
+      'price':'',
   })
+  const [error, setError]  = useState([])
+
 
 const [image, setImage] = useState([])
-const handleInput = (e) => {
-  e.persist();
-  setProduct({...productInput, [e.target.name]:e.target.value})
-}
+
 const handleImage = (e) => {
   setImage({image:e.target.files[0]})
 }
@@ -30,7 +28,11 @@ const handleImage = (e) => {
 
 const { product_id } = useParams();
   useEffect(() => {
-      axios.get(`api/categories`).then(res => {
+    const token = localStorage.getItem("auth_token");
+      axios.get(`api/categories/`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        }},).then(res => {
           if(res.data.status === 200){
               setCategoryList(res.data.category); 
           }
@@ -38,7 +40,7 @@ const { product_id } = useParams();
 
         axios.get(`/api/editProduct/${product_id}`).then(res=>{
           if(res.data.status === 200){
-            console.log(res.data.product)
+            console.log(res.data.product_id)
             setProduct(res.data.product)
           }
           else if(res.data.status === 404){
@@ -48,6 +50,11 @@ const { product_id } = useParams();
         })
 
   }, [product_id])
+
+  const handleInput = (e) => {
+    e.persist();
+    setProduct({...productInput, [e.target.name]:e.target.value})
+  }
 
 const updateProduct = (e) =>{
   e.preventDefault();
@@ -66,7 +73,7 @@ const updateProduct = (e) =>{
 
       if(res.data.status === 200){
           swal('Success',res.data.message,"success")
-
+          navigate('/buyer/dashboard/products');
       }
       else if(res.data.status === 422){
           setCategory({...productInput, error_list:res.data.errors})
@@ -102,7 +109,7 @@ const updateProduct = (e) =>{
                       </label> 
                       <input name='name' type="text" className="form-control"  onChange={handleInput} value={productInput.name}/>
                       {<span style={{ color: "red" }}>
-                      {productInput.error_list.name}
+                      {error.name}
                       </span>}
                     </div>
                     <div className="form-group col-sm-6 flex-column d-flex"> 
@@ -111,7 +118,7 @@ const updateProduct = (e) =>{
                       </label>
                       <input name='slug' type="text" className="form-control" onChange={handleInput} value={productInput.slug}/>
                       {<span style={{ color: "red" }}>
-                      {productInput.error_list.slug}
+                      {error.slug}
                       </span> }
                     </div>
         </div>
@@ -120,7 +127,7 @@ const updateProduct = (e) =>{
                       <label style={{fontSize:"15px"}} className="form-control-label px-3">Category
 
                       </label> 
-                      <select className="form-control" onChange={handleInput} value={productInput.category_id}>
+                      <select name='category_id' className="form-control" onChange={handleInput} value={productInput.category_id}>
                       {categoryList.map( (item)=>{
                           return(
                               <option value={item.id} key={item.id}> {item.name} </option>
@@ -130,7 +137,7 @@ const updateProduct = (e) =>{
                       )}
                       </select>
                       <span style={{ color: "red" }}>
-                      {productInput.error_list.category_id}
+                      {error.category_id}
                       </span>
                     </div>
                     <div className="form-group col-sm-6 flex-column d-flex"> 
@@ -139,7 +146,7 @@ const updateProduct = (e) =>{
                       </label>
                       <input name='price' type="text" className="form-control" onChange={handleInput} value={productInput.price}/>
                       <span style={{ color: "red" }}>
-                      {productInput.error_list.price}
+                      {error.price}
                       </span> 
                     </div>
         </div>
@@ -153,7 +160,7 @@ const updateProduct = (e) =>{
                     </label>
                     <input type="file" name='image' className="form-control-file" onChange={handleImage} />
                     <span style={{ color: "red" }}>
-                    {productInput.error_list.image}
+                    {error.image}
                     </span> 
                     </div>
                     

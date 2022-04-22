@@ -7,8 +7,8 @@ const Marketplace = () => {
 
   const [marketplace, setMarketplace] = useState([])
 
-  const { marketplace_id } = useParams();
   
+  const { marketplace_id } = useParams();
   useEffect(() => {
     axios.get(`/api/viewMarket/${marketplace_id}`).then(res=>{
       if(res.data.status === 200){
@@ -29,8 +29,7 @@ const Marketplace = () => {
                 <div className="card">
                     <div className="card-body">
                     <div className="d-flex flex-column align-items-center text-center">
-                    <img src={`http://127.0.0.1:8000/${marketplace.image}`} width="50px" alt={marketplace.name} />
-                        {/* <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" className="rounded-circle" width="150"> */}  
+                    {/* <img src={`http://127.0.0.1:8000/${marketplace.image}`} width="50px" alt={marketplace.name} /> */}
                     </div>
                     </div>
                 </div>
@@ -44,7 +43,7 @@ const Marketplace = () => {
                       <h6 className="mb-0">Name</h6>
                     </div>
                     <div className="col-sm-9 text-secondary">
-                      {marketplace.name}
+                      {/* {marketplace.name} */}
                     </div>
                   </div>
                   <div className="row">
@@ -52,7 +51,7 @@ const Marketplace = () => {
                       <h6 className="mb-0">Slug</h6>
                     </div>
                     <div className="col-sm-9 text-secondary">
-                    {marketplace.slug}
+                    {/* {marketplace.slug} */}
                     </div>
                   </div>
                   
@@ -61,7 +60,7 @@ const Marketplace = () => {
                       <h6 className="mb-0">Description</h6>
                     </div>
                     <div className="col-sm-9 text-secondary">
-                    {marketplace.description}
+                    {/* P */}
                     </div>
                   </div>
                   <br>

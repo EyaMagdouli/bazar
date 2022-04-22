@@ -28,7 +28,13 @@ const AddCategory = () => {
       
     }
 
-    axios.post('/api/addCategory', data).then(res =>{
+
+    const token = localStorage.getItem("auth_token");
+
+    axios.post('/api/addCategory', data, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      }},).then(res =>{
         if (res.data.status === 200){
           swal('Success',res.data.message,'success');
           // document.getElementById('category_from').reset;

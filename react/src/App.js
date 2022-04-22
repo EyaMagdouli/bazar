@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import Header from './components/layout/Header';
 import "bootstrap/dist/css/bootstrap.min.css";
 import Body from './components/layout/Body';
@@ -21,10 +21,11 @@ import axios from 'axios';
 
 
 export default function App() {
+  const prodsRef = useRef(["prdcts","mrktplc","ftrs"])
   return (
     <>
-      <Header />
-      <Body />
+      <Header ref={prodsRef} />
+      <Body ref={prodsRef} />
       <Footer />
     </>
   )

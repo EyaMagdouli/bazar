@@ -40,7 +40,7 @@ export default function Register() {
     if(isLoggedIn()) navigate("/")
   }, [])
   return (
-    <div className="container py-5">
+    <div className="container py-5" style={{top:'70px', left:"70px"}}>
       <div
         className="card"
         style={{ display: "flex", justifyContent: "center" }}

@@ -5,12 +5,14 @@ import swal from 'sweetalert';
 
 const Category = () => {
 
-  const  [categoryList, setCategoryList] = useState([
-
-  ])            
+  const  [categoryList, setCategoryList] = useState([])            
   useEffect(() => {
+    const token = localStorage.getItem("auth_token");
     
-    axios.get(`/api/viewCategory`).then(res=>{
+    axios.get(`/api/viewCategory`,{
+      headers: {
+        Authorization: `Bearer ${token}`,
+      }},).then(res=>{
       console.log(res.data.category)
       if(res.status === 200){
         setCategoryList(res.data.category)
@@ -24,7 +26,10 @@ const Category = () => {
 
     axios.delete(`api/deleteCategory/${id}`).then(res=>{
       if(res.data.status === 200){
+        
         swal("Success",res.data.message,"success")
+        setCategoryList(prev => prev.filter(item=>item.id == id))
+        location.reload();
 
       }
       else if(res.data.status === 404) {

@@ -1,16 +1,17 @@
-import { Link } from "react-router-dom";
-import logo from "../../assets/images/logo.png";
+// import logo from "../../assets/images/logo.png";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Routes, Route, Link } from "react-router-dom";
 import "../../assets/css/home.css";
+import React from "react";
 
-function Header() {
+const Header = React.forwardRef((p,prodsRef) => {
   const navigate = useNavigate();
 
   const logoutSubmit = () => {
     localStorage.clear();
     navigate("/")
   };
+
 
   const AuthButtons = !localStorage.getItem("auth_token") ? (
     <ul className="navbar-nav">
@@ -42,23 +43,28 @@ function Header() {
       </li>
     </ul>
   );
+  const showOnlyInMain = <nav className="navbar navbar-nav ms-auto">
+  <ul>
+  <li onClick={()=>prodsRef?.current[2].scrollIntoView() }>Features</li>
+  <li onClick={()=>prodsRef?.current[1].scrollIntoView() }>Marketplaces</li>
+  <li onClick={()=>prodsRef?.current[0].scrollIntoView() }>Products</li>
+  </ul>
+</nav>
 
   return (
-    <div id="bazarHome"  style={{height: "20px"}}>
-      <div className="header navbar navbar-expand-md " style={{height: "60px"}}>
+    <div id="bazarHome">
+      <div className="header navbar navbar-expand-md " style={{height: 60, zIndex: 1000}}>
         <div className="container">
           <Link className="logo" to="/">
-            <img src={logo} alt="logo" width="150" />
+            <i className="fas fa-shopping-basket"></i> Bazar 
           </Link>
-          <nav className="navbar navbar-nav ms-auto">
-            <Link to="#features">Features</Link>
-            <Link to="#marketplaces">Marketplaces</Link>
-            <Link to="#products">Products</Link>
-          </nav>
+          <Routes>
+            <Route path="/" element={showOnlyInMain} />
+          </Routes>
           <ul className="navbar navbar-nav ms-auto">{AuthButtons}</ul>
         </div>
       </div>
     </div>
   );
-}
-export default Header;
+})
+export default Header

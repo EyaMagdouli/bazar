@@ -38,15 +38,15 @@ export default function Main({ toggle, settoggle }) {
         {/* categories */}
         <Route path="/categories" element={<Category />} />
         <Route path="/categories/add" element={<AddCategory />} />
-        <Route path="/categories/edit/:id" element={<EditCategory />} />
+        <Route path="/categories/edit/:Category_id" element={<EditCategory />} />
 
         {/* products */}
         <Route path="/products" element={ <Product /> } />
         <Route path="/products/add" element={ <AddProduct /> } />
-        <Route path="/products/edit/:id" element={ <EditProduct /> } />
+        <Route path="/products/edit/:product_id" element={ <EditProduct /> } />
 
          {/* marketplace */}
-        <Route path="/marketplace" element={ <Marketplace /> } />
+        <Route path="/marketplace/:marketplace_id" element={ <Marketplace /> } />
         <Route path="/marketplace/edit" element={ <EditMarketplace /> } />
 
 

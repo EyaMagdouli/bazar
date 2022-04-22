@@ -8,7 +8,11 @@ const Product = () => {
   const [product, setProduct] = useState([])
   
   useEffect(() => {
-      axios.get(`/api/viewProduct`).then(res=>{
+    const token = localStorage.getItem("auth_token");
+      axios.get(`/api/viewProduct`,{
+        headers: {
+          Authorization: `Bearer ${token}`,
+        }},).then(res=>{
         if(res.data.status === 200){
           setProduct(res.data.products)
         }
@@ -21,7 +25,8 @@ const Product = () => {
     axios.delete(`api/deleteProduct/${id}`).then(res=>{
       if(res.data.status === 200){
         swal("Success",res.data.message,"success")
-
+        setProduct(prev => prev.filter(item=>item.id == id))
+        location.reload();
       }
       else if(res.data.status === 404) {
         swal("Success",res.data.message,"success")
@@ -31,16 +36,15 @@ const Product = () => {
     })
   }
 
-var displayProductData =""
 
-displayProductData = product.map( (item, i) => {
+var displayProductData = product.map( (item) => {
   return(
     <tr key={item.id}>
       <td>{item.id}</td>
       <td> <img src={`http://127.0.0.1:8000/${item.image}`} width="50px" alt={item.name} /> </td>
       <td>{item.name}</td>
       <td>{item.slug}</td>
-      <td>{item.category.name}</td>
+      <td>{item.category_id}</td>
       <td>{item.price}</td>
       <td>{item.description}</td>
       <td>
@@ -94,8 +98,6 @@ displayProductData = product.map( (item, i) => {
             </div>
             </div>
             
-  
-
   )
 }
 

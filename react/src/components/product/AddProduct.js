@@ -32,7 +32,11 @@ const handleImage = (e) => {
 
 
     useEffect(() => {
-        axios.get(`api/categories`).then(res => {
+    const token = localStorage.getItem("auth_token");
+        axios.get(`api/categories`, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            }},).then(res => {
             if(res.data.status === 200){
                 setCategory(res.data.category); 
             }
@@ -49,10 +53,14 @@ const submitProduct = (e) =>{
     formData.append('slug', productInput.slug)
     formData.append('price', productInput.price)
     formData.append('description', productInput.description)
+    formData.append('token', localStorage.getItem('auth_token'))        // attching toen
 
+    const token = localStorage.getItem("auth_token");
 
-
-    axios.post(`/api/addProduct`,formData).then(res=>{
+    axios.post(`/api/addProduct`,formData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },}).then(res=>{
 
         if(res.data.status === 200){
             swal('Success',res.data.message,"success")

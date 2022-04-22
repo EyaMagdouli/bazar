@@ -12,18 +12,18 @@ const navigate = useNavigate()
     if(isLoggedIn()) navigate("/")
   }, [])
   return (
-    <div className='container py-5'>
+    <div className='container py-5' style={{top:'100px', left:"70px"}}>
         <div className='row'>
             <div className='col-md-12'>
                 <div className='card'>
                     <div className='card-header '>
-                        <h4> Register as a simple user
+                        <h3> Register as a simple user
                             <Link to={'/register'} state={{kind: "simpleUser"}}>
-                                <button className='btn btn-success float-end btn-sm'>Register</button>
+                                <button className='btn btn-success float-end btn-sm' style={{fontSize:"18px"}}>Register</button>
                             </Link>
-                        </h4>
+                        </h3>
                     </div>
-                    <div className='card-body row' >
+                    <div className='card-body row'  style={{height:"300px"}}>
                         <h3>Or register as</h3>
                         <div className="card col-sm-3 " >
                         <Link to={'/register'} state={{kind: "planter"}}>

@@ -7,12 +7,17 @@ import { Link } from 'react-router-dom';
 
 const EditCategory = () => {
   const navigate = useNavigate();
-  const [categoryInput, setCategory] = useState([]);
+  const [categoryInput, setCategory] = useState({
+    'name' : '',
+    'slug' : '',
+    'description':''
+  });
   const [error, setError]     = useState([])
-  
-  
-  const { Category_id } = useParams();
-  useEffect(() => {
+    
+const { Category_id } = useParams();
+
+ useEffect(() => {
+    
    axios.get(`/api/editCategory/${Category_id}`).then(res =>{
      
       if(res.data.status === 200){
@@ -24,7 +29,7 @@ const EditCategory = () => {
         navigate('/buyer/dashboard/categories');
 
       }
-   })
+  })
   },[Category_id])
 
   const handleInput = (e) => {
@@ -40,6 +45,7 @@ const EditCategory = () => {
     axios.put(`/api/updateCategory/${Category_id}`, data).then(res => {
       if(res.data.status === 200){
           swal('success',res.data.message,"success")
+          navigate('/buyer/dashboard/categories');
           setError([])
 
       }
@@ -91,7 +97,7 @@ const EditCategory = () => {
                 className="form-control"
                 type="text"
                 name="slug"   onChange={handleInput}
-                value={categoryInput.slug || ""} />
+                value={categoryInput.slug } />
                 <span style={{ color: "red" }}>
                 {error.slug}
               </span>
@@ -104,13 +110,13 @@ const EditCategory = () => {
                 type="text"
                 name="description" rows="4" cols="50" 
                 onChange={handleInput}
-                value={categoryInput.description || ""} />
+                value={categoryInput.description ?? ""} />
                 <span style={{ color: "red" }}>
                 {error.description}
               </span>
               </div>
               <br></br>
-              <button style={{width:"600px", marginLeft:"200px",fontSize:"17px"}} type="submit" className="btn btn-outline-success">Add Category</button>
+              <button style={{width:"600px", marginLeft:"200px",fontSize:"17px"}} type="submit" className="btn btn-outline-success">Edit Category</button>
 
             
 
