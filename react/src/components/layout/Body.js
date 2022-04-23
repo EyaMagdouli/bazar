@@ -8,6 +8,9 @@ import ChooseKind from "../auth/ChooseKind";
 import ForgotPassword from "../auth/ForgotPassword";
 import { ProtectedRoute } from "../route/ProtectedRoute";
 import Dashboard from "../roles/Dashboard";
+import Profile from "../user/Profile"
+import EditProfile from "../user/EditProfile"
+
 
 const Body = React.forwardRef((props, prodsRef) => {
   useEffect(() => {}, [localStorage.getItem("auth_token")]);
@@ -19,10 +22,16 @@ const Body = React.forwardRef((props, prodsRef) => {
       <Route path="/login/forgotPassword" element={<ForgotPassword />} />
       <Route path="/chooseKind" element={<ChooseKind />} />
 
+      <Route path="/profile" element={ <Profile/> } />
+      <Route path="/profile/edit" element={ <EditProfile/> } />
+
+
       <Route
         path="/createMarket"
         element={<ProtectedRoute Component={<CreateMarketplace />} />}
       />
+
+
 
       {/* <Route path="/regular" element={<VerifyRoleRoute Component={<div>HENLOW REGULAR</div>} role="regular" />} />
       <Route path="/planter" element={<VerifyRoleRoute Component={<div>HENLOW PLANTER</div>} role="planter" />} /> */}

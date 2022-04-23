@@ -40,10 +40,10 @@ export default function Register() {
     if(isLoggedIn()) navigate("/")
   }, [])
   return (
-    <div className="container py-5" style={{top:'70px', left:"70px"}}>
+    <div className="container py-5" style={{top:'70px', left:"240px"}}>
       <div
         className="card"
-        style={{ display: "flex", justifyContent: "center" }}
+        style={{ display: "flex", justifyContent: "center", width:800 }}
       >
         <div
           className="card-body"
@@ -54,13 +54,13 @@ export default function Register() {
           }}
         >
           <div className="login100-pic " data-tilt>
-            <img src={pic} alt="image" />
+            <img src={pic} alt="image" style={{height:300}} />
           </div>
           <form
             className="login100-form validate-form"
             onSubmit={registerSubmit}
           >
-            <span className="login100-form-title">Register</span>
+            <span className="login100-form-title" style={{padding:"30px", color:"green", fontWeight:"bold", textAlign:"center" }}>Register</span>
             <div
               className="wrap-input100 validate-input"
               data-validate="name is required"
@@ -147,13 +147,13 @@ export default function Register() {
 
 
             <div className="container-login100-form-btn">
-              <button type="submit" className="login100-form-btn">
+              <button type="submit" className="login100-form-btn" style={{fontSize:"20px"}}>
                 Register
               </button>
             </div>
 
             <div className="text-center p-t-20">
-              <Link to={"/login"}>
+              <Link to={"/login"} style={{fontSize:"15px"}}>
                 Login
                 <i
                   className="fa fa-long-arrow-right m-l-5"

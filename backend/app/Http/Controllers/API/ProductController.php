@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Validator;
 
 class ProductController extends Controller
 {
-    public function index(Request $request){
+    public function index(){
 
 
         $user_id = auth()->user()->id;

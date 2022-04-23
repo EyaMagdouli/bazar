@@ -1,86 +1,48 @@
-import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
-import axios from 'axios'
-import { useParams } from 'react-router'
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import axios from "axios";
+import { useParams } from "react-router";
+import '../../assets/css/marketplace.css'
 
 const Marketplace = () => {
+  const [marketplace, setMarketplace] = useState([]);
 
-  const [marketplace, setMarketplace] = useState([])
-
-  
   const { marketplace_id } = useParams();
   useEffect(() => {
-    axios.get(`/api/viewMarket/${marketplace_id}`).then(res=>{
-      if(res.data.status === 200){
-        console.log(res.data.marketplace)
-        setMarketplace(res.data.marketplace)
-      }
-    })
-}, [marketplace_id])
-
-
-
+    const token = localStorage.getItem("auth_token");
+    axios
+      .get(`/api/viewMarket/${marketplace_id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((res) => {
+        if (res.data.status === 200) {
+          console.log(res.data.marketplace);
+          setMarketplace(res.data.marketplace);
+        }
+      });
+  }, [marketplace_id]);
 
   return (
-    <div className='data'>
-        <div className='recentData' >
-            <div className="row gutters-sm" >
-                <div className="col-md-4 mb-3" >
-                <div className="card">
-                    <div className="card-body">
-                    <div className="d-flex flex-column align-items-center text-center">
-                    {/* <img src={`http://127.0.0.1:8000/${marketplace.image}`} width="50px" alt={marketplace.name} /> */}
-                    </div>
-                    </div>
+<div className="container mt-5">
+    <div className="row d-flex justify-content-center">
+        <div className="col-md-7">
+            <div className="card p-3 py-4" style={{top:"60px"}}>
+                <div className="text-center"> 
                 </div>
-                </div>   
+                <div className="text-center mt-3">
+                    <h5 className="mt-2 mb-0">Alexender Schidmt</h5> <span>UI/UX Designer</span>
+                    <div className="px-4 mt-1">
+                        <p className="fonts">Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
+                    </div>
+                    <div className="buttons"> <button className="btn btn-outline-success px-4" style={{fontSize:"15px", height:"30px"}}>Edit</button></div>
+                </div>
             </div>
-            <div className="col-md-8" style={{ width:"500px"}}>
-              <div className="card mb-3" style={{ left:"400px", top:"-60px", height:"100%"}}>
-                <div className="card-body">
-                  <div className="row">
-                    <div className="col-sm-3">
-                      <h6 className="mb-0">Name</h6>
-                    </div>
-                    <div className="col-sm-9 text-secondary">
-                      {/* {marketplace.name} */}
-                    </div>
-                  </div>
-                  <div className="row">
-                    <div className="col-sm-3">
-                      <h6 className="mb-0">Slug</h6>
-                    </div>
-                    <div className="col-sm-9 text-secondary">
-                    {/* {marketplace.slug} */}
-                    </div>
-                  </div>
-                  
-                  <div className="row">
-                    <div className="col-sm-3">
-                      <h6 className="mb-0">Description</h6>
-                    </div>
-                    <div className="col-sm-9 text-secondary">
-                    {/* P */}
-                    </div>
-                  </div>
-                  <br>
-                  </br>
-                  <div className="row">
-                    <div className="col-sm-12">
-                    <Link to="/buyer/dashboard/marketplace/edit">
-                    <button className='button' type="button" >
-                    Edit
-                    </button>
-                    </Link>
-                    </div>
-                  </div>
-                </div>
-              </div>
         </div>
     </div>
-    </div>
+</div>
+  );
+};
 
-  )
-}
-
-export default Marketplace
+export default Marketplace;

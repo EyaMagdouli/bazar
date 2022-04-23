@@ -18,6 +18,7 @@ class CreateCategoriesTable extends Migration
             $table->integer('marketplace_id')->required();
             $table->string('name')->required();
             $table->string('slug')->unique()->required();
+            $table->boolean('status')->required();
             $table->longText('description')->nullable();
             $table->timestamps();
         });

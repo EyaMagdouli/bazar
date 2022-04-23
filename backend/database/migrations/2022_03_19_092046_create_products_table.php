@@ -19,6 +19,7 @@ class CreateProductsTable extends Migration
             $table->integer('marketplace_id')->required();
             $table->string('name')->required();
             $table->string('slug')->required();
+            $table->boolean('status')->required();
             $table->string('description')->nullable();
             $table->decimal('price')->required();
             $table->string('image')->required();

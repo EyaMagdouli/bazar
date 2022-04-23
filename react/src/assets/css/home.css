@@ -104,6 +104,22 @@ section{
 .header .navbar li:hover {
     color:var(--green);
 }
+.header .dashboard div{
+    height: 3.5rem;
+    width: 110px;
+    line-height: 3.5rem;
+    border-radius: .5rem;
+    background: #eee;
+    color:var(--green);
+    font-size: 1.5rem;
+    margin-left: 20px;
+    cursor: pointer;
+    text-align: center; 
+}
+.header .dashboard div:hover{
+    background: var(--green);
+    color:#fff;
+}
 
 .header .icons div{
     height: 3.5rem;
@@ -706,4 +722,12 @@ section{
         margin: 2rem auto;
     }
 
+}
+.card1 {
+    border: none;
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+    cursor: pointer,
+    
 }

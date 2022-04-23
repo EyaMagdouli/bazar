@@ -101,11 +101,10 @@ const updateProduct = (e) =>{
                 <button className="button" type="button" >Back</button>
             </Link>
         </div>
-        <form className="form-card" onSubmit={updateProduct}>
+        <form className="form-card" /* onSubmit={updateProduct} */>
         <div className="row justify-content-between text-left">
                     <div className="form-group col-sm-6 flex-column d-flex"> 
                       <label style={{fontSize:"15px"}} className="form-control-label px-3">Name
-
                       </label> 
                       <input name='name' type="text" className="form-control"  onChange={handleInput} value={productInput.name}/>
                       {<span style={{ color: "red" }}>

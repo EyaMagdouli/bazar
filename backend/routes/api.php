@@ -7,7 +7,7 @@ use App\Http\Controllers\API\CategoryController;
 use App\Http\Controllers\API\ProductController;
 use App\Http\Controllers\API\MarketplaceController;
 use App\Http\Controllers\API\HomeController;
-
+use App\Models\Marketplace;
 
 /*
 |--------------------------------------------------------------------------
@@ -53,8 +53,7 @@ Route::middleware('auth:sanctum')->get('categories',[CategoryController::class, 
 
 //marketplace
  Route::middleware('auth:sanctum')->post('createMarket',[MarketplaceController::class,'create']);
- Route::get('viewMarket/{id}',[MarketplaceController::class,'index']);
-
+ Route::middleware('auth:sanctum')->get('viewMarket/{id}',[MarketplaceController::class,'index']);
 
 
 
@@ -72,6 +71,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('test',function(){
-    return 'test';
-});
+
+

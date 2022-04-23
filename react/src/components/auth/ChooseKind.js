@@ -13,10 +13,8 @@ const navigate = useNavigate()
   }, [])
   return (
     <div className='container py-5' style={{top:'100px', left:"70px"}}>
-        <div className='row'>
-            <div className='col-md-12'>
-                <div className='card'>
-                    <div className='card-header '>
+                <div className='card1'>
+                    <div className='card-header ' style={{height:50}}>
                         <h3> Register as a simple user
                             <Link to={'/register'} state={{kind: "simpleUser"}}>
                                 <button className='btn btn-success float-end btn-sm' style={{fontSize:"18px"}}>Register</button>
@@ -59,8 +57,8 @@ const navigate = useNavigate()
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
+     
+
 
     </div>
   )

@@ -11,6 +11,26 @@ use Illuminate\Support\Facades\Validator;
 
 class MarketplaceController extends Controller
 {
+
+    public function index($id)
+    {
+        $user_id = auth()->user()->id;
+        $marketplace = Marketplace::where('user_id',$user_id)->findOrFail($id);
+
+
+        // if ($marketplace) {
+            return response()->json([
+                'status' => 200,
+                'product' => $marketplace
+            ]);
+        // } else {
+        //     return response()->json([
+        //         'status' => 404,
+        //         'message' => "No Marketplace found"
+        //     ]);
+        // }
+    }
+
     public function create(Request $request)
     {
         //return response()->json($request->all());
@@ -56,19 +76,8 @@ class MarketplaceController extends Controller
     }
 
 
-    public function index($id)
-    {
-        $marketplace = Marketplace::find($id);
-        if ($marketplace) {
-            return response()->json([
-                'status' => 200,
-                'product' => $marketplace
-            ]);
-        } else {
-            return response()->json([
-                'status' => 404,
-                'message' => "No Marketplace found"
-            ]);
-        }
-    }
+
+
+
+
 }
