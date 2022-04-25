@@ -2,32 +2,32 @@ export const menuList = [
     {
         title: "Dashboard",
         ion: "laptop",
-        link: "/buyer/dashboard"
+        link: "/dashboard"
     },
     {
         title: "Clients",
         ion: "people",
-        link: "/buyer/dashboard/clients"
+        link: "/dashboard/clients"
     },
     {
         title: "Marketplace",
         ion: "bag-handle",
-        link: "/buyer/dashboard/marketplace/marketplace_id"
+        link: "/dashboard/marketplace"
     },
     {
         title: "Products",
         className: "fas fa-pepper-hot",
-        link: "/buyer/dashboard/products"
+        link: "/dashboard/products"
     },
     {
         title: "Categories",
         ion: "fast-food",
-        link: "/buyer/dashboard/categories"
+        link: "/dashboard/categories"
     },
     {
         title: "Chat",
         ion: "chatbubbles",
-        link: "/buyer/dashboard/chat"
+        link: "/dashboard/chat"
     }
     
 ]

@@ -11,13 +11,13 @@ import axios from 'axios';
  axios.defaults.headers.post['Content-Type'] = 'application/json';
  axios.defaults.headers.post['Accept'] = 'application/json';
  axios.defaults.withCredentials = true; //to gender with the csrf token
-//  axios.interceptors.request.use({   //to check if the bearer token has come or not
-//    function(config) {
-//      const token = localStorage.getItem('auth_token');
-//      config.headers.Authorization = 'Bearer ' + token;
-//      return config;
-//    }
-//  });
+ axios.interceptors.request.use({   //to check if the bearer token has come or not
+   function(config) {
+     const token = localStorage.getItem('auth_token');
+     config.headers.Authorization = 'Bearer ' + token;
+     return config;
+   }
+ });  
 
 
 export default function App() {

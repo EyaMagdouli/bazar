@@ -38,7 +38,7 @@ const AddCategory = () => {
         if (res.data.status === 200){
           swal('Success',res.data.message,'success');
           // document.getElementById('category_from').reset;
-          navigate('/buyer/dashboard/categories');
+          navigate('/dashboard/categories');
         }
         else if (res.data.status === 400){
           setCategory({...categoryInput, error_list:res.data.errors})

@@ -7,21 +7,22 @@ use App\Models\Marketplace;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Validator;
 
 class MarketplaceController extends Controller
 {
 
-    public function index($id)
+    public function index()
     {
         $user_id = auth()->user()->id;
-        $marketplace = Marketplace::where('user_id',$user_id)->findOrFail($id);
+        $marketplace = Marketplace::where('user_id',$user_id)->get();
 
 
         // if ($marketplace) {
             return response()->json([
                 'status' => 200,
-                'product' => $marketplace
+                'marketplace' => $marketplace
             ]);
         // } else {
         //     return response()->json([
@@ -76,8 +77,76 @@ class MarketplaceController extends Controller
     }
 
 
+    public function edit(){
+        $user_id = auth()->user()->id;
+        $marketplace = Marketplace::where('user_id',$user_id)->get();
+        if($marketplace){
+            return response()->json([
+                'status'=>200,
+                'marketplace'=>$marketplace
+            ]);
+
+        }
+        else{
+            return response()->json([
+                'status'=>404,
+                'message'=>"No marketplace found"
+            ]);
+        }
+    }
 
 
+    public function update(Request $request){
+        $validator= Validator::make($request->all(),[
+            'slug'=>'required|max:191',
+            'name'=>'required|max:191',
+        ]);
+
+        if($validator->fails()){
+            return response()->json([
+                'status'=>422,
+                'errors'=>$validator->errors()
+            ]);
+
+        }
+        else{
+            $user_id = auth()->user()->id;
+            $marketplace = Marketplace::where('user_id',$user_id)->first();
+            if($marketplace){
+            $marketplace->name = $request->input('name');
+            $marketplace->slug = $request->input('slug');
+            $marketplace->description = $request->input('description');
+
+            //image
+            if($request->hasFile('image')){
+                $path=$marketplace->image;
+                if(File::exists($path)){
+                    File::delete($path);
+                }
+            $file = $request->file('image');
+            $extension = $file->getClientOriginalExtension();
+            $fileName=  time().'.'.$extension;
+            $file->move('uploads/marketplace/',$fileName);
+            $marketplace->image='uploads/marketplace/'.$fileName;
+            }
+            $marketplace->update();
+            return response()->json([
+                'status'=>200,
+                'message'=>'Marketplace updated successfully'
+            ]);
+        }
+
+        else{
+
+            return response()->json([
+                'status'=>404,
+                'message'=>'Marketplace not found'
+            ]);
+        }
 
 
+    }
+
+
+}
 }

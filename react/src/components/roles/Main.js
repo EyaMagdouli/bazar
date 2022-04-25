@@ -23,12 +23,12 @@ export default function Main({ toggle, settoggle }) {
           <ion-icon name="menu-outline"></ion-icon>
         </div>
         {/* search */}
-        <div className="search">
+        {/* <div className="search">
           <label>
             <input type={"text"} placeholder="Search here" />
             <ion-icon name="search-circle-outline"></ion-icon>
           </label>
-        </div>
+        </div> */}
       </div>
 
        
@@ -46,7 +46,7 @@ export default function Main({ toggle, settoggle }) {
         <Route path="/products/edit/:product_id" element={ <EditProduct /> } />
 
          {/* marketplace */}
-        <Route path="/marketplace/:marketplace_id" element={ <Marketplace /> } />
+        <Route path="/marketplace" element={ <Marketplace /> } />
         <Route path="/marketplace/edit" element={ <EditMarketplace /> } />
 
 

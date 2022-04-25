@@ -25,4 +25,21 @@ class HomeController extends Controller
             'products'=> $products
         ]);
     }
+
+
+
+    public function showMarket($id){
+        $marketplace = Marketplace::where('id',$id)->get();
+        //dd($marketplace);
+        $products = Product::where('marketplace_id',$id)->get();
+        if($marketplace){
+            return response()->json([
+                'status' => 200,
+                'marketplace' => $marketplace,
+                'products' => $products
+
+            ]);
+
+        }
+    }
 }

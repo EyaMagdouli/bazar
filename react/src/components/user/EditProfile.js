@@ -1,26 +1,68 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { Link, useParams, useNavigate } from "react-router-dom";
+import swal from "sweetalert";
 
 const EditProfile = () => {
+const navigate = useNavigate();
 
-    const [passwordShown, setPasswordShown] = useState(false);
-  // Password toggle handler
+  const [passwordShown, setPasswordShown] = useState(false);
   const togglePassword = () => {
     setPasswordShown(!passwordShown);
   };
 
+  const [error, setError] = useState([]);
+
+  const [profileInput, setProfile] = useState([]);
+  const token = localStorage.getItem("auth_token");
+
+  useEffect(() => {
+    axios
+      .get(`/api/editProfile`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((res) => {
+        if (res.data.status === 200) {
+          const {user: [actualUser]} = res.data
+          
+          setProfile(actualUser);
+        } 
+      });
+  }, []);
+  const handleInput = (e) => {
+    e.persist();
+    setProfile({...profileInput,[e.target.name]: e.target.value})
+  }
+
+  const updateProfile = (e) =>{
+    e.preventDefault();
+    const data = profileInput;
+    // console.log(profileInput)
+    axios.post(`/api/updateProfile`, data, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }).then(res=>{
+      console.log(res.data.status)
+      if(res.data.status === 200){
+        swal('success',res.data.message,"success")
+
+      }
+      else if(res.data.status === 422){
+        setError(res.data.errors)
+      }
+    })
+  }
+
   return (
     <div className="data">
-      <div className="recentData" style={{top:"60px", left:"50px"}}>
+      <div className="recentData" style={{ top: "60px", left: "50px" }}>
         <div className="cardHeader">
           <h1 className="title">Edit Profile</h1>
-          <Link to="/profile">
-            <button className="button" type="button">
-              Back
-            </button>
-          </Link>
         </div>
-        <form className="form-card" /* onSubmit={updateProduct} */>
+        <form className="form-card" onSubmit={updateProfile}>
           <div className="row justify-content-between text-left">
             <div className="form-group col-sm-6 flex-column d-flex">
               <label
@@ -32,11 +74,11 @@ const EditProfile = () => {
               <input
                 name="email"
                 type="text"
-                className="form-control" /* onChange={handleInput} value={productInput.name} */
+                className="form-control" onChange={handleInput} value={profileInput.email||''}
               />
-              {/*  {<span style={{ color: "red" }}>
-                      {error.name}
-                      </span>} */}
+               {<span style={{ color: "red" }}>
+                      {error.email}
+                      </span>}
             </div>
 
             <div className="form-group col-sm-6 flex-column d-flex">
@@ -49,89 +91,41 @@ const EditProfile = () => {
               <input
                 name="name"
                 type="text"
-                className="form-control" /* onChange={handleInput} value={productInput.name} */
+                className="form-control" onChange={handleInput} value={profileInput.name||''}
               />
-              {/*  {<span style={{ color: "red" }}>
+               {<span style={{ color: "red" }}>
                       {error.name}
-                      </span>} */}
+                      </span>}
             </div>
           </div>
           <div className="row justify-content-between text-left">
-                    <div className="form-group col-sm-6 flex-column d-flex"> 
-                      <label style={{fontSize:"15px"}} className="form-control-label px-3">Kind
-
-                      </label> 
-                      <select name='kibd' className="form-control" /* onChange={handleInput} value={productInput.category_id} */>
-                      {/* {categoryList.map( (item)=>{
-                          return(
-                              <option value={item.id} key={item.id}> {item.name} </option>
-                          )
-                      }
-                          
-                      )} */}
-                      </select>
-                      {/* <span style={{ color: "red" }}>
-                      {error.category_id}
-                      </span> */}
-                    </div>
-                    <div className="form-group col-sm-6 flex-column d-flex"> 
-                      <label style={{fontSize:"15px"}} className="form-control-label px-3">Phone
-
-                      </label>
-                      <input name='phone' type="text" className="form-control" /* onChange={handleInput} value={productInput.price} *//>
-
-                      {/* <span style={{ color: "red" }}>
-                      {error.price}
-                      </span>  */}
-                    </div>
-        </div>
-        <div className="row justify-content-between text-left">
             <div className="form-group col-sm-6 flex-column d-flex">
               <label
                 style={{ fontSize: "15px" }}
                 className="form-control-label px-3"
               >
-                Password
+                Phone
               </label>
               <input
-                name="password"
-                type={passwordShown ? "text" : "password"}
-                className="form-control" /* onChange={handleInput} value={productInput.name} */
+                name="phone_number"
+                type="text"
+                className="form-control" onChange={handleInput} value={profileInput.phone_number||''}
               />
-              <br></br>
-              <div style={{top:"40px", justifyContent:"space-evenly"}}>
-              <input type="checkbox" onClick={togglePassword} />Show Password
-              </div>
-              {/*  {<span style={{ color: "red" }}>
-                      {error.name}
-                      </span>} */}
-            </div>
-            <div className="form-group col-sm-6 flex-column d-flex">
-              <label
-                style={{ fontSize: "15px" }}
-                className="form-control-label px-3"
-              >
-                New Password
-              </label>
-              <input
-                name="email"
-                type={passwordShown ? "text" : "password"}
-                className="form-control" /* onChange={handleInput} value={productInput.name} */
-                
-              />
-              <br></br>
-              <div style={{top:"40px"}}>
-              <input type="checkbox" onClick={togglePassword} />Show Password
-              </div>
-              {/*  {<span style={{ color: "red" }}>
-                      {error.name}
-                      </span>} */}
-            </div>
-            </div>
-            <br>
-            </br>
-            <button style={{width:"600px", marginLeft:"200px", fontSize:"17px"}} type="submit" className="btn btn-outline-success">Edit Profile</button>
 
+              <span style={{ color: "red" }}>
+                      {error.phone_number}
+                      </span> 
+            </div>
+            
+          </div>
+          <br></br>
+          <button
+            style={{ width: "600px", marginLeft: "200px", fontSize: "17px" }}
+            type="submit"
+            className="btn btn-outline-success"
+          >
+            Edit Profile
+          </button>
         </form>
       </div>
     </div>

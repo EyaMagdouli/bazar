@@ -26,7 +26,7 @@ const { Category_id } = useParams();
       }
       else if(res.data.status === 404){
         swal("error",res.data.message,"error");
-        navigate('/buyer/dashboard/categories');
+        navigate('/dashboard/categories');
 
       }
   })
@@ -45,7 +45,7 @@ const { Category_id } = useParams();
     axios.put(`/api/updateCategory/${Category_id}`, data).then(res => {
       if(res.data.status === 200){
           swal('success',res.data.message,"success")
-          navigate('/buyer/dashboard/categories');
+          navigate('/dashboard/categories');
           setError([])
 
       }
@@ -61,9 +61,6 @@ const { Category_id } = useParams();
 
     })
   }
-
-
-
 
   return (
     <div className='data'>

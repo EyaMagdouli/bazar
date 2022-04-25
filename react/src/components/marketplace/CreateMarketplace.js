@@ -43,7 +43,7 @@ const CreateMarketplace = () => {
         if (res.data.status === 200) {
           console.log(res.data);
           swal("Success", res.data.message, "success");
-          navigate(`/buyer/dashboard/marketplace/${res.data.id}`);
+          navigate(`/dashboard/marketplace`);
         } else {
           setMarket({ ...marketInput, error_list: res.data.errors });
         }

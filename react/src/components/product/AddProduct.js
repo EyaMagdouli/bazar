@@ -64,7 +64,7 @@ const submitProduct = (e) =>{
 
         if(res.data.status === 200){
             swal('Success',res.data.message,"success")
-            navigate('/buyer/dashboard/products')
+            navigate('/dashboard/products')
 
         }
         else if(res.data.status === 422){
@@ -82,7 +82,7 @@ const submitProduct = (e) =>{
         <div className='recentData'>
             <div className='cardHeader'>
                 <h1 className='title'>Add Product</h1>
-                <Link to="/buyer/dashboard/products">
+                <Link to="/dashboard/products">
                     <button className="button" type="button" >Back</button>
                 </Link>
             </div>

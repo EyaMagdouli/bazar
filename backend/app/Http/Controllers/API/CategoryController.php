@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Marketplace;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -104,9 +105,11 @@ class CategoryController extends Controller
     public function destroy($id)
     {
         $category = Category::find($id);
+        $products = Product::where('id',$id);
         if ($category) {
 
-            $category->delete(); //it will delete the data
+            $category->delete();
+            $products->delete();
             return response()->json([
                 'status' => 200,
                 'message' => 'Category deleted successfully',

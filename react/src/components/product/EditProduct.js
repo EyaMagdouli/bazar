@@ -40,12 +40,12 @@ const { product_id } = useParams();
 
         axios.get(`/api/editProduct/${product_id}`).then(res=>{
           if(res.data.status === 200){
-            console.log(res.data.product_id)
+            //console.log(res.data.product_id)
             setProduct(res.data.product)
           }
           else if(res.data.status === 404){
             swal('Error',res.data.message,"error")
-            navigate('/buyer/dashboard/products')
+            navigate('/dashboard/products')
           }
         })
 
@@ -73,7 +73,7 @@ const updateProduct = (e) =>{
 
       if(res.data.status === 200){
           swal('Success',res.data.message,"success")
-          navigate('/buyer/dashboard/products');
+          navigate('/dashboard/products');
       }
       else if(res.data.status === 422){
           setCategory({...productInput, error_list:res.data.errors})
@@ -82,7 +82,7 @@ const updateProduct = (e) =>{
       }
       else if(res.data.status === 404){
         swal("Error",res.data.message,"error")
-        navigate('/buyer/dashboard/products')
+        navigate('/dashboard/products')
 
       }
 
@@ -97,11 +97,11 @@ const updateProduct = (e) =>{
     <div className='recentData'>
         <div className='cardHeader'>
             <h1 className='title'>Edit Product</h1>
-            <Link to="/buyer/dashboard/products">
+            <Link to="/dashboard/products">
                 <button className="button" type="button" >Back</button>
             </Link>
         </div>
-        <form className="form-card" /* onSubmit={updateProduct} */>
+        <form className="form-card" onSubmit={updateProduct}>
         <div className="row justify-content-between text-left">
                     <div className="form-group col-sm-6 flex-column d-flex"> 
                       <label style={{fontSize:"15px"}} className="form-control-label px-3">Name
@@ -152,7 +152,7 @@ const updateProduct = (e) =>{
         <div className="row justify-content-between text-left">
         <div className="form-group col-sm-6 flex-column d-flex"> 
                     <label style={{fontSize:"15px"}} className="form-control-label px-3">Description</label> 
-                    <textarea name='description' className="form-control" rows="3" onChange={handleInput} value={productInput.description} />
+                    <textarea name='description' className="form-control" rows="3" onChange={handleInput} value={productInput.description || "" } />
                     </div>
                     <div className="form-group col-sm-6 flex-column d-flex"> 
                     <label style={{fontSize:"15px"}} className="form-control-label px-3">Image

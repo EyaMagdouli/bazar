@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 //pic
 import feature1 from "../../assets/images/feature-img-1.png";
@@ -29,7 +30,7 @@ const [products, setProducts] = useState([])
 useEffect(() => {
   axios.get(`/api/products`).then((res) => {
     if (res.data.status === 200) {
-      console.log(res.data.products)
+      //console.log(res.data.products)
       setProducts(res.data.products);
     }
   });
@@ -103,7 +104,11 @@ useEffect(() => {
                   <a href="#" style={{textDecoration: "none"}}><h3 >{item.name}</h3> </a> 
 
                   <p> {item.description} </p>
-                  <a href="#" className="button">Explore</a>
+                  <Link to={`/marketplace/${item.id}`}>
+                     <button className="button">
+                       Explore
+                     </button>
+                  </Link>
                 </div>
 
               </div>

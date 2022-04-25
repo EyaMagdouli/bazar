@@ -5,18 +5,24 @@ import swal from 'sweetalert';
 
 const Category = () => {
 
-  const  [categoryList, setCategoryList] = useState([])            
+  const  [categoryList, setCategoryList] = useState([])   
+  const [loading, setLoading] = useState(false)
+  const [currentPage, setCurrentPage] = useState(1)
+  const [categoriesPerPage] = useState(3)
+
+
+  
   useEffect(() => {
+    setLoading(true)
+
     const token = localStorage.getItem("auth_token");
-    
     axios.get(`/api/viewCategory`,{
       headers: {
         Authorization: `Bearer ${token}`,
       }},).then(res=>{
-      console.log(res.data.category)
-      if(res.status === 200){
-        setCategoryList(res.data.category)
-      }
+      setCategoryList(res.data.category)
+      setLoading(false)
+      
     })
 
   }, [])
@@ -40,7 +46,25 @@ const Category = () => {
     })
   }
 
-  var viewCategory_table=categoryList.map( (item)=> {
+  const indexOfLastCategory = currentPage * categoriesPerPage;
+  const indexOfFirstProduct = indexOfLastCategory - categoriesPerPage;
+  const currentCategories = categoryList.slice(
+    indexOfFirstProduct,
+    indexOfLastCategory
+  );
+
+  const PageNumbers = [];
+
+  for (let i = 1; i <= Math.ceil(categoryList.length / categoriesPerPage); i++) {
+    PageNumbers.push(i);
+  }
+
+
+  if (loading) {
+    return <h2 style={{ marginLeft: "80px", marginTop: "40px" }}>Loading..</h2>;
+  }
+
+  var viewCategory_table=currentCategories.map( (item)=> {
     return (
       <tr key={item.id} >
         <td className="text-nowrap align-middle"> {item.id} </td>
@@ -50,7 +74,7 @@ const Category = () => {
         <td className="text-center align-middle">
         <div className="btn-group align-top">
         <button type="button" >
-            <Link to={`/buyer/dashboard/categories/edit/${item.id}`} style={{color:"blue", fontSize:"17px" ,marginRight:"10px", textDecoration:"none"}}  >
+            <Link to={`/dashboard/categories/edit/${item.id}`} style={{color:"blue", fontSize:"17px" ,marginRight:"10px", textDecoration:"none"}}  >
             <i className="far fa-edit" ></i> Edit </Link>
         </button>
         <button type="button" onClick={(e)=>deleteCategory(e, item.id)} style={{color:"red", fontSize:"16px" }} >
@@ -70,11 +94,13 @@ const Category = () => {
   useEffect(() => {
     if(!categories) nav("/")
   }, []) */
+  const paginate = pageNumber => setCurrentPage(pageNumber)
+
   return <div className='data'>
   <div className='recentData' >
     <div className='cardHeader' >
             <h1 className='title'>Categories</h1>
-            <Link to="/buyer/dashboard/categories/add">
+            <Link to="/dashboard/categories/add">
             <button className='button' type="button" >
               Add Category
               </button>
@@ -95,6 +121,17 @@ const Category = () => {
                     {viewCategory_table}
                     </tbody>
               </table>
+              <nav style={{marginLeft:"900px"}}>
+         <ul className="pagination">
+            {PageNumbers.map(number=>(
+              <li key={number} className="page-item">
+                  <a onClick={()=> paginate(number) }  className="page-link">
+                      {number}
+                      </a>
+              </li>
+            ))}          
+         </ul>
+        </nav>
             </div> 
           </div>
 

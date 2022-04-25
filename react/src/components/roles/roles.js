@@ -1,4 +1,4 @@
-export const rolesCategories = [
+const roles= [
     {
         role: "buyer",
         categories: [
@@ -20,3 +20,4 @@ export const rolesCategories = [
         ]
     }
 ]
+export default  roles

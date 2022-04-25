@@ -7,6 +7,7 @@ use App\Http\Controllers\API\CategoryController;
 use App\Http\Controllers\API\ProductController;
 use App\Http\Controllers\API\MarketplaceController;
 use App\Http\Controllers\API\HomeController;
+use App\Http\Controllers\API\UserController;
 use App\Models\Marketplace;
 
 /*
@@ -53,23 +54,30 @@ Route::middleware('auth:sanctum')->get('categories',[CategoryController::class, 
 
 //marketplace
  Route::middleware('auth:sanctum')->post('createMarket',[MarketplaceController::class,'create']);
- Route::middleware('auth:sanctum')->get('viewMarket/{id}',[MarketplaceController::class,'index']);
+ Route::middleware('auth:sanctum')->get('viewMarket',[MarketplaceController::class,'index']);
+ Route::middleware('auth:sanctum')->get('editMarket',[MarketplaceController::class,'edit']);
+ Route::middleware('auth:sanctum')->post('updateMarket',[MarketplaceController::class,'update']);
+
+
+
 
 
 
 //home
 Route::get('marketplaces',[HomeController::class,'marketplaces']);
 Route::get('products',[HomeController::class,'products']);
+Route::get('marketplace/{id}',[HomeController::class,'showMarket']);
+
+
+//profile
+Route::middleware('auth:sanctum')->get('profile',[UserController::class,'index']);
+Route::middleware('auth:sanctum')->get('editProfile',[UserController::class, 'edit']);
+Route::middleware('auth:sanctum')->post('updateProfile',[UserController::class, 'update']);
 
 
 
 
 
-
-
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
 
 
 
