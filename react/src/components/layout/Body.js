@@ -7,7 +7,7 @@ import CreateMarketplace from "../marketplace/CreateMarketplace";
 import ChooseKind from "../auth/ChooseKind";
 import ForgotPassword from "../auth/ForgotPassword";
 import { ProtectedRoute } from "../route/ProtectedRoute";
-import Dashboard from "../roles/Dashboard";
+import Dashboard from "../dashboard/Dashboard";
 import EditProfile from "../user/EditProfile"
 import Marketplace from "../home/Marketplace";
 

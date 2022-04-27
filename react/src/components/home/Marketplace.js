@@ -87,9 +87,7 @@ const Marketplace = () => {
                <li>       
             <img src={`http://127.0.0.1:8000/${item.image}`} alt={item.name}/>
             <div className="content">
-            <div className="icons">
-              <a><i className="fas fa-user"></i> by {item.marketplace.name} </a> 
-            </div>
+          
             <h3> {item.name} </h3>
             <h5> Price: <span>{item.price} </span>  </h5>
             <p> {item.description} </p>

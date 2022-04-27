@@ -5,9 +5,7 @@ import axios from "axios";
 const CreateMarketplace = () => {
   const navigate = useNavigate();
   const [marketInput, setMarket] = useState({
-    name: "",
-    slug: "",
-    description: "",
+    name: "",    description: "",
     error_list: [],
   });
 
@@ -27,7 +25,6 @@ const CreateMarketplace = () => {
 
     const formData = new FormData();
     formData.append("name", marketInput.name);
-    formData.append("slug", marketInput.slug);
     formData.append("image", image.image);
     formData.append("description", marketInput.description);
     formData.append("token", localStorage.getItem("auth_token"));
@@ -91,26 +88,6 @@ const CreateMarketplace = () => {
               />
               <span style={{ color: "red" }}>
                 {marketInput.error_list.name}
-              </span>
-            </div>
-            <div className="wrap-input100 validate-input">
-              <label
-                style={{ fontSize: "15px" }}
-                className="form-control-label px-3"
-              >
-                Slug
-                <span className="text-danger"> *</span>
-              </label>
-              <input
-                className="input100"
-                type="text"
-                name="slug"
-                placeholder="Slug"
-                onChange={handleInput}
-                value={marketInput.slug || ""}
-              />
-              <span style={{ color: "red" }}>
-                {marketInput.error_list.slug}
               </span>
             </div>
             <div className="wrap-input100 validate-input">

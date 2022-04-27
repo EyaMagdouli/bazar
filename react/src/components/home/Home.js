@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import Dropdown from "react-bootstrap"
 
 //pic
 import feature1 from "../../assets/images/feature-img-1.png";
@@ -13,9 +14,10 @@ import axios from "axios";
 //js files
 
 const Home = React.forwardRef((p, prodsRef) => {
-const [marketplaces, setMarketplaces] = useState([]);
-const [products, setProducts] = useState([])
-
+  const [marketplaces, setMarketplaces] = useState([]);
+  const [products, setProducts] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [categoryId, setCategoryId] = useState("")
 
   useEffect(() => {
     axios.get(`/api/marketplaces`).then((res) => {
@@ -24,17 +26,20 @@ const [products, setProducts] = useState([])
         setMarketplaces(res.data.marketplaces);
       }
     });
-  },[]);
 
+    axios.get(`/api/products`).then((res) => {
+      if (res.data.status === 200) {
+        //console.log(res.data.products)
+        setProducts(res.data.products);
+      }
+    });
+    axios.get(`/api/categories`).then((res) => {
+      if (res.data.status === 200) {
+        setCategories(res.data.category);
 
-useEffect(() => {
-  axios.get(`/api/products`).then((res) => {
-    if (res.data.status === 200) {
-      //console.log(res.data.products)
-      setProducts(res.data.products);
-    }
-  });
-},[]);
+      }
+    });
+  }, []);
 
   return (
     <div style={{ top: "900px " }}>
@@ -88,29 +93,36 @@ useEffect(() => {
           (prodsRef.current = prodsRef?.current.map((x) =>
             x === "mrktplc" ? e : x
           ))
-        } className="marketplaces" id="marketplaces">
+        }
+        className="marketplaces"
+        id="marketplaces"
+      >
         <h1 className="heading">
           <span>Marketplaces</span>{" "}
         </h1>
         <div className="box-container">
-          {marketplaces.map((item,i) => {
+          {marketplaces.map((item, i) => {
             return (
               <div key={i} className="box">
-                <img src={`http://127.0.0.1:8000/${item.image}`} alt={item.name}/>   
+                <img
+                  src={`http://127.0.0.1:8000/${item.image}`}
+                  alt={item.name}
+                />
                 <div className="content">
                   <div className="icons">
-                   <a><i className="fas fa-user"></i> by {item.user.name} </a> 
+                    <a>
+                      <i className="fas fa-user"></i> by {item.user.name}{" "}
+                    </a>
                   </div>
-                  <a href="#" style={{textDecoration: "none"}}><h3 >{item.name}</h3> </a> 
+                  <a href="#" style={{ textDecoration: "none" }}>
+                    <h3>{item.name}</h3>{" "}
+                  </a>
 
                   <p> {item.description} </p>
                   <Link to={`/marketplace/${item.id}`}>
-                     <button className="button">
-                       Explore
-                     </button>
+                    <button className="button">Explore</button>
                   </Link>
                 </div>
-
               </div>
             );
           })}
@@ -124,25 +136,55 @@ useEffect(() => {
           (prodsRef.current = prodsRef?.current.map((x) =>
             x === "prdcts" ? e : x
           ))
-        } className="products" id="products">
-        <h1 className="heading"><span>Products</span></h1>
+        }
+        className="products"
+        id="products"
+      >
+        <h1 className="heading">
+          <span>Products </span>
+          <select onClick={(e)=> setCategoryId(this.value) } className="select">
+          <option  className="select-content">
+         
+              By category 
+     
+          </option>
+          {categories.map((item)=>(              
+                <option key={item.id}   value={categoryId} className="select-content"> {item.name} </option>   
+          ))}
+          {
+          }
+        </select>
+      {  console.log(categoryId)}
+
+        </h1>
+      
 
         <div className="box-container">
-        {products.map((item,i) => {
+          {products.map((item, i) => {
             return (
-          <div key={i} className="box">
-            <img src={`http://127.0.0.1:8000/${item.image}`} alt={item.name}/>
-            <div className="content">
-            <div className="icons">
-              <a><i className="fas fa-user"></i> by {item.marketplace.name} </a> 
-            </div>
-            <h3> {item.name} </h3>
-            <h5> Price: <span>{item.price} </span>  </h5>
-            <p> {item.description} </p>
-            <a href="#" className="button">Chat</a>
-            </div>
-          </div>
-           );
+              <div key={i} className="box">
+                <img
+                  src={`http://127.0.0.1:8000/${item.image}`}
+                  alt={item.name}
+                />
+                <div className="content">
+                  <div className="icons">
+                    <a>
+                     by {item.marketplace.name}{" "}
+                    </a>
+                  </div>
+                  <h3> {item.name} </h3>
+                  <h5>
+                    {" "}
+                    Price: <span>{item.price} </span>{" "}
+                  </h5>
+                  <p> {item.description} </p>
+                  <a href="#" className="button">
+                    Chat
+                  </a>
+                </div>
+              </div>
+            );
           })}
         </div>
       </section>

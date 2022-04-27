@@ -31,7 +31,6 @@ class ProductController extends Controller
 
         $validator= Validator::make($request->all(),[
             'category_id'=>'required|max:191',
-            'slug'=>'required|max:191',
             'name'=>'required|max:191',
             'image'=>'required|image|mimes:jpeg,png,jpg|max:2048',
             'price'=>'required'
@@ -59,9 +58,7 @@ class ProductController extends Controller
             $product = new Product;
             $product->category_id = $request->input('category_id');
             $product->marketplace_id =$market->id;
-            $product->name = $request->input('name');
-            $product->slug = $request->input('slug');
-            $product->price = $request->input('price');
+            $product->name = $request->input('name');            $product->price = $request->input('price');
             $product->description = $request->input('description');
 
             //image
@@ -104,7 +101,6 @@ class ProductController extends Controller
     public function update(Request $request, $id){
         $validator= Validator::make($request->all(),[
             'category_id'=>'required|max:191',
-            'slug'=>'required|max:191',
             'name'=>'required|max:191',
             'price'=>'required'
         ]);
@@ -121,7 +117,6 @@ class ProductController extends Controller
             if($product){
             $product->category_id = $request->input('category_id');
             $product->name = $request->input('name');
-            $product->slug = $request->input('slug');
             $product->price = $request->input('price');
             $product->description = $request->input('description');
 

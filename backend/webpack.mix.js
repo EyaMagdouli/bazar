@@ -13,8 +13,18 @@ const mix = require('laravel-mix');
 
 mix.js('resources/js/app.js', 'public/js')
     .react()
-    .sass('resources/sass/app.scss', 'public/css');
-
+    .sass('resources/sass/app.scss', 'public/css')
+    .copy(
+        'node_modules/@fortawesome/fontawesome-free/webfonts',
+        'public/webfonts'
+    );
     
+// create a custom Backpack bundle CSS, with custom colors
+mix.sass('resources/scss/custom-backpack-bundle.scss', 'public/packages/backpack/base/css/')
+    .options({
+      processCssUrls: false
+    });
+
+
 mix.disableNotifications(); // Disable success and error Notification
 mix.disableSuccessNotifications(); // Disable only success Notification and show error Notification

@@ -28,6 +28,9 @@ export default function Login(props) {
         localStorage.setItem("auth_token", token);
         localStorage.setItem("auth_name", name);
         localStorage.setItem("kind", kind);
+
+        
+
         //swal('Logged In successfully',message,"success");
         navigate("/");
       } else if (status === 401) {
@@ -37,7 +40,9 @@ export default function Login(props) {
       }
   };
   useEffect(() => {
-    if(isLoggedIn()) navigate("/")
+    if(isLoggedIn()) {
+      navigate("/")
+    } 
   }, [])
   return (
     <div className="container py-5" style={{top:"60px", left:"200px", justifyContent:"center"}}>

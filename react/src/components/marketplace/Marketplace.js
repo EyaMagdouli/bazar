@@ -44,7 +44,6 @@ const Marketplace = () => {
                   <div className="col-lg-6">
                     <div className="about-text go-to">
                       <h3 className="dark-color"> {item.name} </h3>
-                      <h6 className="theme-color lead">{item.slug}</h6>
                       <p>
                         <mark> By {item.user.name} </mark>
                       </p>

@@ -7,7 +7,6 @@ const EditMarketplace = () => {
 
   const navigate = useNavigate()
   const [marketplaceInput, setMarketplaceInput] = useState({
-    'slug':'',
     'name':'',
     'description':'',
 })
@@ -26,9 +25,8 @@ useEffect(() => {
       Authorization: `Bearer ${token}`,
     }},).then(res=>{
       if(res.data.status === 200){
-        const {slug, name, description} = (res.data.marketplace[0])
+        const { name, description} = (res.data.marketplace[0])
         setMarketplaceInput({
-          slug,
           name,
           description
         })
@@ -51,7 +49,6 @@ const updateMarket = (e) =>{
   const formData = new FormData()
   formData.append('image',image.image)
   formData.append('name',marketplaceInput.name)
-  formData.append('slug',marketplaceInput.slug)
   formData.append('description',marketplaceInput.description)
 
   const token = localStorage.getItem("auth_token");
@@ -99,23 +96,15 @@ const updateMarket = (e) =>{
                       {error.name}
                       </span>}
             </div>
-
             <div className="form-group col-sm-6 flex-column d-flex">
-              <label
-                style={{ fontSize: "15px" }}
-                className="form-control-label px-3"
-              >
-                Slug
-              </label>
-              <input
-                name="slug"
-                type="text"
-                className="form-control" onChange={handleInput} value={marketplaceInput.slug}
-              />
-               {<span style={{ color: "red" }}>
-                      {error.slug}
-                      </span>}
-            </div>
+            <label style={{fontSize:"15px"}} className="form-control-label px-3">Image
+                    </label>
+                    <input type="file" name='image' className="form-control-file" onChange={handleImage} />
+                    <span style={{ color: "red" }}>
+                    {error.image}
+                    </span> 
+              </div>
+        
           </div>
           <div className="row justify-content-between text-left">
             <div className="form-group col-sm-6 flex-column d-flex">
@@ -132,14 +121,7 @@ const updateMarket = (e) =>{
                 onChange={handleInput}
                 value={marketplaceInput.description ?? ""} />
             </div>
-            <div className="form-group col-sm-6 flex-column d-flex">
-            <label style={{fontSize:"15px"}} className="form-control-label px-3">Image
-                    </label>
-                    <input type="file" name='image' className="form-control-file" onChange={handleImage} />
-                    <span style={{ color: "red" }}>
-                    {error.image}
-                    </span> 
-              </div>
+            
           </div>
           <br></br>
           <button

@@ -38,7 +38,6 @@ class MarketplaceController extends Controller
         //dd(auth()->user()->id);
         $validator = Validator::make($request->all(), [
             'name' => 'required|max:191',
-            'slug' => 'required|max:191',
             'description' => "required",
             'image' => 'required|image|mimes:jpeg,png,jpg|max:2048',
         ]);
@@ -55,7 +54,6 @@ class MarketplaceController extends Controller
            // $user = User::where('remember_token', $token)->first();
             $marketplace = new Marketplace;
             $marketplace->name = $request->input('name');
-            $marketplace->slug = $request->input('slug');
             $marketplace->description = $request->input('description');
             $marketplace->user_id = auth()->user()->id;
             //image

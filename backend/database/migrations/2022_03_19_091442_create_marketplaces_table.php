@@ -17,10 +17,10 @@ class CreateMarketplacesTable extends Migration
             $table->id();
             $table->integer('user_id')->required();
             $table->string('name')->required();
-            $table->string('slug')->required();
             $table->string('image')->required();
             $table->text('description')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

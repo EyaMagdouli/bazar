@@ -35,12 +35,7 @@ Route::middleware('auth:sanctum')->group(function(){
 });
 
 //categories
-Route::middleware('auth:sanctum')->get('viewCategory',[CategoryController::class,'index']);
-Route::middleware('auth:sanctum')->post('addCategory',[CategoryController::class, 'store']);
- Route::get('editCategory/{id}',[CategoryController::class, 'edit']);
- Route::put('updateCategory/{id}', [CategoryController::class, 'update']);
- Route::delete('deleteCategory/{id}',[CategoryController::class, 'destroy']);
-Route::middleware('auth:sanctum')->get('categories',[CategoryController::class, 'allCategories']);
+Route::get('categories',[CategoryController::class,'index']);
 
 
 

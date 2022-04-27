@@ -66,7 +66,6 @@ const Product = () => {
           />{" "}
         </td>
         <td>{item.name}</td>
-        <td>{item.slug}</td>
         <td>{item.category.name}</td>
         <td>{item.price}</td>
         <td>{item.description}</td>
@@ -120,7 +119,6 @@ const Product = () => {
               <td>ID</td>
               <td>Image</td>
               <td>Name</td>
-              <td>Slug</td>
               <td>Category</td>
               <td>Price</td>
               <td>Description</td>

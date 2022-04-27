@@ -735,3 +735,28 @@ section{
     cursor: pointer,
     
 }
+
+.select {
+    position: relative;
+    display: inline-block;
+    left: 20px;
+    font-size: 25px;
+    margin-bottom:15px;
+    color: var(--green);
+    
+  }
+  
+  .select-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 200px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    padding: 12px 16px;
+    z-index: 1;
+    font-size: medium;
+  }
+  
+  .select:hover .select-content {
+    display: block;
+  }

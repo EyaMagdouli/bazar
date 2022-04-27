@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Category;
@@ -9,12 +10,12 @@ use App\Models\Marketplace;
 
 class Product extends Model
 {
-    use HasFactory;
+    use \Backpack\CRUD\app\Models\Traits\CrudTrait;
+    use HasFactory,SoftDeletes;
 
     protected $table ='products';
     protected $fillable =
     ['name',
-    'slug',
     'marketplace_id',
     'category_id',
     'image',
