@@ -109,8 +109,9 @@ const Header = React.forwardRef((p, prodsRef) => {
                   Phone Number: <span>{profile.phone_number} </span>{" "}
                 </h4>
                 <h4 className="box">
-                  Kind: <span>{profile.kind} </span>{" "}
+                  Kind: <span>{profile.kind} </span>
                 </h4>
+                
 
                 <Link to="/profile/edit">
                   <button
@@ -122,6 +123,7 @@ const Header = React.forwardRef((p, prodsRef) => {
                   </button>
                 </Link>
           </div>
+        
 
         {isActiveSearch ? (
           <form action="" className="search-form">
@@ -135,7 +137,7 @@ const Header = React.forwardRef((p, prodsRef) => {
     </ul>
   );
   const showOnlyInMain = (
-    <nav className="navbar navbar-nav ms-auto">
+    <nav className="navbar navbar-nav ms-auto" style={{left:"80px"}}>
       <ul>
         <li onClick={() => prodsRef?.current[2].scrollIntoView()}>Features</li>
         <li onClick={() => prodsRef?.current[1].scrollIntoView()}>
@@ -159,7 +161,7 @@ const Header = React.forwardRef((p, prodsRef) => {
           <Routes>
             <Route path="/" element={showOnlyInMain} />
           </Routes>
-          <ul className="navbar navbar-nav ms-auto">{AuthButtons}</ul>
+          <ul className="navbar navbar-nav ms-auto" style={{left:"70px"}} >{AuthButtons}</ul>
         </div>
       </div>
     </div>

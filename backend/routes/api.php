@@ -62,6 +62,7 @@ Route::get('categories',[CategoryController::class,'index']);
 Route::get('marketplaces',[HomeController::class,'marketplaces']);
 Route::get('products',[HomeController::class,'products']);
 Route::get('marketplace/{id}',[HomeController::class,'showMarket']);
+Route::get('productbycategory/{id}',[HomeController::class,'productsByCat']);
 
 
 //profile

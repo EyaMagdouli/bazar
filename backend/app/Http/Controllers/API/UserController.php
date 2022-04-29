@@ -16,11 +16,13 @@ class UserController extends Controller
 
         $user_id = auth()->user()->id;
         $profile = User::where('id', $user_id)->get();
+        if($profile) {
+            return response()->json([
+                'status' => 200,
+                'profile' => $profile,
+            ]);
+        }
 
-        return response()->json([
-            'status' => 200,
-            'profile' => $profile,
-        ]);
     }
     public function edit()
     {

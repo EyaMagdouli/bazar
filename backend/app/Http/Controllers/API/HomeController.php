@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\Marketplace;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -41,5 +42,14 @@ class HomeController extends Controller
             ]);
 
         }
+    }
+
+
+    public function productsByCat($id){
+        $products = Product::where('category_id',$id)->get();
+        return response()->json([
+            'status' => 200,
+            'productbycategory' => $products
+        ]);
     }
 }
