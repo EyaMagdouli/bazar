@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use App\Models\Marketplace;
+use App\Models\Conversation;
 use Spatie\Permission\Traits\HasRoles;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 
@@ -51,4 +52,7 @@ class User extends Authenticatable
     public function marketplace(){
          $this->hasOne(Marketplace::class);
     }
+    public function conversation(){
+        $this->hasMany(Conversation::class);
+   }
 }

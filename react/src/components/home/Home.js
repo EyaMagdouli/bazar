@@ -206,9 +206,9 @@ const Home = React.forwardRef((p, prodsRef) => {
                     Price: <span>{item.price} </span>{" "}
                   </h5>
                   <p> {item.description} </p>
-                  <a href="#" className="button">
+                  <Link to="/chat" className="button">
                     Chat
-                  </a>
+                  </Link>
                 </div>
               </div>
             );
