@@ -11,8 +11,8 @@ class Message extends Model
 {
     use HasFactory;
 
-
-    public function marketplace(){
+    protected $with = ['conversation'];
+    public function conversation(){
         $this->belongsTo(Conversation::class);
    }
 

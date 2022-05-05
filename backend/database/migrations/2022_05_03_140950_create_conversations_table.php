@@ -15,7 +15,10 @@ class CreateConversationsTable extends Migration
     {
         Schema::create('conversations', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id')->required();
+            $table->integer('buyer_id')->required();
+            $table->integer('seller_id')->required();
+            $table->integer('product_id')->required();
+            $table->enum('status',['waiting','declined','refused','approved'])->default('waiting');
             $table->timestamps();
         });
     }

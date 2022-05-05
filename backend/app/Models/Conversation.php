@@ -13,13 +13,19 @@ class Conversation extends Model
 {
     use HasFactory;
 
-
+    protected $with = ['seller','buyer','product'];
 
     public function message(){
         $this->hasMany(Message::class);
     }
 
-    public function user(){
-        $this->belongsTo(User::class);
+    public function seller(){
+        $this->belongsTo(User::class,'seller_id');
+    }
+    public function buyer(){
+        $this->belongsTo(User::class,'buyer_id');
+    }
+    public function product(){
+        $this->belongsTo(Product::class,'product_id');
     }
 }
