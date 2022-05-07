@@ -5,6 +5,8 @@ namespace App\Http\Controllers\API;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Mail\sendOrderMail;
+use App\Models\Product;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
@@ -12,6 +14,8 @@ use Symfony\Contracts\Service\Attribute\Required;
 use Throwable;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Mail;
+
 class AuthController extends Controller
 {
 
@@ -69,7 +73,7 @@ class AuthController extends Controller
 
         //to check if the input is fine or not
         if($validator->fails()){
-            dd('hi');
+            // dd('hi');
             return response()->json([
                 'status'=>401,
                 'validation_errors'=>$validator->errors(),
@@ -77,6 +81,7 @@ class AuthController extends Controller
         }
         else {
             $user = User::where('email', $request->email)->first();
+            Mail::to('arwa.lemaalem@medianet.com.tn')->send(new sendOrderMail($user,new Product()));
 
             if (! $user || ! Hash::check($request->password, $user->password)) {
                 return response()->json([   // throwing a validation error

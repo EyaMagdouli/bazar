@@ -62,6 +62,7 @@ Route::get('categories',[CategoryController::class,'index']);
 Route::get('marketplaces',[HomeController::class,'marketplaces']);
 Route::get('products',[HomeController::class,'products']);
 Route::get('marketplace/{id}',[HomeController::class,'showMarket']);
+Route::get('product/{id}',[HomeController::class,'showProduct']);
 Route::get('productbycategory/{id}',[HomeController::class,'productsByCat']);
 
 
@@ -73,6 +74,9 @@ Route::middleware('auth:sanctum')->post('updateProfile',[UserController::class, 
 
 //chat
 Route::post('messages',[ChatController::class,'message']);
+Route::middleware('auth:sanctum')->get('conversation/{id}',[ChatController::class,'conversation']);
+Route::middleware('auth:sanctum')->post('addMessage',[ChatController::class,'store']);
+
 
 
 

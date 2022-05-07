@@ -33,7 +33,8 @@ class ProductController extends Controller
             'category_id'=>'required|max:191',
             'name'=>'required|max:191',
             'image'=>'required|image|mimes:jpeg,png,jpg|max:2048',
-            'price'=>'required'
+            'price'=>'required',
+            'description' =>'required'
         ]);
 
         if($validator->fails()){
@@ -46,8 +47,6 @@ class ProductController extends Controller
         else{
 
             $user_id = auth()->user()->id;
-
-
 
             // now we will fetch marketplace_id through user_id
             $market = Marketplace::where('user_id', $user_id)->first();    // get marketplace info

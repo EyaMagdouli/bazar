@@ -10,7 +10,7 @@ import { ProtectedRoute } from "../route/ProtectedRoute";
 import Dashboard from "../dashboard/Dashboard";
 import EditProfile from "../user/EditProfile"
 import Marketplace from "../home/Marketplace";
-import Chat from "../chat/Chat";
+import Product from "../home/Product";
 
 
 const Body = React.forwardRef((props, prodsRef) => {
@@ -25,7 +25,6 @@ const Body = React.forwardRef((props, prodsRef) => {
 
       <Route path="/profile/edit" element={ <EditProfile/> } />
 
-      <Route path="/chat" element={ <Chat /> } />
 
       <Route
         path="/createMarket"
@@ -38,6 +37,7 @@ const Body = React.forwardRef((props, prodsRef) => {
       <Route path="/planter" element={<VerifyRoleRoute Component={<div>HENLOW PLANTER</div>} role="planter" />} /> */}
       <Route path="/" element={<Home ref={prodsRef} />} />
       <Route path="/marketplace/:marketplace_id" element={< Marketplace />} />
+      <Route path="/product/:product_id" element={< Product />} />
 
       {/* dashboard */}
       <Route

@@ -44,12 +44,36 @@ class HomeController extends Controller
         }
     }
 
+    public function showProduct($id){
+        $product = Product::where('id',$id)->get();
+        //dd($marketplace);
+        if($product){
+            return response()->json([
+                'status' => 200,
+                'product' => $product
+
+            ]);
+
+        }
+    }
+
 
     public function productsByCat($id){
         $products = Product::where('category_id',$id)->get();
-        return response()->json([
-            'status' => 200,
-            'productbycategory' => $products
-        ]);
+
+        if($products){
+            return response()->json([
+                'status' => 200,
+                'productbycategory' => $products
+            ]);
+        }
+        else{
+            return response()->json([
+                'status' => 404,
+                'message' => 'No products available in this category yet'
+            ]);
+
+        }
+
     }
 }

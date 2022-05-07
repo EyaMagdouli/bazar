@@ -14,6 +14,8 @@ const Home = React.forwardRef((p, prodsRef) => {
   const [categories, setCategories] = useState([]);
   const [productsByCategory, setProductsByCategory] = useState([]);
 
+  const productsCount = productsByCategory  .length;
+
   const getAllProducts = async ()=>{
     axios.get(`/api/products`).then((res) => {
       if (res.data.status === 200) {
@@ -32,6 +34,9 @@ const Home = React.forwardRef((p, prodsRef) => {
           ...z,
           associatedCategory: cat
         })));
+      }
+      else if (status === 404) {
+
       }
     });
   }
@@ -185,34 +190,37 @@ const Home = React.forwardRef((p, prodsRef) => {
             {}
           </select>
         </h1>
-
         <div className="box-container">
           {[...(byCategory ? productsByCategory : products)]
           .filter(e=> !byCategory ? true : e.associatedCategory == ref?.current?.value)
           .map((item, i) => {
-            return (
+            return(
               <div key={i} className="box">
-                <img
-                  src={`http://127.0.0.1:8000/${item.image}`}
-                  alt={item.name}
-                />
-                <div className="content">
-                  <div className="icons">
-                    <a>by {item.marketplace.name} </a>
-                  </div>
-                  <h3> {item.name} </h3>
-                  <h5>
-                    {" "}
-                    Price: <span>{item.price} </span>{" "}
-                  </h5>
-                  <p> {item.description} </p>
-                  <Link to="/chat" className="button">
-                    Chat
-                  </Link>
+              <img
+                src={`http://127.0.0.1:8000/${item.image}`}
+                alt={item.name}
+              />
+              <div className="content">
+                <div className="icons">
+                  <a>by {item.marketplace.name} </a>
                 </div>
+                <h3> {item.name} </h3>
+                <h5>
+                  {" "}
+                  Price: <span>{item.price} </span>{" "}
+                </h5>
+                <p> {item.description} </p>
+                <Link to={`/product/${item.id}`} className="button">
+                  Details
+                </Link>
               </div>
-            );
+            </div>
+            )
+         
+       
           })}
+              {console.log(productsCount)}
+
         </div>
       </section>
     </div>

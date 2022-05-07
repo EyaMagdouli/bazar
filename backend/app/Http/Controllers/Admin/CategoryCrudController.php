@@ -89,14 +89,13 @@ class CategoryCrudController extends CrudController
     }
 
 
-    public function destroy($id){
-        dd('hi');
-        $category = Category::find($id);
-        $products = Product::where('category_id',$id);
-        $category->delete();
-        $products->delete();
+    // public function destroy($id){
+    //     $category = Category::find($id);
+    //     $products = Product::where('category_id',$id);
+    //     $category->delete();
+    //     $products->delete();
 
 
 
-    }
+    // }
 }
