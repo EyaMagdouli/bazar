@@ -68,6 +68,7 @@ const Product = () => {
         <td>{item.name}</td>
         <td>{item.category.name}</td>
         <td>{item.price}</td>
+        <td> {item.qty} </td>
         <td>{item.description}</td>
         <td>
           <div className="btn-group align-top">
@@ -121,6 +122,7 @@ const Product = () => {
               <td>Name</td>
               <td>Category</td>
               <td>Price</td>
+              <td>Quantity</td>
               <td>Description</td>
               <td>Actions</td>
             </tr>

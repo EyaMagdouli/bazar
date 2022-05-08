@@ -11,6 +11,7 @@ const AddProduct = () => {
     category_id: "",
     name: "",
     description: "",
+    qty:"",
     price: "",
     error_list: [],
   });
@@ -25,7 +26,6 @@ const AddProduct = () => {
   };
 
   useEffect(() => {
-    const token = localStorage.getItem("auth_token");
     axios
       .get(`api/categories`)
       .then((res) => {
@@ -45,6 +45,7 @@ const AddProduct = () => {
     formData.append("name", productInput.name);
 
     formData.append("price", productInput.price);
+    formData.append("qty", productInput.qty);
     formData.append("description", productInput.description);
     formData.append("token", localStorage.getItem("auth_token")); // attching toen
 
@@ -153,6 +154,46 @@ const AddProduct = () => {
                 style={{ fontSize: "15px" }}
                 className="form-control-label px-3"
               >
+                Quantity
+                <span className="text-danger"> *</span>
+              </label>
+              <input
+                name="qty"
+                type="text"
+                className="form-control"
+                onChange={handleInput}
+                value={productInput.qty}
+              />
+              <span style={{ color: "red" }}>
+                {productInput.error_list.qty}
+              </span>
+            </div>
+          </div>
+          <div className="row justify-content-between text-left">
+          
+            <div className="form-group col-sm-6 flex-column d-flex">
+              <label
+                style={{ fontSize: "15px" }}
+                className="form-control-label px-3"
+              >
+                Description
+              <span className="text-danger"> *</span>
+
+              </label>
+
+              <textarea
+                name="description"
+                className="form-control"
+                rows="3"
+                onChange={handleInput}
+                value={productInput.description}
+              />
+            </div>
+            <div className="form-group col-sm-6 flex-column d-flex">
+              <label
+                style={{ fontSize: "15px" }}
+                className="form-control-label px-3"
+              >
                 Image
                 <span className="text-danger"> *</span>
               </label>
@@ -166,23 +207,7 @@ const AddProduct = () => {
                 {productInput.error_list.image}
               </span>
             </div>
-          </div>
-          <div className="row justify-content-between text-left">
-            <div className="form-group col-sm-6 flex-column d-flex">
-              <label
-                style={{ fontSize: "15px" }}
-                className="form-control-label px-3"
-              >
-                Description
-              </label>
-              <textarea
-                name="description"
-                className="form-control"
-                rows="3"
-                onChange={handleInput}
-                value={productInput.description}
-              />
-            </div>
+           
           </div>
           <br></br>
 

@@ -23,8 +23,8 @@
 html{
     font-size: 62.5%;
     overflow-x: hidden;
-    scroll-behavior: smooth;
-    scroll-padding-top: 2rem;
+    /* scroll-behavior: smooth; */
+    /* scroll-padding-top: 2rem; */
 }
 
 body{
