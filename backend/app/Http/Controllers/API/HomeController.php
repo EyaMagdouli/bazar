@@ -53,7 +53,13 @@ class HomeController extends Controller
                 'product' => $product
 
             ]);
+        }
+        else{
+            return response()->json([
+                'status' => 404,
+                'message' => 'No product available'
 
+            ]);
         }
     }
 

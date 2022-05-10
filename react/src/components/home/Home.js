@@ -205,11 +205,11 @@ const Home = React.forwardRef((p, prodsRef) => {
                   <a>by {item.marketplace.name} </a>
                 </div>
                 <h3> {item.name} </h3>
-                <h5>
+                {/* <h5>
                   {" "}
                   Price: <span>{item.price} </span>{" "}
-                </h5>
-                <p> {item.description} </p>
+                </h5> */}
+                {/* <p> {item.description} </p> */}
                 <Link to={`/product/${item.id}`} className="button">
                   Details
                 </Link>
@@ -219,7 +219,7 @@ const Home = React.forwardRef((p, prodsRef) => {
          
        
           })}
-              {console.log(productsCount)}
+              {/* {console.log(productsCount)} */}
 
         </div>
       </section>

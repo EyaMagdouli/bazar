@@ -193,8 +193,11 @@ section{
 }
 
 .header .shopping-cart.active{
-    right:2rem;
+    top:70px;
+    right:1rem;
+    /* width: 250px; */
     transition: .4s linear;
+
 }
 
 .header .shopping-cart .box{
@@ -219,7 +222,7 @@ section{
 }
 
 .header .shopping-cart .box .fa-trash:hover{
-    color:var(--green);
+    color:red;
 }
 
 .header .shopping-cart .box .content h3{
@@ -759,4 +762,17 @@ section{
   
   .select:hover .select-content {
     display: block;
+  }
+
+  .chat-button{
+      margin-top: 1rem;
+      /* display: inline-block; */
+      padding: 2px 3px;
+      text-decoration: none;
+      font-size: 1.7rem;
+      border-radius: .5rem;
+      border: .2rem solid var(--black);
+      color: var(--black);
+      cursor: pointer;
+      height: 1px;
   }

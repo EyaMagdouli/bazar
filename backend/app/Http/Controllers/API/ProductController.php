@@ -35,7 +35,7 @@ class ProductController extends Controller
             'image'=>'required|image|mimes:jpeg,png,jpg|max:2048',
             'price'=>'required',
             'qty'=>'required',
-            'description' =>'required'
+            'description' =>'required|max:2000'
         ]);
 
         if($validator->fails()){

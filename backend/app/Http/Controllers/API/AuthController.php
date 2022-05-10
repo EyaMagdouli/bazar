@@ -81,7 +81,7 @@ class AuthController extends Controller
         }
         else {
             $user = User::where('email', $request->email)->first();
-            Mail::to('arwa.lemaalem@medianet.com.tn')->send(new sendOrderMail($user,new Product()));
+            // Mail::to('arwa.lemaalem@medianet.com.tn')->send(new sendOrderMail($user,new Product()));
 
             if (! $user || ! Hash::check($request->password, $user->password)) {
                 return response()->json([   // throwing a validation error

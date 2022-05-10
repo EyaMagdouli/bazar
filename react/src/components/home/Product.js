@@ -1,29 +1,77 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
+import swal from "sweetalert"
 
 const Product = () => {
+
+  const navigate= useNavigate()
+
   const [loading, setLoading] = useState(false);
 
   const [product, setProduct] = useState([]);
+  const [quantity, setQuantity] = useState(1)
 
   const { product_id } = useParams();
-
   useEffect(() => {
     setLoading(true);
     axios.get(`api/product/${product_id}`).then((res) => {
       if (res.data.status === 200) {
         setProduct(res.data.product);
-        console.log(res.data.product);
         setLoading(false);
+      }
+      else if (res.data.status === 404){
+        swal('Warning',res.data.message,'warning')
+        navigate('/')
       }
     });
   }, [product_id]);
 
+  const handleDecrement = () => {
+    if(quantity > 1){
+      setQuantity(prevCount =>  prevCount - 1 )
+
+    }
+  }
+  const handleIncrement = () => {
+    if(quantity < 1){
+    setQuantity(prevCount =>  prevCount + 1 )
+    }
+  }
+  
+  const submitAddToCart = (e) => {
+    e.preventDefault()
+    const data = {
+      product_id: product[0].id,
+     // product_qty : product.qty,
+    }
+    const token = localStorage.getItem("auth_token");
+    axios.post(`/api/addToCart`, data, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }).then(res=>{
+      if(res.data.status === 201){
+        swal("Success",res.data.message,"success")
+        location.reload();
+
+      }
+      else if(res.data.status == 409) {
+        swal("Success",res.data.message,"success")
+      }
+      else if(res.data.status == 401){
+        swal("Error",res.data.message,"error")
+      }
+      else if(res.data.status == 404){
+        swal("Warning",res.data.message,"warning")
+      }
+    })
+  }
+
   return (
     <div
       className="container py-5"
-      style={{ top: "60px", left: "200px", justifyContent: "center" }}
+      style={{ top: "20px", left: "200px", justifyContent: "center" }}
     >
       <div
         className="card"
@@ -54,102 +102,73 @@ const Product = () => {
                    alt={item.name}
                  /> 
             </div>
-            <div className="col-md-8">
-              <h4>
-                {item.name}
-                <span className="float-end badge btn-sm btn-danger badge-pill"></span>
-              </h4>
-              <p>{item.description}</p>
-              <p>category:{item.category.name}</p>
-              <p>marketplace:{item.marketplace.name}</p>
-              <h4 className="mb-1">
-               price: {item.price}
-                <s className="ms-2"> quantity {item.qty}</s>
-              </h4>
-              <div>
-                <label className="btn-sm btn-success px-4 mt-2">In stock</label>
-                <div className="row">
-                  <div className="col-md-3 mt-3">
-                    <div className="input-group" style={{ width: 100 }}>
-                      <button type="button" className="input-group-text">
-                        -
-                      </button>
-                      <input
-                        type="text"
-                        className="form-control text-center"
-                        // value="1"
-                      />
-                      <button type="button" className="input-group-text">
-                        +
+            <div className="col-md-8 about-text go-to">
+              
+                <h3 className="dark-color ">
+                  {item.name}
+                  <span className="float-end badge btn-sm btn-danger badge-pill"></span>
+                </h3>
+                <mark style={{fontSize:20}}> By {item.marketplace.name} </mark>
+
+                <p>{item.description}</p>
+                <br></br>
+                <h4 className="mb-1">
+                <s className="ms-2"> price: {item.price} </s>
+                  <br></br>
+                  <br></br>
+                  <s className="ms-2"> quantity available: {item.qty}</s>
+                </h4>
+                <br>
+                </br>
+                {(item.qty > 0) ? (
+                  <div>
+                  
+                  {/* <label className="btn-sm btn-success px-4 mt-2" style={{fontSize:15}}>In stock</label> */}
+                  <div className="row">
+                    {/* <div className="col-md-3 mt-3">
+                      <div className="input-group" style={{ width: 120, fontSize:15 }}>
+                        <button type="button" className="input-group-text"
+                        onClick={handleDecrement}>
+                          -
+                        </button>
+                        <span className="form-control text-center"  >{quantity}  </span>
+                        <button type="button" className="input-group-text"
+                        onClick={handleIncrement}>
+                          +
+                        </button>
+                      </div>
+                    </div> */}
+                    
+                    <div
+                      className="col-md-3 mt-3"
+                      style={{ width: 120   }}
+                    >
+                      <button type="button" className="btn btn-primary w-100" 
+                      style={{fontSize:15}}
+                      onClick={submitAddToCart} >
+                        Add to Cart
                       </button>
                     </div>
                   </div>
-                  <div
-                    className="col-md-3 mt-3"
-                    style={{ width: 100, marginLeft: 200 }}
-                  >
-                    <button type="button" className="btn btn-primary w-100">
-                      Add to Cart
-                    </button>
-                  </div>
                 </div>
+                ) : (
+                  <div>
+    <label className="btn-sm btn-danger px-4 mt-2">Out of stock</label>
+    </div>
+                )}
+                
               </div>
             </div>
+              )
+            })} 
+            
           </div>
-            )
-          })}
+          )}
           
         </div>
-        )}
-        
       </div>
-    </div>
 
-    //   <section className="container mt-5">
-    //   {loading ? (
-    //     <h2 style={{ marginLeft: "80px", marginTop: "-20px" }}>Loading..</h2>
-    //   ) : (
-    //     <div className="row d-flex justify-content-center">
-    //     <div className="col-md-7">
-
-    //     {product.map((item, i) => {
-    //       return (
-    //         <div key={i} assName="card p-3 py-4">
-    //           <div className="col-lg-6">
-    //             <div
-    //               className="about-text go-to"
-    //               style={{ marginLeft: "150px" }}
-    //             >
-    //               <h3 className="dark-color"> {item.name} </h3>
-    //               <h6 className="theme-color lead"> {item.slug} </h6>
-    //               <p>
-    //                 <mark> By {item.marketplace.name} </mark>
-    //               </p>
-    //               <p>{item.description}</p>
-    //               <p>quantity:{item.qty}</p>
-    //               <p>price:{item.price}</p>
-    //             </div>
-    //           </div>
-    //           <div className="col-lg-6">
-    //             <div
-    //               className="about-avatar"
-    //               style={{ marginLeft: "200px", marginTop: "-40px" }}
-    //             >
-    //               <img
-    //                 src={`http://127.0.0.1:8000/${item.image}`}
-    //                 alt={item.name}
-    //               />
-    //             </div>
-    //           </div>
-    //         </div>
-    //       );
-    //     })}
-    //   </div>
-    //   </div>
-
-    //   )}
-
-    // </section>
+   
   );
 };
 

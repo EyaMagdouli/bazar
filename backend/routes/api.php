@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\AuthController;
+use App\Http\Controllers\API\CartController;
 use App\Http\Controllers\API\CategoryController;
 use App\Http\Controllers\API\ChatController;
 use App\Http\Controllers\API\ProductController;
@@ -67,9 +68,16 @@ Route::get('productbycategory/{id}',[HomeController::class,'productsByCat']);
 
 
 //profile
-Route::middleware('auth:sanctum')->get('profile',[UserController::class,'index']);
+Route::get('profile',[UserController::class,'index']);
 Route::middleware('auth:sanctum')->get('editProfile',[UserController::class, 'edit']);
 Route::middleware('auth:sanctum')->post('updateProfile',[UserController::class, 'update']);
+
+
+//cart
+Route::middleware('auth:sanctum')->post('addToCart',[CartController::class,'addtocart']);
+Route::middleware('auth:sanctum')->get('cart',[CartController::class,'index']);
+Route::middleware('auth:sanctum')->delete('deleteCartItem/{cart_id}', [CartController::class,'delete']);
+
 
 
 //chat

@@ -13,8 +13,8 @@ class UserController extends Controller
 {
     public function index()
     {
-
-        $user_id = auth()->user()->id;
+        if(auth('sanctum')->check()){
+            $user_id = auth('sanctum')->user()->id;
         $profile = User::where('id', $user_id)->get();
         if($profile) {
             return response()->json([
@@ -22,6 +22,15 @@ class UserController extends Controller
                 'profile' => $profile,
             ]);
         }
+        }
+        else {
+            return response()->json([
+                'status'=>401,
+                'message' =>'Not logged in'
+            ]);
+        }
+
+
 
     }
     public function edit()
