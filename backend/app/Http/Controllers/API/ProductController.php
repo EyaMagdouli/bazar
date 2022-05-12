@@ -35,6 +35,8 @@ class ProductController extends Controller
             'image'=>'required|image|mimes:jpeg,png,jpg|max:2048',
             'price'=>'required',
             'qty'=>'required',
+            'qtyUnity'=>'required',
+            'priceUnity'=>'required',
             'description' =>'required|max:2000'
         ]);
 
@@ -61,6 +63,8 @@ class ProductController extends Controller
             $product->name = $request->input('name');
              $product->price = $request->input('price');
              $product->qty= $request->input('qty');
+             $product->qtyUnity= $request->input('qtyUnity');
+             $product->priceUnity= $request->input('priceUnity');
             $product->description = $request->input('description');
 
             //image
@@ -106,6 +110,7 @@ class ProductController extends Controller
             'name'=>'required|max:191',
             'price'=>'required',
             'qty'=>'required',
+            'unity'=>'required',
             'description'=>'required'
         ]);
 
@@ -123,6 +128,7 @@ class ProductController extends Controller
             $product->name = $request->input('name');
             $product->price = $request->input('price');
             $product->qty = $request->input('qty');
+            $product->unity = $request->input('unity');
             $product->description = $request->input('description');
 
             //image

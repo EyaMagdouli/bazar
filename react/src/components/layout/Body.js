@@ -11,6 +11,7 @@ import Dashboard from "../dashboard/Dashboard";
 import EditProfile from "../user/EditProfile"
 import Marketplace from "../home/Marketplace";
 import Product from "../home/Product";
+import Chat from "../chat/Chat"
 
 
 const Body = React.forwardRef((props, prodsRef) => {
@@ -31,6 +32,10 @@ const Body = React.forwardRef((props, prodsRef) => {
         element={<ProtectedRoute Component={<CreateMarketplace />} />}
       />
 
+
+
+      {/* chat */}
+      <Route path="/chat/:marketplace_id" element={< Chat />} />
 
 
       {/* <Route path="/regular" element={<VerifyRoleRoute Component={<div>HENLOW REGULAR</div>} role="regular" />} />

@@ -15,8 +15,9 @@ class CreateMessagesTable extends Migration
     {
         Schema::create('messages', function (Blueprint $table) {
             $table->id();
-            $table->enum('user_type',['sender','receiver'])->required();
-            $table->integer('conversation_id')->required();
+            $table->integer('sender_id');
+            $table->integer('receiver_id');
+           // $table->enum('user_type',['sender','receiver'])->required();
             $table->text('message')->required();
             $table->timestamps();
         });

@@ -67,8 +67,8 @@ const Product = () => {
         </td>
         <td>{item.name}</td>
         <td>{item.category.name}</td>
-        <td>{item.price}</td>
-        <td> {item.qty} </td>
+        <td>{item.price} {item.priceUnity} </td>
+        <td> {item.qty} {item.qtyUnity}</td>
         <td>{item.description}</td>
         <td>
           <div className="btn-group align-top">
@@ -104,7 +104,7 @@ const Product = () => {
   const paginate = pageNumber => setCurrentPage(pageNumber)
 
   return (
-    <div className="data">
+    <div className="data" style={{top:-40, left:80}}>
       <div className="recentData">
         <div className="cardHeader">
           <h1 className="title">Products</h1>

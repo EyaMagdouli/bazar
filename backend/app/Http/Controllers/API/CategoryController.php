@@ -11,13 +11,13 @@ use Illuminate\Support\Facades\Validator;
 
 class CategoryController extends Controller
 {
-    public function index()
-    {
-        $category = Category::all();
+
+    public function index(){
+        $category = Category::get();
         return response()->json([
-            'status' => 200,
-            'category' => $category
-        ]);
+        'status' =>200,
+        'category'=> $category
+    ]);
     }
 
 

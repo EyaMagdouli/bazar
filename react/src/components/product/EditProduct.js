@@ -6,21 +6,28 @@ import axios from "axios";
 import swal from "sweetalert";
 
 const EditProduct = () => {
+
+  
   const navigate = useNavigate();
+  const [category, setCategory] = useState([]);
   const [categoryList, setCategoryList] = useState([]);
   const [productInput, setProduct] = useState({
     category_id: "",
     name: "",
     description: "",
     price: "",
+    qty:""
   });
   const [error, setError] = useState([]);
 
-  const [image, setImage] = useState([]);
+  const [image, setImage] = useState("");
 
   const handleImage = (e) => {
-    setImage({ image: e.target.files[0] });
+    if (e.target.files && e.target.files[0]) {
+      setImage(URL.createObjectURL(e.target.files[0]));
+    }
   };
+
 
   const { product_id } = useParams();
   useEffect(() => {
@@ -32,8 +39,10 @@ const EditProduct = () => {
 
     axios.get(`/api/editProduct/${product_id}`).then((res) => {
       if (res.data.status === 200) {
-        //console.log(res.data.product_id)
+        console.log(res.data.product.qty)
         setProduct(res.data.product);
+        setImage(res.data.product.image)
+        console.log(image)
       } else if (res.data.status === 404) {
         swal("Error", res.data.message, "error");
         navigate("/dashboard/products");
@@ -48,13 +57,13 @@ const EditProduct = () => {
 
   const updateProduct = (e) => {
     e.preventDefault();
-
     const formData = new FormData();
     formData.append("image", image.image);
     formData.append("category_id", productInput.category_id);
     formData.append("name", productInput.name);
     formData.append("price", productInput.price);
     formData.append("description", productInput.description);
+    formData.append("qty",productInput.qty);
 
     axios.post(`/api/updateProduct/${product_id}`, formData).then((res) => {
       if (res.data.status === 200) {
@@ -89,6 +98,8 @@ const EditProduct = () => {
                 className="form-control-label px-3"
               >
                 Name
+                <span className="text-danger"> *</span>
+
               </label>
               <input
                 name="name"
@@ -105,6 +116,8 @@ const EditProduct = () => {
                 className="form-control-label px-3"
               >
                 Price
+                <span className="text-danger"> *</span>
+
               </label>
               <input
                 name="price"
@@ -123,6 +136,8 @@ const EditProduct = () => {
                 className="form-control-label px-3"
               >
                 Category
+                <span className="text-danger"> *</span>
+
               </label>
               <select
                 name="category_id"
@@ -146,16 +161,21 @@ const EditProduct = () => {
                 style={{ fontSize: "15px" }}
                 className="form-control-label px-3"
               >
-                Image
+                Quantity
+                <span className="text-danger"> *</span>
               </label>
               <input
-                type="file"
-                name="image"
-                className="form-control-file"
-                onChange={handleImage}
+                name="qty"
+                type="text"
+                className="form-control"
+                onChange={handleInput}
+                value={productInput.qty}
               />
-              <span style={{ color: "red" }}>{error.image}</span>
+              <span style={{ color: "red" }}>
+                {error.qty}
+              </span>
             </div>
+            
           </div>
           <div className="row justify-content-between text-left">
             <div className="form-group col-sm-6 flex-column d-flex">
@@ -164,6 +184,8 @@ const EditProduct = () => {
                 className="form-control-label px-3"
               >
                 Description
+                <span className="text-danger"> *</span>
+
               </label>
               <textarea
                 name="description"
@@ -172,6 +194,27 @@ const EditProduct = () => {
                 onChange={handleInput}
                 value={productInput.description || ""}
               />
+            </div>
+            <div className="form-group col-sm-6 flex-column d-flex">
+              <label
+                style={{ fontSize: "15px" }}
+                className="form-control-label px-3"
+              >
+                Image
+                <span className="text-danger"> *</span>
+
+              </label>
+              <div className='text-center mb-2'>
+                  <img src={image} alt='No photo' width='200px' />
+                </div>
+              <input
+                type="file"
+                name="image"
+                id="image"
+                className="form-control-file"
+                onChange={handleImage}
+              />
+              <span style={{ color: "red" }}>{error.image}</span>
             </div>
           </div>
           <br></br>

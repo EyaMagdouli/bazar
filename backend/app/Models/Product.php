@@ -19,6 +19,8 @@ class Product extends Model
     'marketplace_id',
     'category_id',
     'image',
+    'qty',
+    'unity',
     'price'];
 
 

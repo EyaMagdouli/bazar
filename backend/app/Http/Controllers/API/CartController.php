@@ -1,9 +1,9 @@
 <?php
 
 namespace App\Http\Controllers\API;
-
 use App\Http\Controllers\Controller;
 use App\Models\Cart;
+use App\Models\Marketplace;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -66,15 +66,20 @@ class CartController extends Controller
             $user_id = auth()->user()->id;
             $cartitems = Cart::where('user_id',$user_id)->get();
 
+            $marketPlace = [];
+            foreach($cartitems as $cartitem) {
+                $marketPlace[$cartitem->product->marketplace->name][] = $cartitem;
+            }
+
             return response()->json([
                 'status'=>200,
-                'cart' => $cartitems
+                'cart' => array_values($marketPlace),
             ]);
+            /* dd($cartitems); */
+
         }
 
     }
-
-
     public function delete($cart_id){
         if(auth('sanctum')->check()){
             $user_id = auth()->user()->id;

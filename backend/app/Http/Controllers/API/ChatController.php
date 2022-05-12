@@ -25,6 +25,7 @@ class ChatController extends Controller
         $marketplace = Marketplace::where('id', $product->marketplace_id)->get();
 
 
+        
         if ($product) {
             return response()->json([
                 'status' => 200,

@@ -7,6 +7,8 @@ import axios from "axios";
 const Header = React.forwardRef((p, prodsRef) => {
   const [profile, setProfile] = useState([]);
 
+  const [count, setCount] = useState()
+
   useEffect(() => {
     const token = localStorage.getItem("auth_token");
     axios
@@ -64,10 +66,10 @@ const Header = React.forwardRef((p, prodsRef) => {
       });
   }, []);
 
+
   const deleteCartItem = (e, cart_id) => {
     e.preventDefault()
 
-    const thisClicked = e.currentTarget
     const token = localStorage.getItem("auth_token");
     
     axios.delete(`/api/deleteCartItem/${cart_id}`, {
@@ -186,25 +188,40 @@ const Header = React.forwardRef((p, prodsRef) => {
 
         <div className={`shopping-cart${isActiveCart ? " active" : ""}`}>
           {(cart.length > 0) ? (
-            cart.map((item, i) => {
+            cart.map((citem, j) => {
               return (
-                <div key={i}>
-                <div className="box" >
-                  <i className="fas fa-trash" onClick={ (e)=> deleteCartItem(e, item.id) } ></i>
-                  <img src={`http://127.0.0.1:8000/${item.product.image}`} alt={item.product.name} />
-  
-                  <div className="content">
-                    <h3> {item.product.name} </h3>
-                    <span className="price">{item.product.price}</span>
-                    <span className="quantity">{item.product.qty}</span>
+
+                (cart.length > 0) ? (
+                
+                  <div key={j}>
+                    <h3 style={{marginTop:10}}>{citem[0].product.marketplace.name}</h3>
+                    {
+                      citem.map((item, i) => {
+                        return (
+                          <div className="box" >
+                            <i className="fas fa-trash" onClick={ (e)=> deleteCartItem(e, item.id) } ></i>
+                            <img src={`http://127.0.0.1:8000/${item.product.image}`} alt={item.product.name} />
+            
+                            <div className="content">
+                              <span> {item.product.name} </span>
+                              <br></br>
+                              <span className="price">{item.product.price}</span>
+                              <span className="quantity">{item.product.qty}</span>
+                            </div>
+                          </div>
+                        )
+
+                      })
+
+                    }
+
+                      <Link to={`/chat/`+citem[0].product.marketplace.id} className="chat-button">
+                        Go to Chat 
+                      </Link>
                   </div>
-                  
-                </div>
-                <Link to="chat" className="chat-button">
-                    Go to Chat
-                  </Link>
-                </div>
-              );
+                ):(<></>)
+
+              )
             })
           ):(
             <div className="box">
