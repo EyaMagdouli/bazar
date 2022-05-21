@@ -1,4 +1,3 @@
-import React from 'react'
 import { useEffect, useMemo, useState } from "react";
 import Pusher from "pusher-js";
 import axios from "axios";
@@ -6,9 +5,8 @@ import swal from "sweetalert";
 import { useParams } from "react-router";
 import '../../assets/css/chat.css'
 
-const Chat = () => {
-
-    const [messages, setMessages] = useState([]);
+function App() {
+  const [messages, setMessages] = useState([]);
   const [message, setMessage] = useState("");
 
 
@@ -87,92 +85,64 @@ const Chat = () => {
   };
   // console.log(message[0].message)
 
-
   return (
-    <div id="container">
-	<aside>
-		<header>
-			<input type="text" placeholder="search" />
-		</header>
-		<ul>
-			<li>
-				{/* <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_01.jpg" alt=""> */}
-				<div>
-					<h2>Prénom Nom</h2>
-					
-				</div>
-			</li>
-			<li>
-				{/* <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_02.jpg" alt=""> */}
-				<div>
-					<h2>Prénom Nom</h2>
-					
-				</div>
-			</li>
-			<li>
-				{/* <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_03.jpg" alt=""> */}
-				<div>
-					<h2>Prénom Nom</h2>
-					
-				</div>
-			</li>
-			<li>
-				{/* <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_04.jpg" alt=""> */}
-				<div>
-					<h2>Prénom Nom</h2>
-					
-				</div>
-			</li>
-	
-		
-		</ul>
-	</aside>
-	<main>
-		<header>
-			{/* <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_01.jpg" alt=""> */}
-			<div>
-				<h2>Chat with Vincent Porter</h2>
-			</div>
-			{/* <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/ico_star.png" alt=""> */}
-		</header>
-		<ul id="chat" >
-        { messages.map((m,i) => {
-            return (  
-			<li className="you" key={i}>
-				<div className="entete">
-					<span className="status green"></span>
-					<h2>Vincent &nbsp;</h2>
-					<h3></h3>
-				</div>
-				<div className="triangle"></div>
-				<div className="message">
-					{m.message}
-				</div>
-			</li>
-			
-         )
-        }) }
-        {/* <li className="me">
-				<div className="entete">
-					<h3>10:12AM, Today</h3>
-					<h2>Vincent</h2>
-					<span className="status blue"></span>
-				</div>
-				<div className="triangle"></div>
-				<div className="message">
-					Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
-				</div>
-			</li> */}
-		</ul>
-		<footer>
-			<textarea placeholder="Type your message"></textarea>
-			{/* <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/ico_picture.png" alt="">
-			<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/ico_file.png" alt=""> */}
-			<a href="#">Send</a>
-		</footer>
-	</main>
-</div>
-  )
+    <div className="chat" style={{ marginTop: 90, width: 1000, marginLeft: 100 }}>
+      <div className="d-flex flex-column align-items-stretch flex-shrink-0 bg-white ">
+      
+        
+          {messages.map((message, i) => {
+            return (
+              <div
+                key={i}
+                className="list-group-item list-group-item-action py-3 lh-tight"
+              >
+                <ul className="chat">
+                    <li className="you">
+                      <div className="entete">
+                        <h5 style={{fontSize:11}}>name  &nbsp; </h5>
+                        <h6>date</h6>
+                      </div>
+                      <div className="triangle"></div>
+                      <div className="message">
+                      {message.message}
+                      </div>
+                    </li>
+                    {/* <li className="me">
+                      <div className="entete">
+                          <h2>name</h2>
+                          <h3>date</h3>
+                          <div className="triangle"></div>
+                          <div className="message">
+
+                          </div>
+                      </div>
+                    </li> */}
+                </ul>
+              </div>
+            );
+          })}
+        </div>
+      <form onSubmit={submit}>
+        <input
+          className="form-control"
+          placeholder="Write a message"
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
+        />
+      </form>
+
+
+
+
+      
+      </div>
+
+
+
+   
+  
+    
+  );
 }
 
-export default Chat
+export default App;

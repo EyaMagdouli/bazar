@@ -13,6 +13,7 @@ class CreateCartsTable extends Migration
      */
     public function up()
     {
+        if(!Schema::hasTable('carts')){
         Schema::create('carts', function (Blueprint $table) {
             $table->id();
             $table->integer('user_id');
@@ -20,6 +21,8 @@ class CreateCartsTable extends Migration
            // $table->decimal('product_qty');
             $table->timestamps();
         });
+
+    }
     }
 
     /**

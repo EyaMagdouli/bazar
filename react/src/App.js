@@ -22,6 +22,13 @@ import axios from 'axios';
 
 export default function App() {
   const prodsRef = useRef(["prdcts","mrktplc","ftrs"])
+
+  /**
+   * useEffect(()=>{
+   *  pusher.subscribe(`user-${idUSER}-inbox`)
+   * },[])
+   */
+
   return (
     <>
       <Header ref={prodsRef} />

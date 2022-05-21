@@ -16,7 +16,7 @@
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.4",
-        "pusher/pusher-php-server": "7.0.2"
+        "pusher/pusher-php-server": "^7.0"
     },
     "require-dev": {
         "backpack/generators": "^3.1",

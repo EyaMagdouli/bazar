@@ -13,12 +13,14 @@ class CreateOrdersTable extends Migration
      */
     public function up()
     {
+        if(!Schema::hasTable('orders')){
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->string("status");
 
             $table->timestamps();
         });
+    }
     }
 
     /**

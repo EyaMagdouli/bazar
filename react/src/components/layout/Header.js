@@ -198,7 +198,7 @@ const Header = React.forwardRef((p, prodsRef) => {
                     {
                       citem.map((item, i) => {
                         return (
-                          <div className="box" >
+                          <div key={i} className="box"  >
                             <i className="fas fa-trash" onClick={ (e)=> deleteCartItem(e, item.id) } ></i>
                             <img src={`http://127.0.0.1:8000/${item.product.image}`} alt={item.product.name} />
             

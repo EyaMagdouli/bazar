@@ -81,10 +81,9 @@ Route::middleware('auth:sanctum')->delete('deleteCartItem/{cart_id}', [CartContr
 
 
 //chat
-Route::post('messages',[ChatController::class,'message']);
-Route::middleware('auth:sanctum')->get('conversation/{id}',[ChatController::class,'conversation']);
-Route::middleware('auth:sanctum')->post('addMessage',[ChatController::class,'store']);
-
+Route::middleware('auth:sanctum')->post('sendMessages/{id}',[ChatController::class,'sendMessage']);
+//Route::middleware('auth:sanctum')->get('conversation/{id}',[ChatController::class,'conversation']);
+Route::middleware('auth:sanctum')->get('messages',[ChatController::class,'fetchMessages']);
 
 
 
