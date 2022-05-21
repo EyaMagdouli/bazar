@@ -191,8 +191,9 @@ main header h3{
 #chat .message{
 	padding:20px;
 	color:#fff;
-	line-height:25px;
-	max-width:90%;
+	line-height:5px;
+	height: 30px;
+	max-width:80%;
 	display:inline-block;
 	text-align:left;
 	border-radius:5px;
@@ -225,7 +226,7 @@ main footer{
 	height:155px;
 	padding:20px 30px 10px 20px;
 }
-main footer textarea{
+main footer input{
 	resize:none;
 	border:none;
 	display:block;
@@ -236,14 +237,14 @@ main footer textarea{
 	font-size:13px;
 	margin-bottom:13px;
 }
-main footer textarea::placeholder{
+main footer input::placeholder{
 	color:#ddd;
 }
 main footer img{
 	height:30px;
 	cursor:pointer;
 }
-main footer a{
+main footer button{
 	text-decoration:none;
 	text-transform:uppercase;
 	font-weight:bold;

@@ -5,11 +5,13 @@ import axios from "axios";
 import swal from "sweetalert";
 import { useParams } from "react-router";
 import '../../assets/css/chat.css'
+import moment from 'moment';
 
 const Chat = () => {
 
     const [messages, setMessages] = useState([]);
-  const [message, setMessage] = useState("");
+    const [message, setMessage] = useState("");
+    const [time, setTime] = useState()
 
 
   const { product_id } = useParams();
@@ -80,13 +82,13 @@ const Chat = () => {
           Authorization: `Bearer ${token}`,
         },
       }
+      
     );
     // console.log(res);
     setMessages([...messages,mm])
     setMessage("");
   };
-  // console.log(message[0].message)
-
+//   console.log(message.receiver.name)
 
   return (
     <div id="container">
@@ -131,18 +133,19 @@ const Chat = () => {
 		<header>
 			{/* <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_01.jpg" alt=""> */}
 			<div>
-				<h2>Chat with Vincent Porter</h2>
+				<h2>Chat with {/* {messages[0].receiver.name} */} </h2>
 			</div>
 			{/* <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/ico_star.png" alt=""> */}
 		</header>
 		<ul id="chat" >
         { messages.map((m,i) => {
             return (  
+                
 			<li className="you" key={i}>
 				<div className="entete">
 					<span className="status green"></span>
-					<h2>Vincent &nbsp;</h2>
-					<h3></h3>
+					<h2> {m.sender.name} &nbsp;</h2>
+					<h3>{moment(m.created_at).calendar()}</h3>
 				</div>
 				<div className="triangle"></div>
 				<div className="message">
@@ -165,10 +168,11 @@ const Chat = () => {
 			</li> */}
 		</ul>
 		<footer>
-			<textarea placeholder="Type your message"></textarea>
-			{/* <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/ico_picture.png" alt="">
-			<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/ico_file.png" alt=""> */}
-			<a href="#">Send</a>
+            <form onSubmit={submit}>
+			<input placeholder="Type your message" value={message}
+          onChange={(e) => setMessage(e.target.value)} /> 
+			<button type='submit'>Send</button>
+            </form>
 		</footer>
 	</main>
 </div>

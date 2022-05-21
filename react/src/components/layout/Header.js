@@ -147,7 +147,17 @@ const Header = React.forwardRef((p, prodsRef) => {
             onClick={handleToggleSearch}
             style={{ marginRight: "10px" }}
           ></div>
+          <Link to={"/chat/"} >
           <div
+            className="fa fa-comments"
+            id="cart-btn"
+            style={{ marginRight: 10 }}
+          >
+          </div>
+          </Link>
+
+            
+            <div
             className="fas fa-shopping-cart"
             id="cart-btn"
             style={{ marginRight: 10 }}
