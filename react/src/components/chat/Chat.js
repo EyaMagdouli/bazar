@@ -11,16 +11,17 @@ const Chat = () => {
 
     const [messages, setMessages] = useState([]);
     const [message, setMessage] = useState("");
-    const [time, setTime] = useState()
+    const [chats, setChats] = useState([]);
 
 
   const { product_id } = useParams();
 
+  const { marketplace_id } = useParams();
 
   useEffect( async () => {
     const token = localStorage.getItem("auth_token");
    const {data} = await axios
-      .get(`/api/messages`, {
+      .get(`/api/messages/${marketplace_id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -28,12 +29,44 @@ const Chat = () => {
       setMessages(data)
   }, []);
 
+useEffect(() => {
+  const token = localStorage.getItem("auth_token");
+
+  axios.get(`api/chats`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  }).then((res) => {
+    if(res.data.status === 200) {
+
+      setChats(res.data.chats)
+      console.log(chats)
+    }
+  })
+}, [])
+
+  // useEffect(() => {
+  //   axios.get(`api/chats/`).then((res) => {
+  //     if (res.data.status === 200) {
+  //       setChats(res.data.chats);
+  //       console.log(chats)
+  //     }
+  //   });
+
+  // useEffect( async () => {
+  //   const token = localStorage.getItem("auth_token");
+  //  const {data} = await axios
+  //     .get(`/api/chats`, {
+  //       headers: {
+  //         Authorization: `Bearer ${token}`,
+  //       },
+  //     })
+  //     setChats(data)
+  //     console.log(chats)
+  // }, []);
+
   useEffect(() => {
     try {
-
-
-      
-      
       // const fetch = async({product_id})=>{
       //   if(!product_id) throw new Error("undefined");
       //   const token = localStorage.getItem("auth_token");
@@ -65,7 +98,6 @@ const Chat = () => {
       console.log(error);
     }
   }, [product_id]);
-  const { marketplace_id } = useParams();
   const submit = async (e) => {
     e.preventDefault();
     const token = localStorage.getItem("auth_token");
@@ -97,35 +129,25 @@ const Chat = () => {
 			<input type="text" placeholder="search" />
 		</header>
 		<ul>
-			<li>
-				{/* <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_01.jpg" alt=""> */}
-				<div>
-					<h2>Prénom Nom</h2>
-					
-				</div>
-			</li>
-			<li>
-				{/* <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_02.jpg" alt=""> */}
-				<div>
-					<h2>Prénom Nom</h2>
-					
-				</div>
-			</li>
-			<li>
-				{/* <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_03.jpg" alt=""> */}
-				<div>
-					<h2>Prénom Nom</h2>
-					
-				</div>
-			</li>
-			<li>
-				{/* <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_04.jpg" alt=""> */}
-				<div>
-					<h2>Prénom Nom</h2>
-					
-				</div>
-			</li>
-	
+     {chats.map((c,i) => {
+       return(
+        <li>
+        {/* <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_01.jpg" alt=""> */}
+        <div>
+          <h2> {c} </h2>
+          
+        </div>
+      </li>
+       )
+     })}
+          <li>
+          {/* <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_01.jpg" alt=""> */}
+          <div>
+            <h2> {/* {c} */} </h2>
+            
+          </div>
+        </li>
+        
 		
 		</ul>
 	</aside>
@@ -140,8 +162,9 @@ const Chat = () => {
 		<ul id="chat" >
         { messages.map((m,i) => {
             return (  
-                
-			<li className="you" key={i}>
+             
+                (m.sender.name === localStorage.getItem("auth_name") ) ? (
+                  <li className="you" key={i}>
 				<div className="entete">
 					<span className="status green"></span>
 					<h2> {m.sender.name} &nbsp;</h2>
@@ -152,24 +175,28 @@ const Chat = () => {
 					{m.message}
 				</div>
 			</li>
+                ) : (
+                   <li className="me" key={i}>
+                    <div className="entete">
+                    <h3> {moment(m.created_at).calendar()}  &nbsp;</h3>
+                    <h2> {m.sender.name}  </h2>
+                    <span className="status blue"></span>
+                  </div>
+                  <div className="triangle"></div>
+                  <div className="message">
+                    {m.message}
+                  </div>
+                </li> 
+                )
+			
 			
          )
         }) }
-        {/* <li className="me">
-				<div className="entete">
-					<h3>10:12AM, Today</h3>
-					<h2>Vincent</h2>
-					<span className="status blue"></span>
-				</div>
-				<div className="triangle"></div>
-				<div className="message">
-					Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
-				</div>
-			</li> */}
+       
 		</ul>
 		<footer>
             <form onSubmit={submit}>
-			<input placeholder="Type your message" value={message}
+			<input placeholder="Type your message" 
           onChange={(e) => setMessage(e.target.value)} /> 
 			<button type='submit'>Send</button>
             </form>
