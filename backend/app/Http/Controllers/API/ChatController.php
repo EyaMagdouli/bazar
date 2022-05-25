@@ -25,7 +25,7 @@ class ChatController extends Controller
 
             $receiver_id = $marketplace->user_id;
         }
-        Message::create(
+        $message = Message::create(
             [
                 'message' => $request->message,
                 'conversation_id' => $id,
@@ -36,10 +36,11 @@ class ChatController extends Controller
 
         // event(new  MessageSent($request->input('sender'), $request->input('receiver'), $request->input('message')));
         return response()->json([
-            'message' => $request->message,
-            'conversation_id' => $conversation->id,
-            'sender_id' => auth()->user()->id,
-            'receiver_id' => $receiver_id,
+            'message' => [
+                'sender' => $message->sender,
+                'created_at' => $message->created_at,
+                'message' => $message->message,
+            ],
             'status' => 200,
         ]);
 

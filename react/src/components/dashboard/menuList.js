@@ -17,7 +17,7 @@ export const menuList = [
     {
         title: "Chat",
         ion: "chatbubbles",
-        link: "/dashboard/chat"
+        link: "/chat"
     }
     
 ]

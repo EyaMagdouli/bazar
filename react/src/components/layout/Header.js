@@ -50,6 +50,7 @@ const Header = React.forwardRef((p, prodsRef) => {
     navigate("/");
   };
 
+  const [conversation_id, setConversation_id] = useState([])
   const [cart, setCart] = useState([]);
   useEffect(() => {
     const token = localStorage.getItem("auth_token");
@@ -62,6 +63,7 @@ const Header = React.forwardRef((p, prodsRef) => {
       .then((res) => {
         if (res.data.status === 200) {
           setCart(res.data.cart);
+          setConversation_id(res.data.conversation_id)
         }
       });
   }, []);
@@ -221,11 +223,12 @@ const Header = React.forwardRef((p, prodsRef) => {
                           </div>
                         )
 
+
                       })
 
                     }
-
-                      <Link to={`/chat/`+citem[0].product.marketplace.id} className="chat-button">
+                    {/* {console.log(conversation_id)} */}
+                      <Link to={`/chat/`+conversation_id[j]} className="chat-button">
                         Go to Chat 
                       </Link>
                   </div>

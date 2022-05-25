@@ -75,16 +75,19 @@ class CartController extends Controller
             $user_id = auth()->user()->id;
             $cartitems = Cart::where('user_id',$user_id)->get();
 
-
-
             $marketPlace = [];
+            $conversation_id = [];
             foreach($cartitems as $cartitem) {
                 $marketPlace[$cartitem->product->marketplace->name][] = $cartitem;
+                $conversation_id[] = Conversation::where('id', $cartitem->conversation_id)->first()->id;
+
             }
+
 
             return response()->json([
                 'status'=>200,
                 'cart' => array_values($marketPlace),
+                'conversation_id' => array_values($conversation_id)
             ]);
             /* dd($cartitems); */
 

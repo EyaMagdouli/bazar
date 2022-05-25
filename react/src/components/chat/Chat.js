@@ -1,32 +1,46 @@
 import React from "react";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, useRef } from "react";
 import Pusher from "pusher-js";
 import axios from "axios";
 import swal from "sweetalert";
 import { useParams } from "react-router";
 import "../../assets/css/chat.css";
 import moment from "moment";
+import { Link } from "react-router-dom";
 
 const Chat = () => {
+  
   const [messages, setMessages] = useState([]);
   const [message, setMessage] = useState("");
   const [chats, setChats] = useState([]);
 
+  // const messagesEndRef = useRef(null)
+
+  // const scrollToBottom = () => {
+  //   messagesEndRef.current?.scrollIntoView({ behavior: "smooth", inline: 'start'})
+  // }
+
+  // useEffect(() => {
+    
+  //   scrollToBottom()
+  // }, [messages]);
+
+
   const { product_id } = useParams();
 
   const { conversation_id } = useParams();
-
+  const token = localStorage.getItem("auth_token");
   useEffect(async () => {
-    const token = localStorage.getItem("auth_token");
     const { data } = await axios.get(`/api/messages/${conversation_id}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     });
     setMessages(data);
-  }, []);
+  }, [conversation_id]);
 
   useEffect(() => {
+    
     const token = localStorage.getItem("auth_token");
 
     axios
@@ -38,7 +52,6 @@ const Chat = () => {
       .then((res) => {
         if (res.data.status === 200) {
           setChats(res.data.chats);
-          console.log(chats);
         }
       });
   }, []);
@@ -115,11 +128,11 @@ const Chat = () => {
         },
       }
     );
-    // console.log(res);
     setMessages([...messages, mm]);
-    setMessage("");
+    // cleanUp()
+
   };
-  //   console.log(message.receiver.name)
+
 
   return (
     <div id="container">
@@ -129,19 +142,24 @@ const Chat = () => {
         </header>
         <ul>
           {chats.map((c, i) => {
-            return (localStorage.getItem("user_type") !== 'simpleUser') ? (
-
-              <li>
+            {console.log(localStorage.getItem("user_type"))}
+            return (localStorage.getItem("kind") !== 'simpleUser') ? (
+              <li key={i}>
                 {/* <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_01.jpg" alt=""> */}
                 <div>
+                  <Link to={`/chat/${c.id}`} >
                   <h2> {c.client.name} </h2>
+                  </Link>
                 </div>
               </li>
             ) : (
-              <li>
+              <li key={i}>
                 {/* <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_01.jpg" alt=""> */}
                 <div>
+                  <Link to={`/chat/${c.id}`}>
+                    {console.log(c.marketplace.name)}
                   <h2> {c.marketplace.name} </h2>
+                  </Link>
                 </div>
               </li> 
             )
@@ -181,6 +199,9 @@ const Chat = () => {
               </li>
             );
           })}
+
+          {/* <div ref={messagesEndRef} /> */}
+
         </ul>
         <footer>
           <form onSubmit={submit}>

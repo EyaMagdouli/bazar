@@ -15,11 +15,11 @@ class Conversation extends Model
     protected $with = ['client', 'marketplace'];
 
     public function client(){
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'client_id');
     }
 
     public function marketplace(){
-        return $this->belongsTo(Marketplace::class);
+        return $this->belongsTo(Marketplace::class, 'marketplace_id');
     }
 
     public function message(){

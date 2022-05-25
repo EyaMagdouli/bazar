@@ -28,6 +28,6 @@ class Marketplace extends Model
     }
 
     public function conversation(){
-        return $this->hasMany(Conversation::class, 'marketplace_id');
+        return $this->hasMany(Conversation::class);
     }
 }
