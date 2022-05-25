@@ -14,16 +14,25 @@ const Chat = () => {
   const [message, setMessage] = useState("");
   const [chats, setChats] = useState([]);
 
-  // const messagesEndRef = useRef(null)
+  const messagesEndRef = useRef(null)
 
-  // const scrollToBottom = () => {
-  //   messagesEndRef.current?.scrollIntoView({ behavior: "smooth", inline: 'start'})
-  // }
+  const scrollToBottom = () => {
+    if (messagesEndRef.current) {
+        messagesEndRef.current.scrollTo({
+      top: messagesEndRef.current.scrollHeight,
+      left: 0,
+      behavior: 'smooth'
+    });
 
-  // useEffect(() => {
+  }
+
+    // messagesEndRef.current?.scrollIntoView({ behavior: "smooth", inline: 'start'})
+  }
+
+  useEffect(() => {
     
-  //   scrollToBottom()
-  // }, [messages]);
+    scrollToBottom()
+  }, [messages]);
 
 
   const { product_id } = useParams();
@@ -129,7 +138,7 @@ const Chat = () => {
       }
     );
     setMessages([...messages, mm]);
-    // cleanUp()
+    setMessage("")
 
   };
 
@@ -175,7 +184,7 @@ const Chat = () => {
           </div>
           {/* <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/ico_star.png" alt=""> */}
         </header>
-        <ul id="chat">
+        <ul id="chat" ref={messagesEndRef}>
           {messages.map((m, i) => {
             return (m.sender.name === localStorage.getItem("auth_name")) ? (
               <li className="you" key={i}>
@@ -200,13 +209,13 @@ const Chat = () => {
             );
           })}
 
-          {/* <div ref={messagesEndRef} /> */}
 
         </ul>
         <footer>
           <form onSubmit={submit}>
             <input
               placeholder="Type your message"
+              value={message}
               onChange={(e) => setMessage(e.target.value)}
             />
             <button type="submit">Send</button>
