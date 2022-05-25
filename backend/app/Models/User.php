@@ -52,9 +52,7 @@ class User extends Authenticatable
     public function marketplace(){
          $this->hasOne(Marketplace::class);
     }
-    public function conversation(){
-        $this->hasMany(Conversation::class);
-   }
+
 
    public function sentMessages(){
        return $this->hasMany(Message::class, 'sender_id');
@@ -62,4 +60,9 @@ class User extends Authenticatable
    public function receivedMessages(){
     return $this->hasMany(Message::class, 'receiver_id');
 }
+
+public function conversation(){
+    $this->hasMany(Conversation::class, 'client_id');
+}
+
 }

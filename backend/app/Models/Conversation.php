@@ -8,4 +8,25 @@ use Illuminate\Database\Eloquent\Model;
 class Conversation extends Model
 {
     use HasFactory;
+    protected $fillable =
+    ['client_id',
+    'marketplace_id'];
+
+    protected $with = ['client', 'marketplace'];
+
+    public function client(){
+        return $this->belongsTo(User::class);
+    }
+
+    public function marketplace(){
+        return $this->belongsTo(Marketplace::class);
+    }
+
+    public function message(){
+        return $this->hasMany(Message::class);
+    }
+
+    public function cart(){
+        return $this->belongsTo(Cart::class, 'conversation_id');
+    }
 }

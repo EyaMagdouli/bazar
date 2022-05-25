@@ -35,7 +35,7 @@ const Body = React.forwardRef((props, prodsRef) => {
 
 
       {/* chat */}
-      <Route path="/chat/:marketplace_id" element={< Chat />} />
+      <Route path="/chat/:conversation_id" element={< Chat />} />
       <Route path="/chat" element={< Chat />} />
       {/* <Route path="/regular" element={<VerifyRoleRoute Component={<div>HENLOW REGULAR</div>} role="regular" />} />
       <Route path="/planter" element={<VerifyRoleRoute Component={<div>HENLOW PLANTER</div>} role="planter" />} /> */}
