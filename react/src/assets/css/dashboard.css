@@ -14,12 +14,12 @@
     ---black2:#999;
     --yellow: rgb(185, 231, 174);
 }
-body{
+/* body{
     min-height: 100vh;
     overflow-x: hidden;
     
     
-}
+} */
 .container{
     position: fixed;
     width: 100%;

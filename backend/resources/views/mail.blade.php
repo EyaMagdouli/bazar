@@ -136,7 +136,7 @@ Licensed under MIT
                                                             color="#57697e" style="font-size: 34px;">
                                                             <span
                                                                 style="font-family: Arial, Helvetica, sans-serif; font-size: 34px; color: #57697e;">
-                                                                {{$user['id']}}  ===== Awesome User Expierence
+                                                                {{-- {{$user['id']}}  ===== Awesome User Expierence --}}
                                                             </span>
                                                         </font>
                                                     </div>

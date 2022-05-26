@@ -25,7 +25,6 @@ const Product = () => {
 
   const deleteProduct = (e, id) => {
     e.preventDefault();
-
     axios.delete(`api/deleteProduct/${id}`).then((res) => {
       if (res.data.status === 200) {
         swal("Success", res.data.message, "success");

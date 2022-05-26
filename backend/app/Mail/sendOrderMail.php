@@ -10,17 +10,17 @@ use Illuminate\Queue\SerializesModels;
 class sendOrderMail extends Mailable
 {
     use Queueable, SerializesModels;
-    protected $product;
-    protected $user;
+    protected $order;
+    protected $marketplace;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($product, $user)
+    public function __construct($order, $marketplace)
     {
-        $this->user = $user;
-        $this->product = $product;
+        $this->marketplace = $marketplace;
+        $this->order = $order;
     }
 
     /**
@@ -31,9 +31,9 @@ class sendOrderMail extends Mailable
     public function build()
     {
 
-        return $this->subject('ttt')->view('mail')->with([
-            'user'=>$this->user,
-            'product' => $this->product
+        return $this->subject('Order')->view('mail')->with([
+            'marketplace'=>$this->marketplace,
+            'order' => $this->order
         ]);
     }
 }

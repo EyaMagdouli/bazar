@@ -12,8 +12,8 @@
 </li>
 
 
-<li class='nav-item'><a class='nav-link' href='{{ backpack_url('marketplace') }}'><i class='nav-icon la la-question'></i> Marketplaces</a></li>
-<li class='nav-item'><a class='nav-link' href='{{ backpack_url('product') }}'><i class='nav-icon la la-question'></i> Products</a></li>
+<li class='nav-item'><a class='nav-link' href='{{ backpack_url('marketplace') }}'><i class="nav-icon las la-store-alt" ></i></i> Marketplaces</a></li>
+<li class='nav-item'><a class='nav-link' href='{{ backpack_url('product') }}'><i class='nav-icon la la-carrot ' style="font-size: 1.5rem"></i> Products</a></li>
 
-<li class='nav-item'><a class='nav-link' href='{{ backpack_url('category') }}'><i class='nav-icon la la-question'></i> Categories</a></li>
-<li class='nav-item'><a class='nav-link' href='{{ backpack_url('user') }}'><i class='nav-icon la la-question'></i> Users</a></li>
+<li class='nav-item'><a class='nav-link' href='{{ backpack_url('category') }}'><i class='nav-icon la la-list'></i> Categories</a></li>
+<li class='nav-item'><a class='nav-link' href='{{ backpack_url('livreur') }}'><i class='nav-icon la la-male'></i> Livreurs</a></li>

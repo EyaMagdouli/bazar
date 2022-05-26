@@ -257,3 +257,14 @@ main footer button{
 	margin-top:-65px;
 	display:inline-block;
 }
+
+.order {
+	margin-top: -30px;
+	margin-left: 150px;
+}
+.order .accept{
+	color: green;
+}
+.order .decline{
+	color: red;
+}

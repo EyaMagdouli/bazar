@@ -14,6 +14,10 @@ const Chat = () => {
   const [message, setMessage] = useState("");
   const [chats, setChats] = useState([]);
 
+
+  const [order, setOrder] = useState('accept','decline')
+
+
   const messagesEndRef = useRef(null)
 
   const scrollToBottom = () => {
@@ -60,7 +64,7 @@ const Chat = () => {
       })
       .then((res) => {
         if (res.data.status === 200) {
-          setChats(res.data.chats);
+          setChats(res.data.chats); 
         }
       });
   }, []);
@@ -139,10 +143,28 @@ const Chat = () => {
     );
     setMessages([...messages, mm]);
     setMessage("")
+ 
 
   };
 
 
+  const updateOrder = (e,order) => {
+    e.preventDefault()
+    axios.post(`/api/order/${conversation_id}`,{order}, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }).then((res) => {
+      if(res.data.status === 200 ){
+        swal("Sucess", res.data.message, 'success')
+      }
+      else if (res.data.status === 404 ){
+        swal("error", res.data.message, 'error')
+      }
+    })
+
+    console.log(order)
+  }
   return (
     <div id="container">
       <aside>
@@ -151,7 +173,6 @@ const Chat = () => {
         </header>
         <ul>
           {chats.map((c, i) => {
-            {console.log(localStorage.getItem("user_type"))}
             return (localStorage.getItem("kind") !== 'simpleUser') ? (
               <li key={i}>
                 {/* <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_01.jpg" alt=""> */}
@@ -166,7 +187,6 @@ const Chat = () => {
                 {/* <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_01.jpg" alt=""> */}
                 <div>
                   <Link to={`/chat/${c.id}`}>
-                    {console.log(c.marketplace.name)}
                   <h2> {c.marketplace.name} </h2>
                   </Link>
                 </div>
@@ -208,8 +228,6 @@ const Chat = () => {
               </li>
             );
           })}
-
-
         </ul>
         <footer>
           <form onSubmit={submit}>
@@ -220,6 +238,15 @@ const Chat = () => {
             />
             <button type="submit">Send</button>
           </form>
+          <div className="order">
+              <button  className="accept" onClick={(e) => updateOrder(e,'accept')} value={order}>
+                Accept
+              </button>
+              <button className="decline" onClick={(e) => updateOrder(e,'decline')} value={order}>
+                Decline
+              </button>
+          </div>
+          {console.log(order)}
         </footer>
       </main>
     </div>

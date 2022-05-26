@@ -157,8 +157,6 @@ class ProductController extends Controller
                 'message'=>'Product not found'
             ]);
         }
-
-
     }
 }
 

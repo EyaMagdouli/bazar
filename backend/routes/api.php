@@ -8,6 +8,7 @@ use App\Http\Controllers\API\ChatController;
 use App\Http\Controllers\API\ProductController;
 use App\Http\Controllers\API\MarketplaceController;
 use App\Http\Controllers\API\HomeController;
+use App\Http\Controllers\API\OrderController;
 use App\Http\Controllers\API\UserController;
 
 
@@ -84,6 +85,9 @@ Route::middleware('auth:sanctum')->delete('deleteCartItem/{cart_id}', [CartContr
 Route::middleware('auth:sanctum')->post('sendMessages/{id}',[ChatController::class,'sendMessage']);
 Route::middleware('auth:sanctum')->get('chats',[ChatController::class,'fetchChats']);
 Route::middleware('auth:sanctum')->get('messages/{id}',[ChatController::class,'fetchMessages']);
+
+//order
+Route::middleware('auth:sanctum')->post('order/{id}',[OrderController::class,'order']);
 
 
 
