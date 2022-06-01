@@ -15,13 +15,13 @@ class CreateLivreursTable extends Migration
     {
         Schema::create('livreurs', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->required();
-            $table->string('email')->required();
-            $table->text('description')->required();
-            $table->string('delivery_time')->required();
-            $table->string('payment')->required();
-            $table->string('phone_number')->required();
-            $table->enum('status',['activated','desactivated'])->default('activated');
+            $table->string('name')->required()->nullable();
+            $table->string('email')->required()->nullable();
+            $table->text('description')->required()->nullable();
+            $table->string('delivery_time')->required()->nullable();
+            $table->string('payment')->required()->nullable();
+            $table->string('phone_number')->required()->nullable();
+            $table->enum('status',['activated','desactivated'])->default('activated')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

@@ -7,6 +7,7 @@ import { useNavigate, useParams } from "react-router";
 import "../../assets/css/chat.css";
 import moment from "moment";
 import { Link } from "react-router-dom";
+import Calculator from "./Calculator";
 
 const Chat = () => {
   
@@ -172,8 +173,14 @@ const Chat = () => {
 
   const openChat = (c) => {
     setContact(c.marketplace.user)
+    console.log(contact.name)
     navigate(`/chat/${c.id}`)
     
+  }
+
+  const [calcul, setCalcul] = useState(false)
+  const showCalcul = () => {
+    setCalcul(!calcul)
   }
 
 
@@ -257,7 +264,19 @@ const Chat = () => {
                 Decline
               </button>
           </div>
-          {console.log(order)}
+          
+              <button className="calcul" onClick={showCalcul}>
+                Calculator
+              </button>
+              <div className="calculator_bazar">
+
+              {calcul ? (
+              <Calculator />
+
+              ): (
+                <></>
+              )}
+          </div>
         </footer>
       </main>
     </div>

@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\CartController;
 use App\Http\Controllers\API\CategoryController;
+use App\Http\Controllers\API\ChartController;
 use App\Http\Controllers\API\ChatController;
 use App\Http\Controllers\API\ProductController;
 use App\Http\Controllers\API\MarketplaceController;
@@ -89,6 +90,9 @@ Route::middleware('auth:sanctum')->get('messages/{id}',[ChatController::class,'f
 //order
 Route::middleware('auth:sanctum')->post('order/{id}',[OrderController::class,'order']);
 
+
+//charts
+Route::middleware('auth:sanctum')->get('chart',[ChartController::class, 'index']);
 
 
 

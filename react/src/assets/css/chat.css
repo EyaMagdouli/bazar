@@ -228,6 +228,7 @@ main header h3{
 main footer{
 	height:155px;
 	padding:20px 30px 10px 20px;
+	position: relative;
 }
 main footer input{
 	resize:none;
@@ -257,14 +258,25 @@ main footer button{
 	margin-top:-65px;
 	display:inline-block;
 }
-
+.calculator_bazar {
+	position: absolute;
+    top: -49px;
+    right: -487px;
+    width: 250px;
+}
 .order {
 	margin-top: -30px;
-	margin-left: 150px;
+	margin-left: 200px;
 }
 .order .accept{
 	color: green;
 }
 .order .decline{
 	color: red;
+}
+
+.calcul {
+	margin-top: -105px;
+	margin-left: 750px;
+	color: #efb8b0;
 }

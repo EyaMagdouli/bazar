@@ -12,6 +12,7 @@ import EditProfile from "../user/EditProfile"
 import Marketplace from "../home/Marketplace";
 import Product from "../home/Product";
 import Chat from "../chat/Chat"
+import Calculator from "../chat/Calculator";
 
 
 const Body = React.forwardRef((props, prodsRef) => {
@@ -42,6 +43,7 @@ const Body = React.forwardRef((props, prodsRef) => {
       <Route path="/" element={<Home ref={prodsRef} />} />
       <Route path="/marketplace/:marketplace_id" element={< Marketplace />} />
       <Route path="/product/:product_id" element={< Product />} />
+      <Route path="/calculator" element={< Calculator />} />
 
       {/* dashboard */}
       <Route
