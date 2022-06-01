@@ -34,7 +34,7 @@ class ChatController extends Controller
             ]
         );
 
-        // event(new  MessageSent($request->input('sender'), $request->input('receiver'), $request->input('message')));
+        event(new  MessageSent($request->input('sender'), $request->input('receiver'), $request->input('message')));
         return response()->json([
             'message' => [
                 'sender' => $message->sender,

@@ -218,7 +218,6 @@ const Header = React.forwardRef((p, prodsRef) => {
                               <span> {item.product.name} </span>
                               <br></br>
                               <span className="quantity">{item.product.qty} {item.product.qtyUnity} <strong> /</strong> {item.product.price} {item.product.priceUnity}</span>
-
                               <span className="price"></span>
                             </div>
                           </div>

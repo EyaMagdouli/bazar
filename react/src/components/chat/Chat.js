@@ -3,13 +3,14 @@ import { useEffect, useMemo, useState, useRef } from "react";
 import Pusher from "pusher-js";
 import axios from "axios";
 import swal from "sweetalert";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import "../../assets/css/chat.css";
 import moment from "moment";
 import { Link } from "react-router-dom";
 
 const Chat = () => {
   
+  const [contact, setContact] = useState({})
   const [messages, setMessages] = useState([]);
   const [message, setMessage] = useState("");
   const [chats, setChats] = useState([]);
@@ -17,6 +18,7 @@ const Chat = () => {
 
   const [order, setOrder] = useState('accept','decline')
 
+  const navigate= useNavigate()
 
   const messagesEndRef = useRef(null)
 
@@ -114,6 +116,7 @@ const Chat = () => {
       });
       const channel = pusher.subscribe("chat");
       channel.bind("message", function (data) {
+        console.log("h")
         setMessages([...messages, data]);
         // allMessages.push(data)
         // setMessages(allMessages)
@@ -163,8 +166,17 @@ const Chat = () => {
       }
     })
 
-    console.log(order)
+    console.log(order) 
+
   }
+
+  const openChat = (c) => {
+    setContact(c.marketplace.user)
+    navigate(`/chat/${c.id}`)
+    
+  }
+
+
   return (
     <div id="container">
       <aside>
@@ -185,10 +197,9 @@ const Chat = () => {
             ) : (
               <li key={i}>
                 {/* <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_01.jpg" alt=""> */}
-                <div>
-                  <Link to={`/chat/${c.id}`}>
+                <div onClick={() => openChat(c)}>
                   <h2> {c.marketplace.name} </h2>
-                  </Link>
+                  {/* {console.log(c.marketplace.user.name)} */}
                 </div>
               </li> 
             )
@@ -200,7 +211,7 @@ const Chat = () => {
         <header>
           {/* <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_01.jpg" alt=""> */}
           <div>
-            <h2>Chat with {/* {messages[0].receiver.name} */} </h2>
+            <h2>Chat with {contact?.name} </h2>
           </div>
           {/* <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/ico_star.png" alt=""> */}
         </header>
