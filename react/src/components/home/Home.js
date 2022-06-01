@@ -136,7 +136,7 @@ const Home = React.forwardRef((p, prodsRef) => {
             return (
               <div key={i} className="box">
                 <img
-                  src={`http://127.0.0.1:8000/${item.image}`}
+                  src={`http://127.0.0.1:8000/uploads/marketplace/${item.image}`}
                   alt={item.name}
                 />
                 <div className="content">
@@ -197,7 +197,7 @@ const Home = React.forwardRef((p, prodsRef) => {
             return(
               <div key={i} className="box">
               <img
-                src={`http://127.0.0.1:8000/${item.image}`}
+                src={`http://127.0.0.1:8000/uploads/product/${item.image}`}
                 alt={item.name}
               />
               <div className="content">

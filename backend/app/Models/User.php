@@ -11,10 +11,11 @@ use App\Models\Marketplace;
 use App\Models\Conversation;
 use Spatie\Permission\Traits\HasRoles;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable, HasRoles, CrudTrait;
+    use HasApiTokens, HasFactory, Notifiable, HasRoles, CrudTrait,SoftDeletes;
 
     /**
      * The attributes that are mass assignable.

@@ -212,13 +212,14 @@ const Header = React.forwardRef((p, prodsRef) => {
                         return (
                           <div key={i} className="box"  >
                             <i className="fas fa-trash" onClick={ (e)=> deleteCartItem(e, item.id) } ></i>
-                            <img src={`http://127.0.0.1:8000/${item.product.image}`} alt={item.product.name} />
+                            <img src={`http://127.0.0.1:8000/uploads/product/${item.product.image}`} alt={item.product.name} />
             
                             <div className="content">
                               <span> {item.product.name} </span>
                               <br></br>
-                              <span className="price">{item.product.price}</span>
-                              <span className="quantity">{item.product.qty}</span>
+                              <span className="quantity">{item.product.qty} {item.product.qtyUnity} <strong> /</strong> {item.product.price} {item.product.priceUnity}</span>
+
+                              <span className="price"></span>
                             </div>
                           </div>
                         )

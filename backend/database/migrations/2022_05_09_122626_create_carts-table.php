@@ -21,6 +21,8 @@ class CreateCartsTable extends Migration
             $table->integer('conversation_id')->required();
            // $table->decimal('product_qty');
             $table->timestamps();
+            $table->softDeletes();
+
         });
 
     }

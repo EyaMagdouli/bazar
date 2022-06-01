@@ -56,13 +56,34 @@ class MarketplaceController extends Controller
             $marketplace->description = $request->input('description');
             $marketplace->user_id = auth()->user()->id;
             //image
-            if ($request->hasFile('image')) {
-                $file = $request->file('image');
-                $extension = $file->getClientOriginalExtension();
-                $fileName =  time() . '.' . $extension;
-                $file->move('uploads/marketplace/', $fileName);
-                $marketplace->image = 'uploads/marketplace/' . $fileName;
+
+            if(request()->hasFile('image')) {
+                // Get filename with the extension
+                $filenameWithExt = request()->file('image')->getClientOriginalName();
+                //Get just filename
+                $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+                // Get just ext
+                $extension = request()->file('image')->getClientOriginalExtension();
+                // Filename to store
+                $fileNameToStore = $filename.'_'.time().'.'.$extension;
+                // dd(config('filesystems.disks.bazar_files.root'));
+                // Upload Image
+                $request->file('image')->storeAs('marketplace', $fileNameToStore, 'bazar_files');
+                // dd('eee');
+                $marketplace->image = $fileNameToStore;
+                // $path = request()->file('image')->storeAs(config('filesystems.disks.bazar_files.root').'/product', $fileNameToStore);
+
+                //
             }
+
+
+            // if (request()->hasFile('image')) {
+            //     $file = $request->file('image');
+            //     $extension = $file->getClientOriginalExtension();
+            //     $fileName =  time() . '.' . $extension;
+            //     $file->move('uploads/marketplace/', $fileName);
+            //     $marketplace->image = 'uploads/marketplace/' . $fileName;
+            // }
             $marketplace->save();
             return response()->json([
                 'id' => $marketplace->id,

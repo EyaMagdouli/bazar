@@ -48,7 +48,7 @@ const CreateMarketplace = () => {
   };
 
   return (
-    <div className="container py-5">
+    <div className="container py-5" style={{top: 60}}>
       <div
         className="card"
         style={{
@@ -68,7 +68,7 @@ const CreateMarketplace = () => {
           }}
         >
           <form className="login100-form validate-form" onSubmit={marketSubmit}>
-            <span className="login100-form-title">Create Marketplace</span>
+            <span className="login100-form-title" style={{top:"50px", color:"green", fontWeight:"bold", textAlign:"center" }}>Create Marketplace</span>
 
             <div className="wrap-input100 validate-input">
               <label
@@ -119,7 +119,8 @@ const CreateMarketplace = () => {
               Image
               <span className="text-danger"> *</span>
             </label>
-            <button type="button" className="btn btn-success ">
+            
+            <button type="button" /* className="btn btn-success " */>
               <input
                 style={{ width: "300px", height: "30px", fontSize: "14px" }}
                 type="file"

@@ -18,6 +18,8 @@ class CreateConversationsTable extends Migration
             $table->integer('client_id')->required();
             $table->integer('marketplace_id')->required();
             $table->timestamps();
+            $table->softDeletes();
+
         });
     }
 

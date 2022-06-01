@@ -18,7 +18,6 @@ class CreateOrdersTable extends Migration
             $table->id();
             $table->integer('conversation_id');
             $table->string("status");
-
             $table->timestamps();
         });
     }

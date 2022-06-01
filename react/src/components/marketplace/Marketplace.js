@@ -53,7 +53,7 @@ const Marketplace = () => {
                   <div className="col-lg-6">
                     <div className="about-avatar">
                       <img
-                        src={`http://127.0.0.1:8000/${item.image}`}
+                        src={`http://127.0.0.1:8000/uploads/marketplace/${item.image}`}
                         alt={item.name}
                       />
                     </div>

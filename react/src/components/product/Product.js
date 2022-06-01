@@ -59,7 +59,7 @@ const Product = () => {
         <td>
           {" "}
           <img
-            src={`http://127.0.0.1:8000/${item.image}`}
+            src={`http://127.0.0.1:8000/uploads/product/${item.image}`}
             width="50px"
             alt={item.name}
           />{" "}

@@ -18,9 +18,12 @@ class CreateLivreursTable extends Migration
             $table->string('name')->required();
             $table->string('email')->required();
             $table->text('description')->required();
+            $table->string('delivery_time')->required();
+            $table->string('payment')->required();
             $table->string('phone_number')->required();
             $table->enum('status',['activated','desactivated'])->default('activated');
-
+            $table->timestamps();
+            $table->softDeletes();
         });
     }
 

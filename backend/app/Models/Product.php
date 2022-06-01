@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Category;
 use App\Models\Marketplace;
+use Illuminate\Support\Facades\Storage;
 
 class Product extends Model
 {
@@ -32,4 +33,19 @@ class Product extends Model
     public function marketplace(){
         return $this->belongsTo(Marketplace::class, 'marketplace_id', 'id');
     }
+
+   // public function setImageAttribute($value)
+//{
+
+        //$attribute_name = "image";
+       // $disk = "bazar_files";
+       // $destination_path = "/product";
+
+
+    //    Storage::disk('bazar_files')->put('product/'.request()->file('image')->getClientOriginalName(), 'Contents');
+//dd('dd');
+       // $this->uploadFileToDisk($value, $attribute_name, $disk, $destination_path);
+
+// return $this->attributes[{$attribute_name}]; // uncomment if this is a translatable field
+//}
 }

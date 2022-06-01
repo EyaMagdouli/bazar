@@ -41,7 +41,7 @@ class ProductCrudController extends CrudController
     {
         CRUD::column('name');
         CRUD::column('marketplace_id');
-        CRUD::column('category_id');
+        CRUD::addColumn('category_id');
         CRUD::column('image');
         CRUD::column('price');
 
@@ -65,8 +65,16 @@ class ProductCrudController extends CrudController
         CRUD::field('name');
         CRUD::field('marketplace_id');
         CRUD::field('category_id');
-        CRUD::field('image');
-        CRUD::field('price');
+        CRUD::addField(
+            [
+                'name' => 'image',
+                'label' => 'Image',
+                'type' => 'upload',
+                'upload' => true,
+                'disk' => 'uploads', // if you store files in the /public folder, please omit this; if you store them in /storage or S3, please specify it;
+                ],
+        );
+        CRUD::field('price')->type('number')->attributes(['min'=>0]);
 
         /**
          * Fields can be defined using the fluent syntax or array syntax:
@@ -84,5 +92,21 @@ class ProductCrudController extends CrudController
     protected function setupUpdateOperation()
     {
         $this->setupCreateOperation();
+    }
+
+
+    protected function setupShowOperation()
+    {
+        CRUD::column('name');
+        CRUD::column('marketplace_id');
+        CRUD::addColumn('category_id');
+        CRUD::column('image')->type('image');
+        CRUD::column('price');
+
+        /**
+         * Columns can be defined using the fluent syntax or array syntax:
+         * - CRUD::column('price')->type('number');
+         * - CRUD::addColumn(['name' => 'price', 'type' => 'number']);
+         */
     }
 }

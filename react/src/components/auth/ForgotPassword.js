@@ -3,8 +3,8 @@ import '../../assets/css/auth/auth.css';
 
 export default function ForgotPassword() {
   return (
-    <div className='container py-5'>
-      <div className='card-header'>
+    <div className='container py-5' style={{top: 90, left: 50}}>
+      <div className='card-header' style={{fontSize: 20}}>
           Reset password
       </div>
       <div className="card" style={{display: 'flex',  justifyContent:'center'}}>

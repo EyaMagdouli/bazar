@@ -43,7 +43,9 @@ class CategoryCrudController extends CrudController
     {
         //CRUD::column('id');
         CRUD::column('name');
-        CRUD::column('description');
+        CRUD::addColumn([
+            'name' => 'description',
+        ]);
         //CRUD::column('created_at');
         //CRUD::column('updated_at');
 
@@ -64,11 +66,11 @@ class CategoryCrudController extends CrudController
     {
         CRUD::setValidation(CategoryRequest::class);
 
-        CRUD::field('id');
+        // CRUD::field('id');
         CRUD::field('name');
         CRUD::field('description');
-        CRUD::field('created_at');
-        CRUD::field('updated_at');
+        // CRUD::field('created_at');
+        // CRUD::field('updated_at');
 
         /**
          * Fields can be defined using the fluent syntax or array syntax:

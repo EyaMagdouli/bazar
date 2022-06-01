@@ -20,6 +20,7 @@ class CreateMessagesTable extends Migration
             $table->integer('conversation_id')->required();
             $table->text('message')->required();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
