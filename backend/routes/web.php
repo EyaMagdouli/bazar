@@ -35,3 +35,4 @@ Route::post('/register', function (Request $request) {
 //Route::get('/admin', [AdminController::class, 'index'])->name('Admin');
 /* Route::get('/SimpleUser', [SimpleUserController::class, 'index'])->name('SimpleUser');
  */
+
