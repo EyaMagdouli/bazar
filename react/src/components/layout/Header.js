@@ -43,10 +43,27 @@ const Header = React.forwardRef((p, prodsRef) => {
         }
         else if(res.data.status === 401) {
           console.log(res.data.message);
-
         }
       });
   }, []);
+
+  const [searchDataProduct, setSearchDataProduct] = useState([])
+  const [searchDataMarketplace, setSearchDataMarketplace] = useState([])
+
+  async function search(key){
+    axios.get(`/api/searchProduct/${key}`)
+    .then((res) => {
+      setSearchDataProduct(res.data.product)
+      // setSearchDataProduct('')
+    })
+
+    axios.get(`api/searchMarketplace/${key}`)
+    .then((res) => {
+      setSearchDataMarketplace(res.data.marketplaces)
+      // setSearchDataMarketplace('')
+    })
+    
+  }
 
   const navigate = useNavigate();
 
@@ -70,7 +87,7 @@ const Header = React.forwardRef((p, prodsRef) => {
   };
 
   const deleteCartItem = (e, cart_id) => {
-    e.preventDefault();
+    // e.preventDefault();
 
     const token = localStorage.getItem("auth_token");
 
@@ -83,7 +100,7 @@ const Header = React.forwardRef((p, prodsRef) => {
       .then((res) => {
         if (res.data.status === 200) {
           swal("Success", res.data.message, "success");
-          location.reload();
+          // location.reload();
         } else if (res.data.status === 404) {
           swal("Error", res.data.message, "error");
         }
@@ -173,7 +190,6 @@ const Header = React.forwardRef((p, prodsRef) => {
             )
           }
        
-
           <div
             className="fas fa-user"
             id="login-btn"
@@ -183,16 +199,16 @@ const Header = React.forwardRef((p, prodsRef) => {
         <div className={`profile${isActiveProfile ? " active" : ""}`}>
           <h3>Profile</h3>
           <h4 className="box">
-            Name: <span> {profile.name} </span>{" "}
+            <strong>Name:</strong> <span> {profile.name} </span>{" "}
           </h4>
           <h4 className="box">
-            email: <span> {profile.email} </span>{" "}
+          <strong>email:</strong> <span> {profile.email} </span>{" "}
           </h4>
           <h4 className="box">
-            Phone Number: <span>{profile.phone_number} </span>{" "}
+          <strong>Phone Number:</strong> <span>{profile.phone_number} </span>{" "}
           </h4>
           <h4 className="box">
-            Kind: <span>{profile.kind} </span>
+          <strong>Kind:</strong> <span>{profile.kind} </span>
           </h4>
 
           <Link to="/profile/edit">
@@ -262,8 +278,53 @@ const Header = React.forwardRef((p, prodsRef) => {
 
         {isActiveSearch ? (
           <form action="" className="search-form">
-            <input type="search" id="search-box" placeholder="Search here..." />
+            <input type="search" onChange={(e)=>search(e.target.value) } id="search-box" placeholder="Search here..." />
             <label htmlFor="search-box" className="fas fa-search"></label>
+                <div className="wrap_searchng">
+                  {searchDataProduct.map((item, i) => {
+                    return (
+                      <div key={i} className="searching">
+                        <img className="img-searching"
+                          src={`http://127.0.0.1:8000/uploads/product/${item.image}`}
+                          alt={item.name}
+                        />
+
+                        <div className="content-searching">
+                          <span> {item.name} </span>
+                          <br></br>
+                          
+                        </div>
+                        <Link style={{right: -180}} to={`/product/${item.id}`} className="button">
+                            Details
+                          </Link>
+                      </div>
+                    );
+                  })
+                  }
+                  {
+                  searchDataMarketplace.map((item,i) => {
+                    return (
+                      <div key={i} className="searching">
+                      <img className="img-searching"
+                        src={`http://127.0.0.1:8000/uploads/marketplace/${item.image}`}
+                        alt={item.name}
+                      />
+
+                      <div className="content-searching">
+                        <span> {item.name} </span>
+                        <br></br>
+                                            
+                      </div>
+                      <Link style={{right: -180}} to={`/marketplace/${item.id}`} className="button">
+                          Explore
+                        </Link>
+                    </div>
+                    )
+                  })
+
+                  }
+
+                </div>
           </form>
         ) : (
           <></>

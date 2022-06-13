@@ -94,7 +94,9 @@ Route::middleware('auth:sanctum')->post('order/{id}',[OrderController::class,'or
 //charts
 Route::middleware('auth:sanctum')->get('chart',[ChartController::class, 'index']);
 
-
+//search
+Route::get('searchProduct/{key}',[ProductController::class, 'search']);
+Route::get('searchMarketplace/{key}',[MarketplaceController::class, 'search']);
 
 
 

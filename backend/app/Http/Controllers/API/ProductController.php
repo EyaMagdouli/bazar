@@ -199,5 +199,15 @@ public function destroy($id){
     }
 
 }
+
+
+public function search($key){
+
+    $products = Product::where('name','Like','%'.$key.'%')->get();
+    return response()->json([
+        'status'=>200,
+        'product' => $products
+    ]);
 }
-// 
+}
+//

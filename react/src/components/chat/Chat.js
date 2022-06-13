@@ -32,7 +32,6 @@ const Chat = () => {
       left: 0,
       behavior: 'smooth'
     });
-
   }
 
     // messagesEndRef.current?.scrollIntoView({ behavior: "smooth", inline: 'start'})
@@ -42,8 +41,6 @@ const Chat = () => {
     
     scrollToBottom()
   }, [messages]);
-
-
   const { product_id } = useParams();
 
   const { conversation_id } = useParams();

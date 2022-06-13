@@ -1,6 +1,8 @@
 import React, { useEffect, useState, useRef } from "react";
 import { Link, useParams } from "react-router-dom";
 
+import Carousel from 'react-elastic-carousel'
+
 //pic
 import feature1 from "../../assets/images/feature-img-1.png";
 import feature2 from "../../assets/images/feature-img-2.png";
@@ -103,17 +105,20 @@ const Home = React.forwardRef((p, prodsRef) => {
           <div className="box">
             <img src={feature1} alt="Feature" />
             <h3>fresh and organic </h3>
-            <p>Lorem ipsum</p>
+            <p>We offer a wide range of conventional, organic, exotic fresh Fruits &amp;  Vegetables through direct farm sourcing and distribution.</p>
           </div>
           <div className="box">
             <img src={feature2} alt="Feature" />
             <h3>Delivery </h3>
-            <p>Lorem ipsum</p>
+            <p>You shop, We drop!
+
+              we deliver your purchases anywhere you want by picking the delivery company depending on your localisation 
+            </p>
           </div>
           <div className="box">
             <img src={feature3} alt="Feature" />
             <h3>Negotiation in chat </h3>
-            <p>Lorem ipsum</p>
+            <p>In this plateforme you have the ability to discuss the trade to reach an agreement that both parties find acceptable </p>
           </div>
         </div>
       </section>

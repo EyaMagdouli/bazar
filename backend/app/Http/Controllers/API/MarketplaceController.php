@@ -167,4 +167,15 @@ class MarketplaceController extends Controller
 
 
 }
+
+
+public function search($key){
+
+    $marketplaces = Marketplace::where('name','Like','%'.$key.'%')->get();
+    return response()->json([
+        'status'=>200,
+        'marketplaces' => $marketplaces
+    ]);
+}
+
 }
