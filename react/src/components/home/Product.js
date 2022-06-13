@@ -36,7 +36,7 @@ const Product = () => {
 
 
   const submitAddToCart = (e) => {
-    e.preventDefault();
+    // e.preventDefault();
     const data = {
       product_id: product[0].id,
       // product_qty : product.qty,
@@ -49,9 +49,13 @@ const Product = () => {
         },
       })
       .then((res) => {
-        if (res.data.status === 201) {
+        if (res.data.status) {
+          // Get the shopping bag from the ws
+          shoppingBag = res.data.shopping_bag
+          // Update the the shopping bag
+          setProduct(shoppingBag)
+          // Display the success alert
           swal("Success", res.data.message, "success");
-          location.reload();
         } else if (res.data.status == 409) {
           swal("Success", res.data.message, "success");
         } else if (res.data.status == 401) {
@@ -61,7 +65,6 @@ const Product = () => {
         }
       });
   };
-
   return (
     <div
       className="container py-5"
@@ -92,7 +95,7 @@ const Product = () => {
                 <div className="row" key={i}>
                   <div className="col-md-4 border-end">
                     <img
-                      src={`http://127.0.0.1:8000/${item.image}`}
+                      src={`http://127.0.0.1:8000/uploads/product/${item.image}`}
                       alt={item.name}
                     />
                   </div>

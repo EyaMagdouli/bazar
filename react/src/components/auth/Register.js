@@ -10,7 +10,6 @@ export default function Register() {
   const navigate = useNavigate();
   const { state } = useLocation()
   const [registerInput, setRegister] = useState({
-	
     kind: state?.kind,
     error_list: [],
   });
@@ -20,20 +19,25 @@ export default function Register() {
   };
   const registerSubmit = async (e) => {
     e.preventDefault();
-    const { data } = await axios.post("/api/register", registerInput);
-    if (data.status === 200) {
-      localStorage.setItem("auth_token", data.token);
-      localStorage.setItem("auth_name", data.name);
-      localStorage.setItem("user_type", state.kind);
-    //   swal("Success", data.message, "success");
-	  if(state.kind === "simpleUser"){
-      navigate("/");}
-	  else {
-		  navigate("/createMarket");
-	  }
-    } else {
-      setRegister({ ...registerInput, error_list: res.data.validation_errors });
-    }
+
+    axios.post("/api/register", registerInput).then((res) => {
+      if (res.data.status === 200) {
+        localStorage.setItem("auth_token", res.data.token);
+        localStorage.setItem("auth_name", res.data.name);
+        localStorage.setItem("kind", state.kind);
+      //   swal("Success", data.message, "success");
+      if(state.kind === "simpleUser"){
+        navigate("/");}
+      else {
+        navigate("/createMarket");
+      }
+      } 
+      else if(res.data.status === 401) {
+        setRegister({ ...registerInput, error_list: res.data.validation_errors });
+        console.log(res.data.validation_errors)
+      }
+    })
+
   };
 
   useEffect(() => {

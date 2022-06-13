@@ -15,6 +15,8 @@ const Chat = () => {
   const [messages, setMessages] = useState([]);
   const [message, setMessage] = useState("");
   const [chats, setChats] = useState([]);
+  const [hasChats, setHasChats] = useState(false)
+  let allMessages = []
 
 
   const [order, setOrder] = useState('accept','decline')
@@ -67,58 +69,22 @@ const Chat = () => {
       })
       .then((res) => {
         if (res.data.status === 200) {
-          setChats(res.data.chats); 
+          setChats(res.data.chats);
+          setHasChats(true)
         }
       });
   }, []);
 
-  // useEffect(() => {
-  //   axios.get(`api/chats/`).then((res) => {
-  //     if (res.data.status === 200) {
-  //       setChats(res.data.chats);
-  //       console.log(chats)
-  //     }
-  //   });
-
-  // useEffect( async () => {
-  //   const token = localStorage.getItem("auth_token");
-  //  const {data} = await axios
-  //     .get(`/api/chats`, {
-  //       headers: {
-  //         Authorization: `Bearer ${token}`,
-  //       },
-  //     })
-  //     setChats(data)
-  //     console.log(chats)
-  // }, []);
-
   useEffect(() => {
     try {
-      // const fetch = async({product_id})=>{
-      //   if(!product_id) throw new Error("undefined");
-      //   const token = localStorage.getItem("auth_token");
-      //   const {data} = await axios
-      //   .get(`/api/conversation/${product_id}`, {
-      //     divs: {
-      //       Authorization: `Bearer ${token}`,
-      //     },
-      //   })
-      //     if (data.status === 200) {
-      //       setProduct(data.product);
-      //       setMarketplace(data.marketplace[0]);
-      //     } else if (data.status === 404) {
-      //       swal("Error", data.message, "error");
-      //     }
-      // }
-      //(async()=>await fetch({product_id}))()
       Pusher.logToConsole = true;
       const pusher = new Pusher("2b8d8570e2c008128793", {
         cluster: "mt1",
       });
       const channel = pusher.subscribe("chat");
       channel.bind("message", function (data) {
-        console.log("h")
-        setMessages([...messages, data]);
+        allMessages.push(data)
+        setMessages(allMessages);
         // allMessages.push(data)
         // setMessages(allMessages)
       });
@@ -172,8 +138,14 @@ const Chat = () => {
   }
 
   const openChat = (c) => {
-    setContact(c.marketplace.user)
-    console.log(contact.name)
+    if(localStorage.getItem("kind") !== 'simpleUser'){
+    setContact(c.client)
+    console.log(contact)
+    }
+    else {
+      setContact(c.marketplace.user)
+
+    }
     navigate(`/chat/${c.id}`)
     
   }
@@ -195,7 +167,7 @@ const Chat = () => {
             return (localStorage.getItem("kind") !== 'simpleUser') ? (
               <li key={i}>
                 {/* <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_01.jpg" alt=""> */}
-                <div>
+                <div onClick={() => openChat(c)}>
                   <Link to={`/chat/${c.id}`} >
                   <h2> {c.client.name} </h2>
                   </Link>
@@ -203,10 +175,10 @@ const Chat = () => {
               </li>
             ) : (
               <li key={i}>
-                {/* <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_01.jpg" alt=""> */}
                 <div onClick={() => openChat(c)}>
+                <Link to={`/chat/${c.id}`} >
                   <h2> {c.marketplace.name} </h2>
-                  {/* {console.log(c.marketplace.user.name)} */}
+                </Link>
                 </div>
               </li> 
             )
@@ -216,10 +188,15 @@ const Chat = () => {
       </aside>
       <main>
         <header>
-          {/* <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_01.jpg" alt=""> */}
-          <div>
-            <h2>Chat with {contact?.name} </h2>
+          { (hasChats) ? (
+            <div>
+            <h2>{contact?.name} </h2>
           </div>
+          ) : (
+            <h2> You don't have any conversations yet </h2>
+
+          ) }
+          
           {/* <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/ico_star.png" alt=""> */}
         </header>
         <ul id="chat" ref={messagesEndRef}>

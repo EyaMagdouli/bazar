@@ -18,7 +18,6 @@ use Illuminate\Support\Facades\Mail;
 
 class AuthController extends Controller
 {
-
     //the register function
     public function register(Request $request){
 
@@ -30,11 +29,10 @@ class AuthController extends Controller
             'phone_number'=>'required|max:18|min:8',
             'password'=>'required|min:8',
         ]);
-
-
         //to check the validation of the inputs
         if($validator->fails()  ){
             return response()->json([
+                'status'=>401,
                 'validation_errors'=>$validator->errors(),
             ]);
         }
@@ -56,18 +54,13 @@ class AuthController extends Controller
                 'token'=>$token,
                 'message'=>'Registered successfully',
                 ]);
-
-
         }
-
     }
-
-
     //login function
     public function login(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'email'=>'required|max:191|email',
+            'email'=>'required|max:191|email|exists:users',
             'password'=>'required'
         ]);
 
@@ -75,7 +68,7 @@ class AuthController extends Controller
         if($validator->fails()){
             // dd('hi');
             return response()->json([
-                'status'=>401,
+                'status'=>422,
                 'validation_errors'=>$validator->errors(),
             ]);
         }
@@ -106,11 +99,6 @@ class AuthController extends Controller
             }
         }
     }
-
-
-
-
-
     //logout function
     public function logout(Request $request){
         $request->user()->currentAccessToken()->delete();
@@ -120,5 +108,4 @@ class AuthController extends Controller
         ];
         return response($response,201);
     }
-
 }

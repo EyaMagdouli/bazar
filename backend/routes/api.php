@@ -77,7 +77,7 @@ Route::middleware('auth:sanctum')->post('updateProfile',[UserController::class, 
 
 //cart
 Route::middleware('auth:sanctum')->post('addToCart',[CartController::class,'addtocart']);
-Route::middleware('auth:sanctum')->get('cart',[CartController::class,'index']);
+Route::get('cart',[CartController::class,'index']);
 Route::middleware('auth:sanctum')->delete('deleteCartItem/{cart_id}', [CartController::class,'delete']);
 
 

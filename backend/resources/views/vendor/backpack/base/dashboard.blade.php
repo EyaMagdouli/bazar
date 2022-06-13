@@ -3,17 +3,19 @@
 
 @section('content')
     <div class="row">
-        <div class="col-sm-6">
+        <div class="col-sm-4">
             <canvas id="myChart" width="600" height="400"></canvas>
         </div>
-        <div class="col-sm-6">
-            <canvas id="myChart2" width=6400" height="400"></canvas>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-12">
+        <div class="col-sm-4">
             <canvas id="myChart3" width="600" height="400"></canvas>
         </div>
+        <div class="col-sm-4">
+            <canvas id="myChart2" width=6400" height="400"></canvas>
+        </div>
+
+    </div>
+    <div class="row">
+
         {{-- <div class="col-sm-6">
             <canvas id="myChart2" width=6400" height="400"></canvas>
         </div> --}}

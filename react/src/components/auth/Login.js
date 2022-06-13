@@ -35,7 +35,7 @@ export default function Login(props) {
         navigate("/");
       } else if (status === 401) {
         swal("warning", message, "warning");
-      } else {
+      } else if (status === 422) {
         setLogin({ ...loginInput, error_list: validation_errors });
       }
   };

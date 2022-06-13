@@ -95,17 +95,24 @@ class ChatController extends Controller
 
     public function fetchChats()
     {
-
         if (auth()->user()->kind != 'simpleUser') {
             $marketplace_id = Marketplace::where('user_id', auth()->user()->id)->first()->id;
             $chats = Conversation::where('marketplace_id', $marketplace_id)->get();
         } else {
             $chats = Conversation::where('client_id', auth()->user()->id)->get();
         }
-        return response()->json([
-            'status' => 200,
-            'chats' => $chats
-        ]);
+
+        if(!$chats->isEmpty()){
+            return response()->json([
+                'status' => 200,
+                'chats' => $chats
+            ]);
+        }
+        else {
+            return response()->json([
+                'status' => 422,
+            ]);
+        }
 
 
         // $user_id = auth()->user()->id;

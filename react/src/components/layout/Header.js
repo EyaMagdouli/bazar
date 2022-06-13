@@ -7,7 +7,10 @@ import axios from "axios";
 const Header = React.forwardRef((p, prodsRef) => {
   const [profile, setProfile] = useState([]);
 
-  const [count, setCount] = useState()
+  const [count, setCount] = useState();
+
+  const [conversation_id, setConversation_id] = useState([]);
+  const [cart, setCart] = useState([]);
 
   useEffect(() => {
     const token = localStorage.getItem("auth_token");
@@ -25,6 +28,22 @@ const Header = React.forwardRef((p, prodsRef) => {
             profile: [p],
           } = res.data;
           setProfile(p);
+        }
+      });
+    axios
+      .get(`api/cart`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((res) => {
+        if (res.data.status === 200) {
+          setCart(res.data.cart);
+          setConversation_id(res.data.conversation_id);
+        }
+        else if(res.data.status === 401) {
+          console.log(res.data.message);
+
         }
       });
   }, []);
@@ -50,48 +69,26 @@ const Header = React.forwardRef((p, prodsRef) => {
     navigate("/");
   };
 
-  const [conversation_id, setConversation_id] = useState([])
-  const [cart, setCart] = useState([]);
-  useEffect(() => {
+  const deleteCartItem = (e, cart_id) => {
+    e.preventDefault();
+
     const token = localStorage.getItem("auth_token");
+
     axios
-      .get(`api/cart`, {
+      .delete(`/api/deleteCartItem/${cart_id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       })
       .then((res) => {
         if (res.data.status === 200) {
-          setCart(res.data.cart);
-          setConversation_id(res.data.conversation_id)
+          swal("Success", res.data.message, "success");
+          location.reload();
+        } else if (res.data.status === 404) {
+          swal("Error", res.data.message, "error");
         }
       });
-  }, []);
-
-
-  const deleteCartItem = (e, cart_id) => {
-    e.preventDefault()
-
-    const token = localStorage.getItem("auth_token");
-    
-    axios.delete(`/api/deleteCartItem/${cart_id}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    }).then(res => {
-      if(res.data.status === 200){
-        swal("Success", res.data.message, "success")
-        location.reload();
-
-        }
-      else if(res.data.status === 404) {
-        swal("Error", res.data.message, "error")
-
-
-      }
-    })
-  }
-  
+  };
 
   // var searchForm = document.querySelector('.search-form')
   // document.querySelector('#search-btn').onClick = () => {
@@ -137,11 +134,18 @@ const Header = React.forwardRef((p, prodsRef) => {
         >
           Logout
         </button>
+        {
+          (localStorage.getItem("kind") !== 'simpleUser') ? (
         <div className="dashboard">
           <Link to={"/dashboard"} style={{ textDecoration: "none" }}>
             <div> Dashboard</div>
           </Link>
         </div>
+          ) : (
+            <></>
+          )
+        }
+        
         <div className="icons" style={{ margin_left: "50%" }}>
           <div
             className="fa fa-search "
@@ -149,22 +153,26 @@ const Header = React.forwardRef((p, prodsRef) => {
             onClick={handleToggleSearch}
             style={{ marginRight: "10px" }}
           ></div>
-          <Link to={"/chat/"} >
-          <div
-            className="fa fa-comments"
-            id="cart-btn"
-            style={{ marginRight: 10 }}
-          >
-          </div>
-          </Link>
-
-            
+          <Link to={"/chat/"}>
             <div
-            className="fas fa-shopping-cart"
-            id="cart-btn"
-            style={{ marginRight: 10 }}
-            onClick={handleToggleCart}
-          ></div>
+              className="fa fa-comments"
+              id="cart-btn"
+              style={{ marginRight: 10 }}
+            ></div>
+          </Link>
+          {
+            (localStorage.getItem("kind") !== 'planter') ? (
+              <div
+              className="fas fa-shopping-cart"
+              id="cart-btn"
+              style={{ marginRight: 10 }}
+              onClick={handleToggleCart}
+            ></div>
+            ) : (
+              <></>
+            )
+          }
+       
 
           <div
             className="fas fa-user"
@@ -199,52 +207,57 @@ const Header = React.forwardRef((p, prodsRef) => {
         </div>
 
         <div className={`shopping-cart${isActiveCart ? " active" : ""}`}>
-          {(cart.length > 0) ? (
+          {cart.length > 0 ? (
             cart.map((citem, j) => {
-              return (
+              return cart.length > 0 ? (
+                <div key={j}>
+                  <h3 style={{ marginTop: 10 }}>
+                    {citem[0].product.marketplace.name}
+                  </h3>
+                  {citem.map((item, i) => {
+                    return (
+                      <div key={i} className="box">
+                        <i
+                          className="fas fa-trash"
+                          onClick={(e) => deleteCartItem(e, item.id)}
+                        ></i>
+                        <img
+                          src={`http://127.0.0.1:8000/uploads/product/${item.product.image}`}
+                          alt={item.product.name}
+                        />
 
-                (cart.length > 0) ? (
-                
-                  <div key={j}>
-                    <h3 style={{marginTop:10}}>{citem[0].product.marketplace.name}</h3>
-                    {
-                      citem.map((item, i) => {
-                        return (
-                          <div key={i} className="box"  >
-                            <i className="fas fa-trash" onClick={ (e)=> deleteCartItem(e, item.id) } ></i>
-                            <img src={`http://127.0.0.1:8000/uploads/product/${item.product.image}`} alt={item.product.name} />
-            
-                            <div className="content">
-                              <span> {item.product.name} </span>
-                              <br></br>
-                              <span className="quantity">{item.product.qty} {item.product.qtyUnity} <strong> /</strong> {item.product.price} {item.product.priceUnity}</span>
-                              <span className="price"></span>
-                            </div>
-                          </div>
-                        )
-
-
-                      })
-
-                    }
-                    {/* {console.log(conversation_id)} */}
-                      <Link to={`/chat/`+conversation_id[j]} className="chat-button">
-                        Go to Chat 
-                      </Link>
-                  </div>
-                ):(<></>)
-
-              )
+                        <div className="content">
+                          <span> {item.product.name} </span>
+                          <br></br>
+                          <span className="quantity">
+                            {item.product.qty} {item.product.qtyUnity}{" "}
+                            <strong> /</strong> {item.product.price}{" "}
+                            {item.product.priceUnity}
+                          </span>
+                          <span className="price"></span>
+                        </div>
+                      </div>
+                    );
+                  })}
+                  {/* {console.log(conversation_id)} */}
+                  <Link
+                    to={`/chat/` + conversation_id[j]}
+                    className="chat-button"
+                  >
+                    Go to Chat
+                  </Link>
+                </div>
+              ) : (
+                <></>
+              );
             })
-          ):(
+          ) : (
             <div className="box">
               <h4>Your shopping cart is empty</h4>
             </div>
           )}
-          
 
           {/* <div className="total">total :</div> */}
-          
         </div>
 
         {isActiveSearch ? (

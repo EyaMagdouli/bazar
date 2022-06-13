@@ -13,30 +13,24 @@ class UserController extends Controller
 {
     public function index()
     {
-        if(auth('sanctum')->check()){
+        if (auth('sanctum')->check()) {
             $user_id = auth('sanctum')->user()->id;
-        $profile = User::where('id', $user_id)->get();
-        if($profile) {
+            $profile = User::where('id', $user_id)->get();
+            if ($profile) {
+                return response()->json([
+                    'status' => 200,
+                    'profile' => $profile,
+                ]);
+            }
+        } else {
             return response()->json([
-                'status' => 200,
-                'profile' => $profile,
+                'status' => 401,
+                'message' => 'Not logged in'
             ]);
         }
-        }
-        else {
-            return response()->json([
-                'status'=>401,
-                'message' =>'Not logged in'
-            ]);
-        }
-
-
-
     }
     public function edit()
     {
-
-
         $user_id = auth()->user()->id;
         $user = User::where('id', $user_id)->get();
         return response()->json([
@@ -46,29 +40,24 @@ class UserController extends Controller
     }
 
 
-    public function update(Request $request){
+    public function update(Request $request)
+    {
 
 
-            $user_id = auth()->user()->id;
+        $user_id = auth()->user()->id;
 
-            $user = User::where('id', $user_id)->first();
+        $user = User::where('id', $user_id)->first();
 
-            if($user){
-                $user->email = $request->input('email');
-                $user->name = $request->input('name');
-                $user->phone_number = $request->input('phone_number');
-               // $user->password = $request->input('password');
-                $user->update();
-                return response()->json([
-                    'status'=>200,
-                    'message'=>'User updated successfully'
-                ]);
-            }
-
-
-
-
-
-
-}
+        if ($user) {
+            $user->email = $request->input('email');
+            $user->name = $request->input('name');
+            $user->phone_number = $request->input('phone_number');
+            // $user->password = $request->input('password');
+            $user->update();
+            return response()->json([
+                'status' => 200,
+                'message' => 'User updated successfully'
+            ]);
+        }
+    }
 }

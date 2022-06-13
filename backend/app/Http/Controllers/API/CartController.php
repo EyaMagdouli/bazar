@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\API;
+
 use App\Http\Controllers\Controller;
 use App\Models\Cart;
 use App\Models\Conversation;
@@ -10,25 +11,25 @@ use Illuminate\Http\Request;
 
 class CartController extends Controller
 {
-    public function addtocart(Request $request){
+    public function addtocart(Request $request)
+    {
 
-        if(auth('sanctum')->check()){
+        if (auth('sanctum')->check()) {
 
             $user_id = auth()->user()->id;
             $product_id = $request->product_id;
             //$product_qty = $request->product_qty;
 
 
-            $product= Product::where('id',$product_id)->first();
-            if($product){
+            $product = Product::where('id', $product_id)->first();
+            if ($product) {
 
-                if(Cart::where('product_id',$product_id)->where('user_id',$user_id)->exists()){
+                if (Cart::where('product_id', $product_id)->where('user_id', $user_id)->exists()) {
                     return response()->json([
-                        'status'=>409,
-                        'message'=>$product->name. ' already added to cart'
+                        'status' => 409,
+                        'message' => $product->name . ' already added to cart'
                     ]);
-                }
-                else {
+                } else {
                     $conversation = new Conversation;
                     $conversation->client_id = $user_id;
                     $conversation->marketplace_id = $product->marketplace_id;
@@ -44,80 +45,77 @@ class CartController extends Controller
 
 
                     return response()->json([
-                        'status'=>201,
-                        'message'=>'Added to cart'
+                        'status' => 201,
+                        'message' => 'Added to cart'
                     ]);
                 }
 
-            return response()->json([
-                'status'=>201,
-                'message'=>'Added to cart'
-            ]);
-            }
-            else{
                 return response()->json([
-                    'status'=>404,
-                    'message'=>'Product not found'
+                    'status' => 201,
+                    'message' => 'Added to cart'
                 ]);
-
+            } else {
+                return response()->json([
+                    'status' => 404,
+                    'message' => 'Product not found'
+                ]);
             }
-        }
-        else{
+        } else {
             return response()->json([
-                'status'=>401,
-                'message'=>'You have to be logged in first'
+                'status' => 401,
+                'message' => 'You have to be logged in first'
             ]);
         }
     }
 
-    public function index(){
-        if(auth('sanctum')->check()){
-            $user_id = auth()->user()->id;
-            $cartitems = Cart::where('user_id',$user_id)->get();
+    public function index()
+    {
+        if (auth('sanctum')->check()) {
+            $user_id = auth('sanctum')->user()->id;
+            $cartitems = Cart::where('user_id', $user_id)->get();
 
             $marketPlace = [];
             $conversation_id = [];
-            foreach($cartitems as $cartitem) {
+            foreach ($cartitems as $cartitem) {
                 $marketPlace[$cartitem->product->marketplace->name][] = $cartitem;
                 $conversation_id[] = Conversation::where('id', $cartitem->conversation_id)->first()->id;
-
             }
 
-
             return response()->json([
-                'status'=>200,
+                'status' => 200,
                 'cart' => array_values($marketPlace),
                 'conversation_id' => array_values($conversation_id)
             ]);
-            /* dd($cartitems); */
 
         }
-
+        else {
+            return response()->json([
+                'status' => 401,
+                'message' => 'Not logged in'
+            ]);
+        }
     }
-    public function delete($cart_id){
-        if(auth('sanctum')->check()){
+    public function delete($cart_id)
+    {
+        if (auth('sanctum')->check()) {
             $user_id = auth()->user()->id;
-            $cartitem = Cart::where('id',$cart_id)->where('user_id',$user_id)->first();
-            if($cartitem){
+            $cartitem = Cart::where('id', $cart_id)->where('user_id', $user_id)->first();
+            if ($cartitem) {
                 $cartitem->delete();
                 return response()->json([
-                    'status'=>200,
-                    'message'=>'Cart item removed Successfully'
+                    'status' => 200,
+                    'message' => 'Cart item removed Successfully'
                 ]);
-            }
-            else {
+            } else {
                 return response()->json([
-                    'status'=>404,
-                    'message'=>'Cart item not found'
+                    'status' => 404,
+                    'message' => 'Cart item not found'
                 ]);
             }
-
-
-        }
-        else{
+        } else {
             return response()->json([
-                'status'=>401,
-                'message'=>'You have to be logged in first'
+                'status' => 401,
+                'message' => 'You have to be logged in first'
             ]);
         }
     }

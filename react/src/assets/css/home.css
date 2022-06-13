@@ -193,7 +193,7 @@ section{
 }
 .header .shopping-cart{
     position: absolute;
-    top:110%; right:-110%;
+    top:110%; right:-210%;
     padding:1rem;
     border-radius: .5rem;
     box-shadow: var(--box-shadow);
