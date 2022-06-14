@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Mail\sendMarketplaceRequestMail;
 use App\Models\Marketplace;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 
 class MarketplaceController extends Controller
@@ -49,6 +51,7 @@ class MarketplaceController extends Controller
             ]);
         } else {
 
+            $admin= User::where('kind','admin')->first();
             $token = $request->token;
            // $user = User::where('remember_token', $token)->first();
             $marketplace = new Marketplace;
@@ -74,6 +77,7 @@ class MarketplaceController extends Controller
                 // $path = request()->file('image')->storeAs(config('filesystems.disks.bazar_files.root').'/product', $fileNameToStore);
 
                 //
+
             }
 
 
@@ -84,7 +88,9 @@ class MarketplaceController extends Controller
             //     $file->move('uploads/marketplace/', $fileName);
             //     $marketplace->image = 'uploads/marketplace/' . $fileName;
             // }
+            Mail::to($admin->email)->send(new sendMarketplaceRequestMail($marketplace));
             $marketplace->save();
+            
             return response()->json([
                 'id' => $marketplace->id,
                 'status' => 200,

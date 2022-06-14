@@ -15,7 +15,8 @@ class Marketplace extends Model
     protected $fillable =
     ['name',
     'description',
-    'image'];
+    'image',
+    'accepted'];
 
     protected $with = ['user'];
 

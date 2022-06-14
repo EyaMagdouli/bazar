@@ -7,6 +7,7 @@ use App\Http\Controllers\HomeController;
 use Backpack\CRUD\app\Http\Controllers\AdminController;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,4 +36,3 @@ Route::post('/register', function (Request $request) {
 //Route::get('/admin', [AdminController::class, 'index'])->name('Admin');
 /* Route::get('/SimpleUser', [SimpleUserController::class, 'index'])->name('SimpleUser');
  */
-

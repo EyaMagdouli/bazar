@@ -1,8 +1,10 @@
 import React, { useEffect, useState, useRef } from "react";
 import { Link, useParams } from "react-router-dom";
 
-import Carousel from 'react-elastic-carousel'
-
+import Slider from "react-slick"
+// Import css files
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 //pic
 import feature1 from "../../assets/images/feature-img-1.png";
 import feature2 from "../../assets/images/feature-img-2.png";
@@ -11,6 +13,22 @@ import "../../assets/css/home.css";
 import axios from "axios";
 
 const Home = React.forwardRef((p, prodsRef) => {
+
+  var settingsMarketplace = {
+      dots: true,
+      infinite: true,
+      speed: 1000,
+      slidesToShow: 3,
+      slidesToScroll: 3
+  };
+  var settingsProduct = {
+    dots: true,
+    infinite: true,
+    speed: 1000,
+    slidesToShow: 6,
+    slidesToScroll: 6
+};
+
   const [marketplaces, setMarketplaces] = useState([]);
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
@@ -136,7 +154,7 @@ const Home = React.forwardRef((p, prodsRef) => {
         <h1 className="heading">
           <span>Marketplaces</span>{" "}
         </h1>
-        <div className="box-container">
+        <Slider {...settingsMarketplace} className="box-container">
           {marketplaces.map((item, i) => {
             return (
               <div key={i} className="box">
@@ -162,7 +180,7 @@ const Home = React.forwardRef((p, prodsRef) => {
               </div>
             );
           })}
-        </div>
+        </Slider>
       </section>
 
       {/* Products section  */}
@@ -195,7 +213,7 @@ const Home = React.forwardRef((p, prodsRef) => {
             {}
           </select>
         </h1>
-        <div className="box-container">
+        <div /* {...settingsProduct}  */ className="box-container">
           {[...(byCategory ? productsByCategory : products)]
           .filter(e=> !byCategory ? true : e.associatedCategory == ref?.current?.value)
           .map((item, i) => {

@@ -19,6 +19,7 @@ class CreateMarketplacesTable extends Migration
             $table->string('name')->required()->unique();
             $table->string('image')->required();
             $table->text('description')->nullable();
+            $table->boolean('accepted')->default(false);
             $table->timestamps();
             $table->softDeletes();
         });

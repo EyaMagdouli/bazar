@@ -50,11 +50,6 @@ const Product = () => {
       })
       .then((res) => {
         if (res.data.status) {
-          // Get the shopping bag from the ws
-          // shoppingBag = res.data.shopping_bag
-          // Update the the shopping bag
-          // setProduct(shoppingBag)
-          // Display the success alert
           swal("Success", res.data.message, "success");
         } else if (res.data.status == 409) {
           swal("Success", res.data.message, "success");
