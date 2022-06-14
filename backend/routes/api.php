@@ -10,6 +10,7 @@ use App\Http\Controllers\API\ProductController;
 use App\Http\Controllers\API\MarketplaceController;
 use App\Http\Controllers\API\HomeController;
 use App\Http\Controllers\API\OrderController;
+use App\Http\Controllers\API\PasswordController;
 use App\Http\Controllers\API\UserController;
 
 
@@ -99,4 +100,6 @@ Route::get('searchProduct/{key}',[ProductController::class, 'search']);
 Route::get('searchMarketplace/{key}',[MarketplaceController::class, 'search']);
 
 
-
+//password
+Route::post('forgot',[PasswordController::class, 'forgot']);
+Route::post('reset',[PasswordController::class, 'reset']);

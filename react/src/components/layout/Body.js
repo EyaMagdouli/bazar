@@ -6,6 +6,7 @@ import Home from "../home/Home";
 import CreateMarketplace from "../marketplace/CreateMarketplace";
 import ChooseKind from "../auth/ChooseKind";
 import ForgotPassword from "../auth/ForgotPassword";
+import ResetPassword from "../auth/ResetPassword";
 import { ProtectedRoute } from "../route/ProtectedRoute";
 import Dashboard from "../dashboard/Dashboard";
 import EditProfile from "../user/EditProfile"
@@ -23,6 +24,7 @@ const Body = React.forwardRef((props, prodsRef) => {
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="/login/forgotPassword" element={<ForgotPassword />} />
+      <Route path="/login/resetPassword/:token" element={<ResetPassword />} />
       <Route path="/chooseKind" element={<ChooseKind />} />
 
       <Route path="/profile/edit" element={ <EditProfile/> } />

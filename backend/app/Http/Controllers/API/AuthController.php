@@ -64,6 +64,7 @@ class AuthController extends Controller
             'password'=>'required'
         ]);
 
+        
         //to check if the input is fine or not
         if($validator->fails()){
             // dd('hi');
