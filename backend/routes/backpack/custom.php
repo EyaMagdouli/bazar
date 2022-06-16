@@ -19,6 +19,10 @@ Route::group([
 
 
     Route::crud('marketplace', 'MarketplaceCrudController');
+    Route::post(
+        'marketplace/{id}/enable/{state}',
+        'MarketplaceCrudController@enable'
+    )->name('marketplace.enable');
     Route::crud('product', 'ProductCrudController');
     Route::crud('category', 'CategoryCrudController');
     Route::crud('livreur', 'LivreurCrudController');

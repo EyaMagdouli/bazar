@@ -30,25 +30,24 @@ class ProductController extends Controller
         //dd(Marketplace::where('user_id',$request->user()->id)->firstOrFail());
 
 
-        // $validator= Validator::make($request->all(),[
-        //     'category_id'=>'required|max:191',
-        //     'name'=>'required|max:191',
-        //     'image'=>'required|image|mimes:jpeg,png,jpg|max:2048',
-        //     'price'=>'required',
-        //     'qty'=>'required',
-        //     'qtyUnity'=>'required',
-        //     'priceUnity'=>'required',
-        //     'description' =>'required|max:2000'
-        // ]);
+        $validator= Validator::make($request->all(),[
+            'category_id'=>'required|max:191',
+            'name'=>'required|max:191',
+            'image'=>'required|image|mimes:jpeg,png,jpg|max:2048',
+            'price'=>'required',
+            'qty'=>'required',
+            'qtyUnity'=>'required',
+            'priceUnity'=>'required',
+        ]);
 
-        // if($validator->fails()){
-        //     return response()->json([
-        //         'status'=>422,
-        //         'errors'=>$validator->errors()
-        //     ]);
+        if($validator->fails()){
+            return response()->json([
+                'status'=>422,
+                'errors'=>$validator->errors()
+            ]);
 
-        // }
-        // else{
+        }
+        else{
 
             $user_id = auth()->user()->id;
 
@@ -83,8 +82,6 @@ class ProductController extends Controller
                 // dd('eee');
                 $product->image = $fileNameToStore;
                 // $path = request()->file('image')->storeAs(config('filesystems.disks.bazar_files.root').'/product', $fileNameToStore);
-
-                //
             }
 
             //image
@@ -101,7 +98,7 @@ class ProductController extends Controller
                 'status'=>200,
                 'message'=>'Product added successfully'
             ]);
-        // }
+        }
 
     }
 
@@ -132,7 +129,10 @@ class ProductController extends Controller
             'price'=>'required',
             'qty'=>'required',
             'unity'=>'required',
-            'description'=>'required'
+            'qtyUnity'=>'required',
+            'priceUnity'=>'required',
+            'image'=>'required|image|mimes:jpeg,png,jpg|max:2048',
+
         ]);
 
         if($validator->fails()){
@@ -140,7 +140,6 @@ class ProductController extends Controller
                 'status'=>422,
                 'errors'=>$validator->errors()
             ]);
-
         }
         else{
             $product = Product::find($id);
@@ -150,20 +149,39 @@ class ProductController extends Controller
             $product->price = $request->input('price');
             $product->qty = $request->input('qty');
             $product->unity = $request->input('unity');
+            $product->qtyUnity= $request->input('qtyUnity');
+             $product->priceUnity= $request->input('priceUnity');
             $product->description = $request->input('description');
 
-            //image
-            if($request->hasFile('image')){
-                $path=$product->image;
-                if(File::exists($path)){
-                    File::delete($path);
-                }
-            $file = $request->file('image');
-            $extension = $file->getClientOriginalExtension();
-            $fileName=  time().'.'.$extension;
-            $file->move('uploads/product/',$fileName);
-            $product->image='uploads/product/'.$fileName;
+            if(request()->hasFile('image')) {
+                // Get filename with the extension
+                $filenameWithExt = request()->file('image')->getClientOriginalName();
+                //Get just filename
+                $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+                // Get just ext
+                $extension = request()->file('image')->getClientOriginalExtension();
+                // Filename to store
+                $fileNameToStore = $filename.'_'.time().'.'.$extension;
+                // dd(config('filesystems.disks.bazar_files.root'));
+                // Upload Image
+                $request->file('image')->storeAs('product', $fileNameToStore, 'bazar_files');
+                // dd('eee');
+                $product->image = $fileNameToStore;
+                // $path = request()->file('image')->storeAs(config('filesystems.disks.bazar_files.root').'/product', $fileNameToStore);
             }
+
+            //image
+            // if($request->hasFile('image')){
+            //     $path=$product->image;
+            //     if(File::exists($path)){
+            //         File::delete($path);
+            //     }
+            // $file = $request->file('image');
+            // $extension = $file->getClientOriginalExtension();
+            // $fileName=  time().'.'.$extension;
+            // $file->move('uploads/product/',$fileName);
+            // $product->image='uploads/product/'.$fileName;
+            // }
             $product->update();
             return response()->json([
                 'status'=>200,

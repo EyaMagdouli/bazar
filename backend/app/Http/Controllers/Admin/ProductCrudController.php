@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Requests\ProductRequest;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
+use Egulias\EmailValidator\Exception\CRLFAtTheEnd;
 
 /**
  * Class ProductCrudController
@@ -42,8 +43,24 @@ class ProductCrudController extends CrudController
         CRUD::column('name');
         CRUD::column('marketplace_id');
         CRUD::addColumn('category_id');
-        CRUD::column('image');
-        CRUD::column('price');
+        // CRUD::column('image');
+        $this->crud->addColumn([
+            'name'     => 'price',
+            'label'    => 'Price',
+            'type'     => 'closure',
+            'function' => function ($entry) {
+                return $entry->price . ' ' . $entry->priceUnity;
+            }
+        ],);
+        $this->crud->addColumn([
+            'name'     => 'qty',
+            'label'    => 'Quantity',
+            'type'     => 'closure',
+            'function' => function ($entry) {
+                return $entry->qty . ' ' . $entry->qtyUnity;
+            }
+        ],);
+        CRUD::column('qty')->label('Quantity');
 
         /**
          * Columns can be defined using the fluent syntax or array syntax:
@@ -72,9 +89,34 @@ class ProductCrudController extends CrudController
                 'type' => 'upload',
                 'upload' => true,
                 'disk' => 'uploads', // if you store files in the /public folder, please omit this; if you store them in /storage or S3, please specify it;
-                ],
+            ],
         );
-        CRUD::field('price')->type('number')->attributes(['min'=>0]);
+        CRUD::field('price')->type('number')->attributes(['min' => 0]);
+        CRUD::field('qty')->type('number')->attributes(['min' => 0])->label('Quantity');
+        CRUD::field('description');
+        CRUD::addField([
+            'name'        => 'qtyUnity',
+            'label'       => 'Quantity unity',
+            'type'        => 'radio',
+            'options'     => [
+                0 => 'g',
+                1 => 'kg',
+                2 => 't',
+                3 => 'oz',
+                4 => 'lb',
+            ]
+        ]);
+        CRUD::addField([
+            'name'        => 'priceUnity',
+            'label'       => 'Price unity',
+            'type'        => 'radio',
+            'options'     => [
+                0 => 'usd',
+                1 => 'eur',
+                2 => 'pound',
+                3 => 'dt',
+            ]
+        ]);
 
         /**
          * Fields can be defined using the fluent syntax or array syntax:
@@ -100,9 +142,29 @@ class ProductCrudController extends CrudController
         CRUD::column('name');
         CRUD::column('marketplace_id');
         CRUD::addColumn('category_id');
-        CRUD::column('image')->type('image');
-        CRUD::column('price');
-
+        $this->crud->addColumn([
+            'label' => 'image',
+            'type'      => 'image',
+            'name'      => 'image',
+            'prefix'     => '/uploads/product/',
+        ]);
+        $this->crud->addColumn([
+            'name'     => 'price',
+            'label'    => 'Price',
+            'type'     => 'closure',
+            'function' => function ($entry) {
+                return $entry->price . ' ' . $entry->priceUnity;
+            }
+        ],);
+        $this->crud->addColumn([
+            'name'     => 'qty',
+            'label'    => 'Quantity',
+            'type'     => 'closure',
+            'function' => function ($entry) {
+                return $entry->qty . ' ' . $entry->qtyUnity;
+            }
+        ],);
+        CRUD::column('description');
         /**
          * Columns can be defined using the fluent syntax or array syntax:
          * - CRUD::column('price')->type('number');

@@ -82,7 +82,7 @@ const AddProduct = () => {
         </div>
         <form className="form-card" onSubmit={submitProduct}>
           <div className="row justify-content-between text-left">
-            <div className="form-group col-sm-2 flex-column d-flex">
+            <div className="form-group col-sm-3 flex-column d-flex">
               <label
                 style={{ fontSize: "15px" }}
                 className="form-control-label px-3"
@@ -101,7 +101,7 @@ const AddProduct = () => {
                 {productInput.error_list.name}
               </span>
             </div>
-            <div className="form-group col-sm-3 flex-column d-flex">
+            <div className="form-group col-sm-2 flex-column d-flex">
               <label
                 style={{ fontSize: "15px" }}
                 className="form-control-label px-3"
@@ -309,7 +309,7 @@ const AddProduct = () => {
               </div>
               
               <span style={{ color: "red" }}>
-                {productInput.error_list.category_id}
+                {productInput.error_list.qtyUnity}
               </span>
             </div>
           </div>
@@ -320,7 +320,7 @@ const AddProduct = () => {
                 className="form-control-label px-3"
               >
                 Description
-                <span className="text-danger"> *</span>
+                {/* <span className="text-danger"> *</span> */}
               </label>
 
               <textarea

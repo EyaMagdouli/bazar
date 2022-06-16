@@ -6,8 +6,6 @@ import axios from "axios";
 import swal from "sweetalert";
 
 const EditProduct = () => {
-
-  
   const navigate = useNavigate();
   const [category, setCategory] = useState([]);
   const [categoryList, setCategoryList] = useState([]);
@@ -16,7 +14,9 @@ const EditProduct = () => {
     name: "",
     description: "",
     price: "",
-    qty:""
+    qtyUnity: "",
+    priceUnity: "",
+    qty: "",
   });
   const [error, setError] = useState([]);
 
@@ -28,7 +28,6 @@ const EditProduct = () => {
     }
   };
 
-
   const { product_id } = useParams();
   useEffect(() => {
     axios.get(`api/categories/`).then((res) => {
@@ -39,10 +38,10 @@ const EditProduct = () => {
 
     axios.get(`/api/editProduct/${product_id}`).then((res) => {
       if (res.data.status === 200) {
-        console.log(res.data.product.qty)
+        console.log(res.data.product.qty);
         setProduct(res.data.product);
-        setImage(res.data.product.image)
-        console.log(image)
+        setImage(res.data.product.image);
+        console.log(image);
       } else if (res.data.status === 404) {
         swal("Error", res.data.message, "error");
         navigate("/dashboard/products");
@@ -63,14 +62,15 @@ const EditProduct = () => {
     formData.append("name", productInput.name);
     formData.append("price", productInput.price);
     formData.append("description", productInput.description);
-    formData.append("qty",productInput.qty);
-
+    formData.append("qty", productInput.qty);
+    formData.append("qtyUnity", productInput.qtyUnity);
+    formData.append("priceUnity", productInput.priceUnity);
     axios.post(`/api/updateProduct/${product_id}`, formData).then((res) => {
       if (res.data.status === 200) {
         swal("Success", res.data.message, "success");
         navigate("/dashboard/products");
       } else if (res.data.status === 422) {
-        setCategory({ ...productInput, error_list: res.data.errors });
+        setCategory({ ...productInput});
         setError(res.data.errors);
       } else if (res.data.status === 404) {
         swal("Error", res.data.message, "error");
@@ -92,14 +92,13 @@ const EditProduct = () => {
         </div>
         <form className="form-card" onSubmit={updateProduct}>
           <div className="row justify-content-between text-left">
-            <div className="form-group col-sm-6 flex-column d-flex">
+            <div className="form-group col-sm-3 flex-column d-flex">
               <label
                 style={{ fontSize: "15px" }}
                 className="form-control-label px-3"
               >
                 Name
                 <span className="text-danger"> *</span>
-
               </label>
               <input
                 name="name"
@@ -110,14 +109,13 @@ const EditProduct = () => {
               />
               {<span style={{ color: "red" }}>{error.name}</span>}
             </div>
-            <div className="form-group col-sm-6 flex-column d-flex">
+            <div className="form-group col-sm-2 flex-column d-flex">
               <label
                 style={{ fontSize: "15px" }}
                 className="form-control-label px-3"
               >
                 Price
                 <span className="text-danger"> *</span>
-
               </label>
               <input
                 name="price"
@@ -127,17 +125,82 @@ const EditProduct = () => {
                 value={productInput.price}
               />
               <span style={{ color: "red" }}>{error.price}</span>
+                {console.log(error.price)}
+            </div>
+            <div className="form-group col-sm-7 flex-column d-flex">
+              <label
+                style={{ fontSize: "15px" }}
+                className="form-control-label px-3"
+              >
+                Price Unity
+                <span className="text-danger"> *</span>
+              </label>
+                <div className="form-group">
+              <div className="form-check form-check-inline">
+                <input
+                  className="form-check-input"
+                  type="radio"
+                  name="priceUnity"
+                  value="dt"
+                  onChange={handleInput}
+
+                />
+                <label className="form-check-label" htmlFor="inlineRadio1">
+                  dt (tunisian dinar)
+                </label>
+              </div>
+              <div className="form-check form-check-inline">
+                <input
+                  className="form-check-input"
+                  type="radio"
+                  name="priceUnity"
+                  value="usd"
+                  onChange={handleInput}
+                />
+                <label className="form-check-label" htmlFor="inlineRadio2">
+                  usd (U.S. Dollar)
+                </label>
+              </div>
+              <div className="form-check form-check-inline">
+                <input
+                  className="form-check-input"
+                  type="radio"
+                  name="priceUnity"
+                  value="eur"
+                  onChange={handleInput}
+                />
+                <label className="form-check-label" htmlFor="inlineRadio3">
+                  eur (European Euro)
+                </label>
+              </div>
+              <div className="form-check form-check-inline">
+                <input
+                  className="form-check-input"
+                  type="radio"
+                  name="priceUnity"
+                  value="pound"
+                  onChange={handleInput}
+                />
+                <label className="form-check-label" htmlFor="inlineRadio3">
+                  pound (Britsh Pound sterling)
+                </label>
+              </div>
+              
+              </div>
+              
+              <span style={{ color: "red" }}>
+                {error.priceUnity}
+              </span>
             </div>
           </div>
           <div className="row justify-content-between text-left">
-            <div className="form-group col-sm-6 flex-column d-flex">
+            <div className="form-group col-sm-4 flex-column d-flex">
               <label
                 style={{ fontSize: "15px" }}
                 className="form-control-label px-3"
               >
                 Category
                 <span className="text-danger"> *</span>
-
               </label>
               <select
                 name="category_id"
@@ -156,7 +219,7 @@ const EditProduct = () => {
               </select>
               <span style={{ color: "red" }}>{error.category_id}</span>
             </div>
-            <div className="form-group col-sm-6 flex-column d-flex">
+            <div className="form-group col-sm-3 flex-column d-flex">
               <label
                 style={{ fontSize: "15px" }}
                 className="form-control-label px-3"
@@ -171,11 +234,84 @@ const EditProduct = () => {
                 onChange={handleInput}
                 value={productInput.qty}
               />
+              <span style={{ color: "red" }}>{error.qty}</span>
+            </div>
+            <div className="form-group col-sm-5 flex-column d-flex">
+              <label
+                style={{ fontSize: "15px" }}
+                className="form-control-label px-3"
+              >
+                Quantity Unity
+                <span className="text-danger"> *</span>
+              </label>
+                <div className="form-group">
+              <div className="form-check form-check-inline">
+                <input
+                  className="form-check-input"
+                  type="radio"
+                  name="qtyUnity"
+                  value="kg"
+                  onChange={handleInput}
+
+                />
+                <label className="form-check-label" htmlFor="inlineRadio1">
+                  kg (kilogram)
+                </label>
+              </div>
+              <div className="form-check form-check-inline">
+                <input
+                  className="form-check-input"
+                  type="radio"
+                  name="qtyUnity"
+                  value="g"
+                  onChange={handleInput}
+                />
+                <label className="form-check-label" htmlFor="inlineRadio2">
+                  g (gram)
+                </label>
+              </div>
+              <div className="form-check form-check-inline">
+                <input
+                  className="form-check-input"
+                  type="radio"
+                  name="qtyUnity"
+                  value="t"
+                  onChange={handleInput}
+                />
+                <label className="form-check-label" htmlFor="inlineRadio3">
+                  t (ton)
+                </label>
+              </div>
+              <div className="form-check form-check-inline">
+                <input
+                  className="form-check-input"
+                  type="radio"
+                  name="qtyUnity"
+                  value="oz"
+                  onChange={handleInput}
+                />
+                <label className="form-check-label" htmlFor="inlineRadio3">
+                  oz (ounce)
+                </label>
+              </div>
+              <div className="form-check form-check-inline">
+                <input
+                  className="form-check-input"
+                  type="radio"
+                  name="qtyUnity"
+                  value="lb"
+                  onChange={handleInput}
+                />
+                <label className="form-check-label" htmlFor="inlineRadio3">
+                  lb (pounds)
+                </label>
+              </div>
+              </div>
+              
               <span style={{ color: "red" }}>
-                {error.qty}
+                {error.qtyUnity}
               </span>
             </div>
-            
           </div>
           <div className="row justify-content-between text-left">
             <div className="form-group col-sm-6 flex-column d-flex">
@@ -184,8 +320,6 @@ const EditProduct = () => {
                 className="form-control-label px-3"
               >
                 Description
-                <span className="text-danger"> *</span>
-
               </label>
               <textarea
                 name="description"
@@ -202,11 +336,10 @@ const EditProduct = () => {
               >
                 Image
                 <span className="text-danger"> *</span>
-
               </label>
-              <div className='text-center mb-2'>
-                  <img src={image} alt='No photo' width='200px' />
-                </div>
+              <div className="text-center mb-2">
+                <img src={image} alt="No photo" width="200px" />
+              </div>
               <input
                 type="file"
                 name="image"
@@ -215,6 +348,7 @@ const EditProduct = () => {
                 onChange={handleImage}
               />
               <span style={{ color: "red" }}>{error.image}</span>
+              {}
             </div>
           </div>
           <br></br>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Mail\AcceptMarketplaceMail;
 use App\Mail\sendMarketplaceRequestMail;
 use App\Models\Marketplace;
 use App\Models\User;
@@ -90,16 +91,17 @@ class MarketplaceController extends Controller
             // }
             Mail::to($admin->email)->send(new sendMarketplaceRequestMail($marketplace));
             $marketplace->save();
+
             
+
             return response()->json([
                 'id' => $marketplace->id,
                 'status' => 200,
                 'token'=>$token,
-                'message' => 'Marketplace added successfully'
+                'message' => 'Wait till the admin accepts your request'
             ]);
         }
     }
-
 
     public function edit(){
         $user_id = auth()->user()->id;

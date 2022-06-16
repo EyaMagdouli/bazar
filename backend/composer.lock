@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "893bf086955f085beb21216254d38dfe",
+    "content-hash": "ec101483b195b7e784f0b5c43f49b5dc",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -689,6 +689,63 @@
                 "source": "https://github.com/dflydev/dflydev-dot-access-data/tree/v3.0.1"
             },
             "time": "2021-08-13T13:06:58+00:00"
+        },
+        {
+            "name": "digitallyhappy/toggle-field-for-backpack",
+            "version": "2.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/DigitallyHappy/toggle-field-for-backpack.git",
+                "reference": "0d613b25cf3ebf1f2375c1f765660402714d7d6b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/DigitallyHappy/toggle-field-for-backpack/zipball/0d613b25cf3ebf1f2375c1f765660402714d7d6b",
+                "reference": "0d613b25cf3ebf1f2375c1f765660402714d7d6b",
+                "shasum": ""
+            },
+            "require": {
+                "backpack/crud": "^4.1|^5.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "DigitallyHappy\\ToggleFieldForBackpack\\AddonServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "DigitallyHappy\\ToggleFieldForBackpack\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Cristian Tabacitu",
+                    "email": "hello@tabacitu.ro",
+                    "homepage": "https://tabacitu.ro"
+                }
+            ],
+            "description": "Easily toggle boolean attributes with a new field type.",
+            "homepage": "https://github.com/digitallyhappy/toggle-field-for-backpack",
+            "keywords": [
+                "Backpack for Laravel",
+                "addon",
+                "admin panel",
+                "backpack",
+                "laravel",
+                "toggle"
+            ],
+            "support": {
+                "issues": "https://github.com/DigitallyHappy/toggle-field-for-backpack/issues",
+                "source": "https://github.com/DigitallyHappy/toggle-field-for-backpack/tree/2.0.1"
+            },
+            "time": "2022-02-05T11:46:26+00:00"
         },
         {
             "name": "doctrine/cache",

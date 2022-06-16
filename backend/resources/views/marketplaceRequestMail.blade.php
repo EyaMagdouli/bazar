@@ -9,8 +9,8 @@
 <body>
 <h1> {{$marketplace['name']}} </h1>
 <h4> A new registred {{ $marketplace->user['kind']}} {{$marketplace->user['name']}} has requested to create a marketplace {{$marketplace['name']}}  </h4>
-<p> {{$marketplace['description']}} </p>
-<img src="{{$marketplace['image']}}" />
+{{-- <p> {{$marketplace['description']}} </p> --}}
+{{-- <img src="{{$marketplace['image']}}" /> --}}
 <h5> Check your dashboard to accept the request <a href="http://localhost:8000/admin/dashboard"> Dashboard </a> </h5>
 </body>
 </html>
