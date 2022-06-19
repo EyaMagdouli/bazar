@@ -4,7 +4,8 @@
 ## Requirements 
 * PHP (+v7.3) https://www.php.net/manual/fr/install.php
 * Composer https://getcomposer.org/download/
-* Laravel 8 (version v8) https://laravel.com/docs/8.x/installation
+* Laravel (v8) https://laravel.com/docs/8.x/installation
+*  Node.js (+v8) https://nodejs.org/en/download/
 
 ## Installation
 1. Clone repo
