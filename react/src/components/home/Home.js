@@ -95,14 +95,7 @@ const Home = React.forwardRef((p, prodsRef) => {
   return (
     <div style={{ top: "900px " }}>
       <section className="home" id="home">
-        <div className="content">
-          <h3>
-            fresh and <span>organic</span> products for you{" "}
-          </h3>
-          <h3>
-            In different <span>Marketplaces</span>{" "}
-          </h3>
-        </div>
+       
       </section>
 
       {/* Features section */}

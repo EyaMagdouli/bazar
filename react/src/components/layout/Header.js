@@ -3,6 +3,7 @@ import { useNavigate, Routes, Route, Link } from "react-router-dom";
 import "../../assets/css/home.css";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import logo from "../../assets/images/logo.png";
 
 const Header = React.forwardRef((p, prodsRef) => {
   const [profile, setProfile] = useState([]);
@@ -124,7 +125,7 @@ const Header = React.forwardRef((p, prodsRef) => {
           to={"/login"}
           style={{ color: "green", fontSize: "20px" }}
         >
-          Login
+          S'authentifier
         </Link>
       </li>
       <li className="nav-item">
@@ -133,7 +134,7 @@ const Header = React.forwardRef((p, prodsRef) => {
           to={"/ChooseKind"}
           style={{ color: "green", fontSize: "20px" }}
         >
-          Register
+          S'inscrire
         </Link>
       </li>
     </ul>
@@ -332,17 +333,7 @@ const Header = React.forwardRef((p, prodsRef) => {
       </li>
     </ul>
   );
-  const showOnlyInMain = (
-    <nav className="navbar navbar-nav ms-auto" style={{ left: "80px" }}>
-      <ul>
-        <li onClick={() => prodsRef?.current[2].scrollIntoView()}>Features</li>
-        <li onClick={() => prodsRef?.current[1].scrollIntoView()}>
-          Marketplaces
-        </li>
-        <li onClick={() => prodsRef?.current[0].scrollIntoView()}>Products</li>
-      </ul>
-    </nav>
-  );
+ 
 
   return (
     <div id="bazarHome">
@@ -352,11 +343,8 @@ const Header = React.forwardRef((p, prodsRef) => {
       >
         <div className="container">
           <Link className="logo" to="/">
-            <i className="fas fa-shopping-basket"></i> Bazar
+          <img src={logo} alt="Feature" style={{width:'60px'}} /> Agro-Siliana
           </Link>
-          <Routes>
-            <Route path="/" element={showOnlyInMain} />
-          </Routes>
           <ul className="navbar navbar-nav ms-auto" style={{ left: "70px" }}>
             {AuthButtons}
           </ul>
